@@ -102,11 +102,20 @@ def calculate_average(gradeBook, student_name):
     result = total / len(gradeBook[student_name])
     return result
 def display_gradebook(gradeBook):
-    return gradeBook
+    print("Gradebook:")
+    for student, grades in gradeBook.items():
+        print(student + ":")
+        for subject, grade in grades.items():
+            print("- {}: {}".format(subject, grade))
+        average_grade = calculate_average(gradeBook, student)
+        if average_grade is not None:
+            print("  Average grade: {:.2f}".format(average_grade))
+        print()
 result = add_student(gradeBook, 'Anchita')
 grade1 = add_grade(gradeBook,student_name="Anchita", subject='Math', grade=90)
 grade2 = add_grade(gradeBook,student_name="Anchita", subject='Linear Algebra', grade=30)
 grade3 = add_grade(gradeBook,student_name="Anchita", subject='Science', grade=100)
 grade4 = add_grade(gradeBook,student_name="Anchita", subject='Engineering', grade=70)
 average = calculate_average(gradeBook, 'Anchita')
-print(average)
+print(display_gradebook(gradeBook))
+
