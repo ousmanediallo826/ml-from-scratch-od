@@ -213,7 +213,197 @@ print(lst)
 
 
 
+#===============================================PART TWO=================================
 
+# 🟦 1. User Activity Aggregator (Logs → Features)
+# Problem:
+#
+# You receive user activity logs:
+
+# logs = [
+#     {"user": "u1", "action": "click"},
+#     {"user": "u2", "action": "view"},
+#     {"user": "u1", "action": "purchase"},
+#     {"user": "u2", "action": "click"},
+# ]
+
+# Task:
+#
+# Return:
+# {
+#     "u1": {"click": 1, "purchase": 1},
+#     "u2": {"view": 1, "click": 1}
+# }
+
+def aggregate_user_log(user_log):
+    aggregate_log = {}
+    for item in user_log:
+        for key, value in item.items():
+            if key not in aggregate_log:
+                if key == 'user':
+                    aggregate_log[key] = value
+
+    return aggregate_log
+
+user_log = aggregate_user_log([
+    {"user": "u1", "action": "click"},
+    {"user": "u2", "action": "view"},
+    {"user": "u1", "action": "purchase"},
+    {"user": "u2", "action": "click"},
+])
+print(user_log)
+
+
+
+
+
+
+
+
+
+
+# 🟨 2. Flatten API JSON (Real Backend Problem)
+
+# Problem:
+#
+# You get nested API data:
+#
+# data = {
+#     "user": {
+#         "id": 1,
+#         "profile": {
+#             "name": "John",
+#             "skills": ["Python", "ML"]
+#         }
+#     }
+# }
+
+# Task:
+#
+# Flatten it into:
+#
+# {
+#     "user_id": 1,
+#     "user_profile_name": "John",
+#     "user_profile_skills_0": "Python",
+#     "user_profile_skills_1": "ML"
+# }
+#
+# 👉 This is used in:
+#
+# Data pipelines
+# ML preprocessing
+
+
+
+
+
+
+
+
+
+# 🟩 3. Top K Frequent Words (NLP Style)
+# Problem:
+# words = ["ai", "ml", "ai", "data", "ml", "ai"]
+# k = 2
+# Task:
+#
+# Return:
+#
+# ["ai", "ml"]
+#
+# 👉 This is used in:
+#
+# Search engines
+# NLP models
+
+
+
+
+
+
+
+#🟥 4. Transaction Analyzer (Finance Style)
+# Problem:
+# transactions = [
+#     {"user": "u1", "amount": 100},
+#     {"user": "u2", "amount": 200},
+#     {"user": "u1", "amount": 50},
+# ]
+# Task:
+#
+# Return total spent per user:
+#
+# {
+#     "u1": 150,
+#     "u2": 200
+# }
+#
+# 👉 Real-world use:
+#
+# Fintech
+# Fraud detection
+# ML features
+
+
+
+
+
+
+
+
+
+# 🟪 5. Detect Duplicate Emails (Data Cleaning)
+
+# Problem:
+# emails = ["a@gmail.com", "b@gmail.com", "a@gmail.com"]
+# Task:
+#
+# Return:
+#
+# ["a@gmail.com"]
+#
+# 👉 Real-world use:
+#
+# Cleaning datasets before ML
+
+
+
+
+
+
+
+# ⚫ 7. Group Products by Category (E-commerce)
+# Problem:
+# products = [
+#     {"name": "shirt", "category": "clothing"},
+#     {"name": "pants", "category": "clothing"},
+#     {"name": "phone", "category": "electronics"},
+# ]
+# Task:
+# {
+#     "clothing": ["shirt", "pants"],
+#     "electronics": ["phone"]
+# }
+#
+# 👉 Same pattern as your previous exercise — but real-world
+
+
+
+
+
+
+
+
+# 🔵 8. Merge Two Feature Dictionaries
+
+# Problem:
+# user1 = {"clicks": 10, "views": 5}
+# user2 = {"clicks": 3, "purchases": 2}
+# Task:
+# {"clicks": 13, "views": 5, "purchases": 2}
+#
+# 👉 This is EXACTLY ML feature merging
 
 
 
