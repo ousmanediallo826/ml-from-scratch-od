@@ -293,6 +293,35 @@ print(user_log)
 #
 # Data pipelines
 # ML preprocessing
+def flatten_dict(api, parent_key='', result=None):
+    if result is None:
+        result = {}
+
+    for key, value in api.items():
+        new_key = f"{parent_key}.{key}" if parent_key else key
+
+        if isinstance(value, dict):
+            flatten_dict(value, new_key, result)
+        elif isinstance(value, list):
+            for i, item in enumerate(value):
+                result[f"{parent_key}.{i}"] = item
+        else:
+            result[new_key] = value
+    return result
+
+
+
+# Output
+api = {
+    "user": {
+        "id": 1,
+        "profile": {
+            "name": "John",
+            "skills": ["Python", "ML"]
+        }
+    }
+}
+print(flatten_dict(api))
 
 
 
@@ -300,22 +329,6 @@ print(user_log)
 
 
 
-
-
-# 🟩 3. Top K Frequent Words (NLP Style)
-# Problem:
-# words = ["ai", "ml", "ai", "data", "ml", "ai"]
-# k = 2
-# Task:
-#
-# Return:
-#
-# ["ai", "ml"]
-#
-# 👉 This is used in:
-#
-# Search engines
-# NLP models
 
 
 
@@ -345,72 +358,256 @@ print(user_log)
 # Fraud detection
 # ML features
 
+def transactions(api ):
+    total = {}
+
+    for item in api:
+        user = item["user"]
+        amount = item["amount"]
+
+        if user in total:
+            total[user] += amount
+        else:
+            total[user] = amount
+
+    return total
 
 
 
 
+api = [
+    {"user": "u1", "amount": 100},
+    {"user": "u2", "amount": 200},
+    {"user": "u1", "amount": 50},
+]
+print(transactions(api))
 
 
 
 
-# 🟪 5. Detect Duplicate Emails (Data Cleaning)
+# 🟥 1. Order Revenue Analyzer (E-commerce Style)
 
-# Problem:
-# emails = ["a@gmail.com", "b@gmail.com", "a@gmail.com"]
-# Task:
-#
-# Return:
-#
-# ["a@gmail.com"]
-#
-# 👉 Real-world use:
-#
-# Cleaning datasets before ML
+def Revenue_analysis(orders):
+    revenue = {}
+
+    for order in orders:
+       store = order["store"]
+       price = order["price"]
+
+       if store in revenue:
+           revenue[store] += price
+       else:
+           revenue[store] = price
+    return revenue
+
+orders = [
+    {"store": "Nike", "price": 120},
+    {"store": "Adidas", "price": 80},
+    {"store": "Nike", "price": 200},
+]
+
+print(Revenue_analysis(orders))
 
 
 
+# 🟥 2. Employee Work Hours Tracker (HR Style)
+
+def hr_tracker(employees):
+    hr_tracker = {}
+
+    for employer in employees:
+        worker = employer["employee"]
+        hour = employer["hours"]
+
+        if worker in hr_tracker:
+            hr_tracker[worker] += hour
+        else:
+            hr_tracker[worker] = hour
+
+    return hr_tracker
 
 
 
+employees = [
+    {"employee": "John", "hours": 8},
+    {"employee": "Sarah", "hours": 6},
+    {"employee": "John", "hours": 5},
+]
+print(hr_tracker(employees))
 
-# ⚫ 7. Group Products by Category (E-commerce)
-# Problem:
-# products = [
-#     {"name": "shirt", "category": "clothing"},
-#     {"name": "pants", "category": "clothing"},
-#     {"name": "phone", "category": "electronics"},
+
+
+# 🟥 1. Monthly Expense Analyzer (Large Dataset)
+
+# expenses = [
+#     {"month": "Jan", "amount": 300},
+#     {"month": "Feb", "amount": 200},
+#     {"month": "Jan", "amount": 150},
+#     {"month": "Mar", "amount": 500},
+#     {"month": "Feb", "amount": 100},
+#     {"month": "Apr", "amount": 250},
+#     {"month": "Jan", "amount": 400},
+#     {"month": "Mar", "amount": 100},
+#     {"month": "May", "amount": 600},
+#     {"month": "Apr", "amount": 300},
+#     {"month": "Jun", "amount": 450},
+#     {"month": "May", "amount": 200},
 # ]
+
+
 # Task:
-# {
-#     "clothing": ["shirt", "pants"],
-#     "electronics": ["phone"]
-# }
 #
-# 👉 Same pattern as your previous exercise — but real-world
+# Return total expenses per month.
 
 
 
+#🟥 2. Product Sales Counter (Large Dataset)
 
+# sales = [
+#     {"product": "Laptop"},
+#     {"product": "Phone"},
+#     {"product": "Laptop"},
+#     {"product": "Tablet"},
+#     {"product": "Laptop"},
+#     {"product": "Phone"},
+#     {"product": "Mouse"},
+#     {"product": "Keyboard"},
+#     {"product": "Tablet"},
+#     {"product": "Phone"},
+#     {"product": "Laptop"},
+#     {"product": "Mouse"},
+#     {"product": "Headphones"},
+#     {"product": "Keyboard"},
+#     {"product": "Laptop"},
+# ]
 
-
-
-
-# 🔵 8. Merge Two Feature Dictionaries
-
-# Problem:
-# user1 = {"clicks": 10, "views": 5}
-# user2 = {"clicks": 3, "purchases": 2}
 # Task:
-# {"clicks": 13, "views": 5, "purchases": 2}
 #
-# 👉 This is EXACTLY ML feature merging
+# Count how many times each product appears.
+
+
+
+
+# 🟥 3. Highest Paid Employee Finder (Large Dataset)
+
+# employees = [
+#     {"name": "John", "salary": 5000},
+#     {"name": "Sarah", "salary": 7000},
+#     {"name": "Mike", "salary": 4500},
+#     {"name": "David", "salary": 6200},
+#     {"name": "Emma", "salary": 8100},
+#     {"name": "Sophia", "salary": 7600},
+#     {"name": "James", "salary": 6800},
+#     {"name": "Olivia", "salary": 5400},
+#     {"name": "Daniel", "salary": 9000},
+#     {"name": "Liam", "salary": 7300},
+# ]
+
+
+# ask:
+#
+# Return employee with highest salary.
+
+
+
+
+
+# 🟥 1. Fraud Transaction Detector
+
+# transactions = [
+#     {"user": "u1", "amount": 1200, "location": "NY", "time": "09:00"},
+#     {"user": "u2", "amount": 80, "location": "CA", "time": "10:30"},
+#     {"user": "u1", "amount": 3000, "location": "TX", "time": "09:10"},
+#     {"user": "u3", "amount": 150, "location": "FL", "time": "11:00"},
+#     {"user": "u2", "amount": 5000, "location": "CA", "time": "10:40"},
+#     {"user": "u1", "amount": 50, "location": "NY", "time": "09:20"},
+#     {"user": "u3", "amount": 7000, "location": "NV", "time": "11:05"},
+# ]
+
+# ask
+#
+# Return a list of suspicious transactions where:
+#
+# amount is greater than 2000, or
+# the same user makes transactions from different locations within a short time
 
 
 
 
 
 
+# 🟥 2. Top 3 Customers by Total Spending
+# Problem
+
+
+# orders = [
+#     {"customer": "Alice", "amount": 250},
+#     {"customer": "Bob", "amount": 400},
+#     {"customer": "Alice", "amount": 100},
+#     {"customer": "David", "amount": 900},
+#     {"customer": "Bob", "amount": 200},
+#     {"customer": "Emma", "amount": 700},
+#     {"customer": "Alice", "amount": 300},
+#     {"customer": "David", "amount": 150},
+#     {"customer": "Emma", "amount": 100},
+#     {"customer": "Frank", "amount": 1200},
+#     {"customer": "Bob", "amount": 50},
+#     {"customer": "Grace", "amount": 650},
+# ]
+
+
+
+# Task
+# Calculate total spending per customer
+# Return the top 3 highest spending customers
+# Concepts tested
+# grouping totals
+# sorting dictionaries
+# ranking
+# transforming output format
+# Real-world use
+# e-commerce analytics
+# customer segmentation
+# loyalty programs
+# ML customer value features
 
 
 
 
+
+
+# features
+# 🟥 3. Inventory Stock Report Generator
+
+# inventory = [
+#     {"product": "Laptop", "in": 20, "out": 5},
+#     {"product": "Phone", "in": 50, "out": 10},
+#     {"product": "Laptop", "in": 10, "out": 8},
+#     {"product": "Tablet", "in": 30, "out": 15},
+#     {"product": "Phone", "in": 20, "out": 25},
+#     {"product": "Mouse", "in": 100, "out": 40},
+#     {"product": "Keyboard", "in": 60, "out": 20},
+#     {"product": "Tablet", "in": 10, "out": 5},
+#     {"product": "Laptop", "in": 5, "out": 12},
+# ]
+
+
+# Task
+#
+# Return a final stock report per product:
+#
+# total stock in
+# total stock out
+# remaining stock = in - out
+# mark product as "LOW" if remaining stock is less than 10
+
+
+# Concepts tested
+# nested dictionary building
+# accumulation
+# computed fields
+# business rule flags
+# Real-world use
+# warehouse systems
+# supply chain dashboards
+# retail stock management
