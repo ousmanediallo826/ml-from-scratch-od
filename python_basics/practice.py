@@ -1,4 +1,6 @@
 #LIST EXERCISES (5)
+from ipaddress import ip_address
+
 
 # 1. Filter + Transform
 #
@@ -804,6 +806,18 @@ print(airline_membership(info))
 # 👉 Real world: Cybersecurity fraud detection
 
 
+def fraud_detection(ip_address):
+    not_duplicated_ip_address = []
+    duplicated_ip_address = []
+    for item in ip_address:
+        if item not in not_duplicated_ip_address:
+            not_duplicated_ip_address.append(item)
+        else:
+            duplicated_ip_address.append(item)
+    return f"Not Duplicated IP Address: {not_duplicated_ip_address}, Duplicated IP Address: {duplicated_ip_address}"
+
+ip_address = ["192.1.1.1", "192.1.1.2", "192.1.1.1", "10.0.0.1"]
+print(fraud_detection(ip_address))
 
 
 
@@ -829,6 +843,27 @@ print(airline_membership(info))
 #
 # 👉 Real world: University systems
 
+def student_enrollment_match(math_student, science_student):
+    only_math_student = set()
+    only_science_student = set()
+    both_classes = set()
+    for student in math_student:
+        if student not in science_student:
+            only_math_student.add(student)
+    for student in science_student:
+        if student not in math_student:
+            only_science_student.add(student)
+    for student in math_student:
+        if student in science_student:
+            both_classes.add(student)
+
+    return f"Only science class: {only_science_student}, math student: {only_math_student}, both_classes: {both_classes}"
+
+
+science_student = {"Mary", "Alex", "Sarah"}
+math_student = {"John", "Mary", "Alex", "David"}
+print(student_enrollment_match(math_student, science_student))
+
 
 
 
@@ -851,9 +886,29 @@ print(airline_membership(info))
 # 👉 Real world: Banking systems
 
 
+def smart_atm_machine(user):
+    balance = 0
+    if user == "deposit":
+        deposit = int(input("Please enter your deposit: "))
+        if deposit <= 0:
+            return "You can not deposit 0 or negative amount"
+        else:
+            balance = balance + deposit
+            return f"Your balance is {balance}"
+
+    elif user == "withdraw":
+        withdraw = int(input("Please enter your withdraw: "))
+        if withdraw > balance:
+            return f"Your balance is {balance}, you cannot withdraw {withdraw}"
+        elif withdraw <= 0:
+            return "You can not withdraw 0 or negative amount"
+        else:
+            balance = balance - withdraw
+            return f"You withdraw this amount {withdraw}, and your current balance is {balance}"
 
 
-
+user = str(input("Hello there what would you like to do here to do, (deposit, withdraw): "))
+print(smart_atm_machine(user))
 
 
 # 🔴 Expert Level
