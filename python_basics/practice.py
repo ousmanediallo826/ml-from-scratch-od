@@ -173,19 +173,19 @@ print(lst)
 # ['apple', 'banana', 'apricot']
 # → {'a': ['apple', 'apricot'], 'b': ['banana']}
 
-def groupping_by_letter(lst):
-    new_dict= {}
-
-    for item in lst:
-        word = item[0]
-        if word not in new_dict:
-            new_dict[word] = [item]
-        else:
-            new_dict[word].append(item)
-    return new_dict
-
-lst = groupping_by_letter(['apple', 'banana', 'apricot', 'coconut', 'car'])
-print(lst)
+# def groupping_by_letter(lst):
+#     new_dict= {}
+#
+#     for item in lst:
+#         word = item[0]
+#         if word not in new_dict:
+#             new_dict[word] = [item]
+#         else:
+#             new_dict[word].append(item)
+#     return new_dict
+#
+# lst = groupping_by_letter(['apple', 'banana', 'apricot', 'coconut', 'car'])
+# print(lst)
 
 
 # 4. Nested Sum
@@ -198,19 +198,19 @@ print(lst)
 # 👉 Example:
 # {'a': 10, 'b': {'c': 5, 'd': 15}} → 30
 
-def sum_of_numbers(lst):
-    total = 0
-    for value in lst.values():
-        if isinstance(value, dict):
-            total += sum_of_numbers(value)
-        else:
-            total += value
-    return total
-
-lst =  sum_of_numbers({'a': 10, 'b': {'c': 5, 'd': 15}})
-print(lst)
-
-
+# def sum_of_numbers(lst):
+#     total = 0
+#     for value in lst.values():
+#         if isinstance(value, dict):
+#             total += sum_of_numbers(value)
+#         else:
+#             total += value
+#     return total
+#
+# lst =  sum_of_numbers({'a': 10, 'b': {'c': 5, 'd': 15}})
+# print(lst)
+#
+#
 
 
 #===============================================PART TWO=================================
@@ -234,24 +234,24 @@ print(lst)
 #     "u1": {"click": 1, "purchase": 1},
 #     "u2": {"view": 1, "click": 1}
 # }
-
-def aggregate_user_log(user_log):
-    aggregate_log = {}
-    for item in user_log:
-        for key, value in item.items():
-            if key not in aggregate_log:
-                if key == 'user':
-                    aggregate_log[key] = value
-
-    return aggregate_log
-
-user_log = aggregate_user_log([
-    {"user": "u1", "action": "click"},
-    {"user": "u2", "action": "view"},
-    {"user": "u1", "action": "purchase"},
-    {"user": "u2", "action": "click"},
-])
-print(user_log)
+#
+# def aggregate_user_log(user_log):
+#     aggregate_log = {}
+#     for item in user_log:
+#         for key, value in item.items():
+#             if key not in aggregate_log:
+#                 if key == 'user':
+#                     aggregate_log[key] = value
+#
+#     return aggregate_log
+#
+# user_log = aggregate_user_log([
+#     {"user": "u1", "action": "click"},
+#     {"user": "u2", "action": "view"},
+#     {"user": "u1", "action": "purchase"},
+#     {"user": "u2", "action": "click"},
+# ])
+# print(user_log)
 
 
 
@@ -293,38 +293,38 @@ print(user_log)
 #
 # Data pipelines
 # ML preprocessing
-def flatten_dict(api, parent_key='', result=None):
-    if result is None:
-        result = {}
-
-    for key, value in api.items():
-        new_key = f"{parent_key}.{key}" if parent_key else key
-
-        if isinstance(value, dict):
-            flatten_dict(value, new_key, result)
-        elif isinstance(value, list):
-            for i, item in enumerate(value):
-                result[f"{parent_key}.{i}"] = item
-        else:
-            result[new_key] = value
-    return result
-
-
-
-# Output
-api = {
-    "user": {
-        "id": 1,
-        "profile": {
-            "name": "John",
-            "skills": ["Python", "ML"]
-        }
-    }
-}
-print(flatten_dict(api))
-
-
-
+# def flatten_dict(api, parent_key='', result=None):
+#     if result is None:
+#         result = {}
+#
+#     for key, value in api.items():
+#         new_key = f"{parent_key}.{key}" if parent_key else key
+#
+#         if isinstance(value, dict):
+#             flatten_dict(value, new_key, result)
+#         elif isinstance(value, list):
+#             for i, item in enumerate(value):
+#                 result[f"{parent_key}.{i}"] = item
+#         else:
+#             result[new_key] = value
+#     return result
+#
+#
+#
+# # Output
+# api = {
+#     "user": {
+#         "id": 1,
+#         "profile": {
+#             "name": "John",
+#             "skills": ["Python", "ML"]
+#         }
+#     }
+# }
+# print(flatten_dict(api))
+#
+#
+#
 
 
 
@@ -358,82 +358,82 @@ print(flatten_dict(api))
 # Fraud detection
 # ML features
 
-def transactions(api ):
-    total = {}
-
-    for item in api:
-        user = item["user"]
-        amount = item["amount"]
-
-        if user in total:
-            total[user] += amount
-        else:
-            total[user] = amount
-
-    return total
-
-
-
-
-api = [
-    {"user": "u1", "amount": 100},
-    {"user": "u2", "amount": 200},
-    {"user": "u1", "amount": 50},
-]
-print(transactions(api))
+# def transactions(api ):
+#     total = {}
+#
+#     for item in api:
+#         user = item["user"]
+#         amount = item["amount"]
+#
+#         if user in total:
+#             total[user] += amount
+#         else:
+#             total[user] = amount
+#
+#     return total
+#
+#
+#
+#
+# api = [
+#     {"user": "u1", "amount": 100},
+#     {"user": "u2", "amount": 200},
+#     {"user": "u1", "amount": 50},
+# ]
+# print(transactions(api))
 
 
 
 
 # 🟥 1. Order Revenue Analyzer (E-commerce Style)
 
-def Revenue_analysis(orders):
-    revenue = {}
-
-    for order in orders:
-       store = order["store"]
-       price = order["price"]
-
-       if store in revenue:
-           revenue[store] += price
-       else:
-           revenue[store] = price
-    return revenue
-
-orders = [
-    {"store": "Nike", "price": 120},
-    {"store": "Adidas", "price": 80},
-    {"store": "Nike", "price": 200},
-]
-
-print(Revenue_analysis(orders))
+# def Revenue_analysis(orders):
+#     revenue = {}
+#
+#     for order in orders:
+#        store = order["store"]
+#        price = order["price"]
+#
+#        if store in revenue:
+#            revenue[store] += price
+#        else:
+#            revenue[store] = price
+#     return revenue
+#
+# orders = [
+#     {"store": "Nike", "price": 120},
+#     {"store": "Adidas", "price": 80},
+#     {"store": "Nike", "price": 200},
+# ]
+#
+# print(Revenue_analysis(orders))
 
 
 
 # 🟥 2. Employee Work Hours Tracker (HR Style)
 
-def hr_tracker(employees):
-    hr_tracker = {}
-
-    for employer in employees:
-        worker = employer["employee"]
-        hour = employer["hours"]
-
-        if worker in hr_tracker:
-            hr_tracker[worker] += hour
-        else:
-            hr_tracker[worker] = hour
-
-    return hr_tracker
-
-
-
-employees = [
-    {"employee": "John", "hours": 8},
-    {"employee": "Sarah", "hours": 6},
-    {"employee": "John", "hours": 5},
-]
-print(hr_tracker(employees))
+# def hr_tracker(employees):
+#     hr_tracker = {}
+#
+#     for employer in employees:
+#         worker = employer["employee"]
+#         hour = employer["hours"]
+#
+#         if worker in hr_tracker:
+#             hr_tracker[worker] += hour
+#         else:
+#             hr_tracker[worker] = hour
+#
+#     return hr_tracker
+#
+#
+#
+# employees = [
+#     {"employee": "John", "hours": 8},
+#     {"employee": "Sarah", "hours": 6},
+#     {"employee": "John", "hours": 5},
+# ]
+# print(hr_tracker(employees))
 
 
 
@@ -611,3 +611,408 @@ print(hr_tracker(employees))
 # warehouse systems
 # supply chain dashboards
 # retail stock management
+
+
+# 🟢 Beginner Level
+
+# 1. Unique Visitor Counter (Sets)
+#
+# A website logs usernames visiting today:
+
+# ["john", "mary", "john", "alex", "mary", "kevin"]
+
+# Task:
+#
+# Use a set to print:
+#
+# Total unique visitors
+# Names of unique visitors
+#
+# 👉 Real world: Website analytics
+
+def visitor_counter(people):
+    unique_visitor = set()
+    for person in people:
+        unique_visitor.add(person)
+    return unique_visitor
+
+people = ["john", "mary", "john", "alex", "mary", "kevin"]
+print(visitor_counter(people))
+
+
+
+
+
+
+
+# 2. Login Access Checker (Input + Conditional)
+#
+# Ask user:
+# Enter password:
+# password is "admin123":
+#
+# Access Granted
+#
+# Else:
+#
+# Access Denied
+#
+# 👉 Real world: Login systems
+
+def access_checkr(username):
+
+
+        if username == "admin123":
+            return "Access granted"
+
+        else:
+            return "Access denied"
+username = input("Please enter your username: ")
+print(access_checkr(username))
+
+# 3. Age Restriction App
+#
+# Ask user age.
+#
+# If:
+#
+# Under 18 → "Minor"
+# 18 to 64 → "Adult"
+# 65+ → "Senior"
+#
+# 👉 Real world: Insurance / Ticket pricing
+
+def restriction_app(age):
+    if age >= 65:
+        return "You're Senior"
+    elif age >= 18 and age <= 64:
+        return "You're an Adult"
+    else:
+        return "You're a Minor"
+
+age = int(input("Please enter your age: "))
+print(restriction_app(age))
+
+
+
+# pricing
+#
+# 🟡 Intermediate Level
+# 4. Remove Duplicate Products (Sets)
+#
+# Store products scanned in warehouse:
+# ["TV", "Phone", "TV", "Laptop", "Phone", "Tablet"]
+# Task:
+#
+# Print clean unique product list.
+#
+# 👉 Real world: Inventory system
+
+def duplicate_product(lst):
+    new_product_list = set()
+    for item in lst:
+        new_product_list.add(item)
+    return list(new_product_list)
+
+lst =  ["TV", "Phone", "TV", "Laptop", "Phone", "Tablet"]
+print(duplicate_product(lst))
+
+
+
+
+
+
+# 5. Country Shipping Checker (Conditional + Input)
+#
+# Allowed shipping countries:
+#
+# USA, Canada, UK
+#
+# Ask user country.
+#
+# If country allowed:
+#
+# Shipping Available
+#
+# Else:
+#
+# Shipping Not Available
+#
+# 👉 Real world: E-commerce checkout
+
+def shipping_checkr(country):
+
+    if country == "UK" or country == "USA" or country == "Canada":
+        return "Shipping Available"
+    else:
+        return "Shipping Not Available"
+
+
+country = input("Please enter your country: ")
+print(shipping_checkr(country))
+
+
+
+
+
+
+
+
+# 6. Frozen Set VIP Permissions
+#
+# Create VIP permissions:
+
+# {"lounge", "priority boarding", "free meal"}
+
+# Store it as frozenset
+#
+# Then print:
+#
+# All permissions
+# Check if "free meal" exists
+#
+# 👉 Real world: Airline memberships
+
+
+def airline_membership(info):
+    vip_permission = set()
+    for item in info:
+        vip_permission.add(item)
+    vip_permission = frozenset(vip_permission)
+    if "free meal" in vip_permission:
+        print("Free Meal")
+    return vip_permission
+
+
+
+info = {"lounge", "priority boarding", "free meal"}
+print(airline_membership(info))
+
+
+
+
+# 🟠 Advanced Level
+# 7. Fraud Detection by Duplicate IPs
+#
+# Login IP addresses:
+# ["192.1.1.1", "192.1.1.2", "192.1.1.1", "10.0.0.1"]
+
+# Task:
+#
+# Find duplicated IP addresses only.
+#
+# 👉 Real world: Cybersecurity fraud detection
+
+
+
+
+
+
+
+
+# 8. Student Enrollment Match (Sets)
+#
+# Math students:
+# {"John", "Mary", "Alex", "David"}
+
+# Science students:
+#
+# {"Mary", "Alex", "Sarah"}
+
+# Task:
+#
+# Print:
+#
+# Students in both classes
+# Only Math
+# Only Science
+#
+# 👉 Real world: University systems
+
+
+
+
+
+
+
+# 9. Smart ATM Machine
+#
+# Ask user:
+#
+# Account balance
+# Withdraw amount
+#
+# Rules:
+#
+# If withdraw > balance → "Insufficient Funds"
+# If withdraw <= balance → show remaining balance
+# If amount <= 0 → "Invalid Amount"
+#
+# 👉 Real world: Banking systems
+
+
+
+
+
+
+
+# 🔴 Expert Level
+# 10. Dynamic Access Control System
+#
+# Allowed roles:
+#
+# {"admin", "manager", "staff"}
+#
+# Ask user role + department.
+#
+# Rules:
+#
+# Admin can access all
+# Manager only "sales" or "hr"
+# Staff only "support"
+# Else deny access
+#
+# 👉 Real world: Company internal systems
+
+
+
+
+
+
+
+# 🔥 BONUS CHALLENGE (Very Real World)
+# 11. Blacklist Checker
+#
+# Blacklisted emails:
+#
+# {"spam@gmail.com", "bot@yahoo.com"}
+#
+# Ask user email.
+#
+# If blacklisted:
+#
+# Blocked
+#
+# Else:
+#
+# Welcome
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# 🟢 Problem 1: E-Commerce Fraud & Order Analyzer
+#
+# A store receives orders from many users.
+
+# orders = [
+#     {"user": "u1", "email": "a@gmail.com", "ip": "1.1.1.1", "amount": 120},
+#     {"user": "u2", "email": "b@gmail.com", "ip": "2.2.2.2", "amount": 450},
+#     {"user": "u3", "email": "a@gmail.com", "ip": "3.3.3.3", "amount": 50},
+#     {"user": "u4", "email": "d@gmail.com", "ip": "1.1.1.1", "amount": 900},
+#     {"user": "u5", "email": "e@gmail.com", "ip": "5.5.5.5", "amount": 200}
+# ]
+
+# 🎯 Tasks
+#
+# Build a system that:
+#
+# 1. Detect duplicate emails
+#
+# (One email used by multiple accounts)
+#
+# 2. Detect duplicate IPs
+#
+# (Many users ordering from same IP)
+#
+# 3. Total money spent by each user
+#
+# Example:
+# {
+#  "u1": 120,
+#  "u2": 450
+# }
+# 4. Flag suspicious orders:
+#
+# If:
+#
+# amount > 500
+# OR
+# duplicate IP used
+#
+# Then:
+#
+# Suspicious
+# 5. Count safe vs suspicious orders
+# 👉 Real World Use
+# Amazon fraud detection
+# Shopify risk systems
+# Payment security teams
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# 🔥 Problem 2: Smart Employee Attendance & Bonus System
+#
+# A company tracks daily check-ins.
+#
+# attendance = [
+#     {"name": "John", "department": "Sales", "days": 24},
+#     {"name": "Mary", "department": "HR", "days": 19},
+#     {"name": "Alex", "department": "Sales", "days": 26},
+#     {"name": "John", "department": "Sales", "days": 24},
+#     {"name": "Sarah", "department": "IT", "days": 28}
+# ]
+# 🎯 Tasks
+#
+# Build a system that:
+#
+# 1. Remove duplicate employee records
+#
+# (Use set logic)
+#
+# 2. Count employees per department
+#
+# Example:
+#
+# {
+#  "Sales": 2,
+#  "HR": 1,
+#  "IT": 1
+# }
+# 3. Assign bonus using conditions:
+#
+# If days worked:
+#
+# 26+ → $1000 bonus
+# 22–25 → $500
+# Below 22 → $0
+# 4. Find top attendance employee
+# 5. Print employees who qualify for bonus
+# 👉 Real World Use
+# HR payroll systems
+# Attendance dashboards
+# Corporate analytics

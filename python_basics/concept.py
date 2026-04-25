@@ -286,3 +286,9 @@ inside_city_limit = False
 
 maximum_speed = 50 if inside_city_limit else 100
 print(maximum_speed)
+
+
+
+# ============================================================17. Structural Pattern Matching==============================
+
+
