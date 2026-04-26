@@ -12,19 +12,19 @@ from ipaddress import ip_address
 # 👉 Example:
 # [1, 2, 3, 4] → [4, 8]
 
-def new_lists(d):
-    sqrt_even_list = []
-    even_list = []
-    for k in d:
-        if k % 2 == 0:
-            sqrt_even_list.append(k * 2)
-            even_list.append(k)
-    return sqrt_even_list, even_list
-
-
-d = new_lists([1,2,3,4,5,6,7,8,9])
-print(d)
-
+# def new_lists(d):
+#     sqrt_even_list = []
+#     even_list = []
+#     for k in d:
+#         if k % 2 == 0:
+#             sqrt_even_list.append(k * 2)
+#             even_list.append(k)
+#     return sqrt_even_list, even_list
+#
+#
+# d = new_lists([1,2,3,4,5,6,7,8,9])
+# print(d)
+#
 
 
 
@@ -38,17 +38,17 @@ print(d)
 
 # 👉 Example:
 # [1, 2, 2, 3, 1] → [1, 2, 3]
-
-def remove_duplicates(d):
-    lst = []
-    for i in d:
-        if i not in lst:
-            lst.append(i)
-    return lst
-
-d = remove_duplicates([1,1,2,3,3,4,5,6,6])
-print(d)
-
+#
+# def remove_duplicates(d):
+#     lst = []
+#     for i in d:
+#         if i not in lst:
+#             lst.append(i)
+#     return lst
+#
+# d = remove_duplicates([1,1,2,3,3,4,5,6,6])
+# print(d)
+#
 
 
 # 3. Find Second Largest
@@ -61,20 +61,20 @@ print(d)
 # 👉 Example:
 # [10, 5, 8, 20] → 10
 
-def second_largests(d):
-    largest = float('-inf')
-    second_largest = float('-inf')
-    for k in d:
-        if k > largest:
-            second_largest = largest
-            largest = k
-        elif k > second_largest and k != largest:
-            second_largest = k
-    return second_largest
-
-d = second_largests([10, 5, 8, 20])
-print(d)
-
+# def second_largests(d):
+#     largest = float('-inf')
+#     second_largest = float('-inf')
+#     for k in d:
+#         if k > largest:
+#             second_largest = largest
+#             largest = k
+#         elif k > second_largest and k != largest:
+#             second_largest = k
+#     return second_largest
+#
+# d = second_largests([10, 5, 8, 20])
+# print(d)
+#
 
 # 4. Flatten a Nested List
 #
@@ -86,18 +86,18 @@ print(d)
 # 👉 Output:
 # [1, 2, 3, 4, 5]
 
-def flatten_lst(lst):
-    flat_list = []
-    for item in lst:
-        if isinstance(item, list):
-            flat_list.extend(flatten_lst(item))
-        else:
-            flat_list.append(item)
-    return flat_list
-
-lst = flatten_lst( [1, [2, 3], [4, [5]]])
-print(lst)
-
+# def flatten_lst(lst):
+#     flat_list = []
+#     for item in lst:
+#         if isinstance(item, list):
+#             flat_list.extend(flatten_lst(item))
+#         else:
+#             flat_list.append(item)
+#     return flat_list
+#
+# lst = flatten_lst( [1, [2, 3], [4, [5]]])
+# print(lst)
+#
 
 
 
@@ -130,16 +130,16 @@ print(lst)
 
 # ['a', 'b', 'a'] → {'a': 2, 'b': 1}
 
-def frequency_element(lst):
-    frequency = {}
-    for item in lst:
-        if item not in frequency:
-            frequency[item] = 1
-        else:
-            frequency[item] += 1
-    return frequency
-lst = frequency_element(['a', 'b', 'a', 'c', 'c', 'c'])
-print(lst)
+# def frequency_element(lst):
+#     frequency = {}
+#     for item in lst:
+#         if item not in frequency:
+#             frequency[item] = 1
+#         else:
+#             frequency[item] += 1
+#     return frequency
+# lst = frequency_element(['a', 'b', 'a', 'c', 'c', 'c'])
+# print(lst)
 
 # 2. Invert Dictionary
 #
@@ -150,18 +150,18 @@ print(lst)
 #
 # 👉 Example:
 # {'a': 1, 'b': 1} → {1: ['a', 'b']}
-
-def swap_duplicate_value(lst):
-    new_dict = {}
-    for item, value in lst.items():
-        if value not in new_dict:
-            new_dict[value] = [item]
-        else:
-            new_dict[value].append(item)
-    return new_dict
-
-lst=  swap_duplicate_value({'a': 1, 'b': 1, 'c': 2, 'd': 3})
-print(lst)
+#
+# def swap_duplicate_value(lst):
+#     new_dict = {}
+#     for item, value in lst.items():
+#         if value not in new_dict:
+#             new_dict[value] = [item]
+#         else:
+#             new_dict[value].append(item)
+#     return new_dict
+#
+# lst=  swap_duplicate_value({'a': 1, 'b': 1, 'c': 2, 'd': 3})
+# print(lst)
 
 
 # 3. Group by First Letter
@@ -631,16 +631,16 @@ print(lst)
 # Names of unique visitors
 #
 # 👉 Real world: Website analytics
-
-def visitor_counter(people):
-    unique_visitor = set()
-    for person in people:
-        unique_visitor.add(person)
-    return unique_visitor
-
-people = ["john", "mary", "john", "alex", "mary", "kevin"]
-print(visitor_counter(people))
-
+#
+# def visitor_counter(people):
+#     unique_visitor = set()
+#     for person in people:
+#         unique_visitor.add(person)
+#     return unique_visitor
+#
+# people = ["john", "mary", "john", "alex", "mary", "kevin"]
+# print(visitor_counter(people))
+#
 
 
 
@@ -661,16 +661,16 @@ print(visitor_counter(people))
 #
 # 👉 Real world: Login systems
 
-def access_checkr(username):
-
-
-        if username == "admin123":
-            return "Access granted"
-
-        else:
-            return "Access denied"
-username = input("Please enter your username: ")
-print(access_checkr(username))
+# def access_checkr(username):
+#
+#
+#         if username == "admin123":
+#             return "Access granted"
+#
+#         else:
+#             return "Access denied"
+# username = input("Please enter your username: ")
+# print(access_checkr(username))
 
 # 3. Age Restriction App
 #
@@ -684,16 +684,16 @@ print(access_checkr(username))
 #
 # 👉 Real world: Insurance / Ticket pricing
 
-def restriction_app(age):
-    if age >= 65:
-        return "You're Senior"
-    elif age >= 18 and age <= 64:
-        return "You're an Adult"
-    else:
-        return "You're a Minor"
-
-age = int(input("Please enter your age: "))
-print(restriction_app(age))
+# def restriction_app(age):
+#     if age >= 65:
+#         return "You're Senior"
+#     elif age >= 18 and age <= 64:
+#         return "You're an Adult"
+#     else:
+#         return "You're a Minor"
+#
+# age = int(input("Please enter your age: "))
+# print(restriction_app(age))
 
 
 
@@ -710,16 +710,16 @@ print(restriction_app(age))
 #
 # 👉 Real world: Inventory system
 
-def duplicate_product(lst):
-    new_product_list = set()
-    for item in lst:
-        new_product_list.add(item)
-    return list(new_product_list)
-
-lst =  ["TV", "Phone", "TV", "Laptop", "Phone", "Tablet"]
-print(duplicate_product(lst))
-
-
+# def duplicate_product(lst):
+#     new_product_list = set()
+#     for item in lst:
+#         new_product_list.add(item)
+#     return list(new_product_list)
+#
+# lst =  ["TV", "Phone", "TV", "Laptop", "Phone", "Tablet"]
+# print(duplicate_product(lst))
+#
+#
 
 
 
@@ -742,19 +742,19 @@ print(duplicate_product(lst))
 #
 # 👉 Real world: E-commerce checkout
 
-def shipping_checkr(country):
-
-    if country == "UK" or country == "USA" or country == "Canada":
-        return "Shipping Available"
-    else:
-        return "Shipping Not Available"
-
-
-country = input("Please enter your country: ")
-print(shipping_checkr(country))
-
-
-
+# def shipping_checkr(country):
+#
+#     if country == "UK" or country == "USA" or country == "Canada":
+#         return "Shipping Available"
+#     else:
+#         return "Shipping Not Available"
+#
+#
+# country = input("Please enter your country: ")
+# print(shipping_checkr(country))
+#
+#
+#
 
 
 
@@ -775,22 +775,22 @@ print(shipping_checkr(country))
 #
 # 👉 Real world: Airline memberships
 
-
-def airline_membership(info):
-    vip_permission = set()
-    for item in info:
-        vip_permission.add(item)
-    vip_permission = frozenset(vip_permission)
-    if "free meal" in vip_permission:
-        print("Free Meal")
-    return vip_permission
-
-
-
-info = {"lounge", "priority boarding", "free meal"}
-print(airline_membership(info))
-
-
+#
+# def airline_membership(info):
+#     vip_permission = set()
+#     for item in info:
+#         vip_permission.add(item)
+#     vip_permission = frozenset(vip_permission)
+#     if "free meal" in vip_permission:
+#         print("Free Meal")
+#     return vip_permission
+#
+#
+#
+# info = {"lounge", "priority boarding", "free meal"}
+# print(airline_membership(info))
+#
+#
 
 
 # 🟠 Advanced Level
@@ -805,21 +805,21 @@ print(airline_membership(info))
 #
 # 👉 Real world: Cybersecurity fraud detection
 
-
-def fraud_detection(ip_address):
-    not_duplicated_ip_address = []
-    duplicated_ip_address = []
-    for item in ip_address:
-        if item not in not_duplicated_ip_address:
-            not_duplicated_ip_address.append(item)
-        else:
-            duplicated_ip_address.append(item)
-    return f"Not Duplicated IP Address: {not_duplicated_ip_address}, Duplicated IP Address: {duplicated_ip_address}"
-
-ip_address = ["192.1.1.1", "192.1.1.2", "192.1.1.1", "10.0.0.1"]
-print(fraud_detection(ip_address))
-
-
+#
+# def fraud_detection(ip_address):
+#     not_duplicated_ip_address = []
+#     duplicated_ip_address = []
+#     for item in ip_address:
+#         if item not in not_duplicated_ip_address:
+#             not_duplicated_ip_address.append(item)
+#         else:
+#             duplicated_ip_address.append(item)
+#     return f"Not Duplicated IP Address: {not_duplicated_ip_address}, Duplicated IP Address: {duplicated_ip_address}"
+#
+# ip_address = ["192.1.1.1", "192.1.1.2", "192.1.1.1", "10.0.0.1"]
+# print(fraud_detection(ip_address))
+#
+#
 
 
 
@@ -842,27 +842,27 @@ print(fraud_detection(ip_address))
 # Only Science
 #
 # 👉 Real world: University systems
-
-def student_enrollment_match(math_student, science_student):
-    only_math_student = set()
-    only_science_student = set()
-    both_classes = set()
-    for student in math_student:
-        if student not in science_student:
-            only_math_student.add(student)
-    for student in science_student:
-        if student not in math_student:
-            only_science_student.add(student)
-    for student in math_student:
-        if student in science_student:
-            both_classes.add(student)
-
-    return f"Only science class: {only_science_student}, math student: {only_math_student}, both_classes: {both_classes}"
-
-
-science_student = {"Mary", "Alex", "Sarah"}
-math_student = {"John", "Mary", "Alex", "David"}
-print(student_enrollment_match(math_student, science_student))
+#
+# def student_enrollment_match(math_student, science_student):
+#     only_math_student = set()
+#     only_science_student = set()
+#     both_classes = set()
+#     for student in math_student:
+#         if student not in science_student:
+#             only_math_student.add(student)
+#     for student in science_student:
+#         if student not in math_student:
+#             only_science_student.add(student)
+#     for student in math_student:
+#         if student in science_student:
+#             both_classes.add(student)
+#
+#     return f"Only science class: {only_science_student}, math student: {only_math_student}, both_classes: {both_classes}"
+#
+#
+# science_student = {"Mary", "Alex", "Sarah"}
+# math_student = {"John", "Mary", "Alex", "David"}
+# print(student_enrollment_match(math_student, science_student))
 
 
 
@@ -885,31 +885,31 @@ print(student_enrollment_match(math_student, science_student))
 #
 # 👉 Real world: Banking systems
 
-
-def smart_atm_machine(user):
-    balance = 0
-    if user == "deposit":
-        deposit = int(input("Please enter your deposit: "))
-        if deposit <= 0:
-            return "You can not deposit 0 or negative amount"
-        else:
-            balance = balance + deposit
-            return f"Your balance is {balance}"
-
-    elif user == "withdraw":
-        withdraw = int(input("Please enter your withdraw: "))
-        if withdraw > balance:
-            return f"Your balance is {balance}, you cannot withdraw {withdraw}"
-        elif withdraw <= 0:
-            return "You can not withdraw 0 or negative amount"
-        else:
-            balance = balance - withdraw
-            return f"You withdraw this amount {withdraw}, and your current balance is {balance}"
-
-
-user = str(input("Hello there what would you like to do here to do, (deposit, withdraw): "))
-print(smart_atm_machine(user))
-
+#
+# def smart_atm_machine(user):
+#     balance = 0
+#     if user == "deposit":
+#         deposit = int(input("Please enter your deposit: "))
+#         if deposit <= 0:
+#             return "You can not deposit 0 or negative amount"
+#         else:
+#             balance = balance + deposit
+#             return f"Your balance is {balance}"
+#
+#     elif user == "withdraw":
+#         withdraw = int(input("Please enter your withdraw: "))
+#         if withdraw > balance:
+#             return f"Your balance is {balance}, you cannot withdraw {withdraw}"
+#         elif withdraw <= 0:
+#             return "You can not withdraw 0 or negative amount"
+#         else:
+#             balance = balance - withdraw
+#             return f"You withdraw this amount {withdraw}, and your current balance is {balance}"
+#
+#
+# user = str(input("Hello there what would you like to do here to do, (deposit, withdraw): "))
+# print(smart_atm_machine(user))
+#
 
 # 🔴 Expert Level
 # 10. Dynamic Access Control System
@@ -929,41 +929,29 @@ print(smart_atm_machine(user))
 #
 # 👉 Real world: Company internal systems
 
-
-
-
-
-
-
-# 🔥 BONUS CHALLENGE (Very Real World)
-# 11. Blacklist Checker
 #
-# Blacklisted emails:
+# def access_control_systems(employee_input_role, employee_input_department):
+#     employee_catalog = {}
+#     employee_catalog["role"] = employee_input_role
+#     employee_catalog["department"] = employee_input_department
+#     print(employee_catalog)
 #
-# {"spam@gmail.com", "bot@yahoo.com"}
+#     if employee_catalog['role'] == "admin":
+#         return "Admin can access all"
+#     elif employee_catalog['role'] == "manager":
+#         return f"Manger only access {employee_catalog['department']}"
+#     elif employee_catalog['role'] == "staff":
+#         return f"Staff only access {employee_catalog['department']}"
+#     else:
+#         return "Access denied"
 #
-# Ask user email.
 #
-# If blacklisted:
 #
-# Blocked
+# employee_input_role = input("Please enter your employee role: ")
+# employee_input_department = input("Please enter your employee department: ")
+# print(access_control_systems(employee_input_role, employee_input_department))
 #
-# Else:
 #
-# Welcome
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -971,13 +959,13 @@ print(smart_atm_machine(user))
 #
 # A store receives orders from many users.
 
-# orders = [
-#     {"user": "u1", "email": "a@gmail.com", "ip": "1.1.1.1", "amount": 120},
-#     {"user": "u2", "email": "b@gmail.com", "ip": "2.2.2.2", "amount": 450},
-#     {"user": "u3", "email": "a@gmail.com", "ip": "3.3.3.3", "amount": 50},
-#     {"user": "u4", "email": "d@gmail.com", "ip": "1.1.1.1", "amount": 900},
-#     {"user": "u5", "email": "e@gmail.com", "ip": "5.5.5.5", "amount": 200}
-# ]
+orders = [
+    {"user": "u1", "email": "a@gmail.com", "ip": "1.1.1.1", "amount": 120},
+    {"user": "u2", "email": "b@gmail.com", "ip": "2.2.2.2", "amount": 450},
+    {"user": "u3", "email": "a@gmail.com", "ip": "3.3.3.3", "amount": 50},
+    {"user": "u4", "email": "d@gmail.com", "ip": "1.1.1.1", "amount": 900},
+    {"user": "u5", "email": "e@gmail.com", "ip": "5.5.5.5", "amount": 200}
+]
 
 # 🎯 Tasks
 #
@@ -1016,9 +1004,30 @@ print(smart_atm_machine(user))
 # Payment security teams
 
 
+def fraud_order_analyzer(orders):
+    clean_orders = []
+    seen_emails = set()
+    seen_ips = set()
+
+    for order in orders:
+        if order["amount"] > 500:
+            print(f"High amount suspicious: {order['user']}")
+        elif order["email"] in seen_emails or order["ip"] in seen_ips:
+            print(f"Duplicate suspicious: {order['email']} | {order['ip']}")
+        else:
+            clean_orders.append(order)
+            seen_emails.add(order["email"])
+            seen_ips.add(order["ip"])
+    return clean_orders
 
 
 
+
+
+
+
+
+print(fraud_order_analyzer(orders))
 
 
 
