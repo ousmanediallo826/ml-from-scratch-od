@@ -6,6 +6,9 @@
 # # in the dictionary m If k is only contained in one of the dictionaries,
 # # the k and the corresponding value will be included in m
 #
+from math import factorial
+
+
 def dict_merge_sum(d1, d2):
     m = {}
 
@@ -211,14 +214,89 @@ def calculate_grade(grade):
 # Write a Python program, which asks for a year and calculates, if this year is a leap year or not.
 
 
-def leap_year(year):
-    if year % 4:
-        return f"{year} is not a leap year"
-    elif year % 100 == 0 and year % 400 != 0:
-        return f"{year} is not a leap year"
-    else:
-        return f"{year} is a leap year"
+# def leap_year(year):
+#     if year % 4:
+#         return f"{year} is not a leap year"
+#     elif year % 100 == 0 and year % 400 != 0:
+#         return f"{year} is not a leap year"
+#     else:
+#         return f"{year} is a leap year"
+#
+# year = int(input("Enter a year: "))
+# print(leap_year(year))
 
-year = int(input("Enter a year: "))
-print(leap_year(year))
+# ======================================While Loops Exercise ======================
+
+# Exercise 1: Dog Age to Human Age
+# We had a program to convert a dog age to a human age in our chapter Conditional Statements.
+#
+# This was the program:
+
+while True:
+    dog_age = int(input("Age of the dog: "))
+    print()
+    if dog_age <= 0:
+        human_age = -1
+
+    elif dog_age == 1:
+        human_age = 14
+    else:
+        # this means: dog_age >= 2:
+        human_age = 22 + (dog_age - 2) * 5
+    if human_age > 0:
+        print("Corresponds to  " + str(human_age) + " human years!")
+    else:
+        print("Negative values or zero makes no sense for a dog age!")
+        break
+
+# Write a version with a while loop so that people can keep on converting dog ages.
+# 0 or a negative value means that they want to finish.
+
+
+# Exercise 2: Factorial Calculator
+# Write a Python program that calculates the factorial of a number entered by the user using a while loop.
+# The factorial of a non-negative integer n, denoted in mathematics as n!,
+# is the product of all positive integers from 1 to n.
+# For example, 5! (read as "5 factorial") is equal to 5 * 4 * 3 * 2 * 1, which is 120.
+
+
+n = int(input("Enter a number: "))
+factorial = 1
+counter = 1
+while counter <= n:
+
+
+
+
+        factorial *= counter
+        counter += 1
+print(f"{n}! = {factorial}")
+
+
+
+# Exercise 3: Password Checker
+# Write a Python program that simulates a simple password checker.
+# The program should ask the user to enter a password and continue
+# to prompt them until they enter the correct password.
+# Once the correct password is entered, the program should print a success message.
+
+
+maximum_attempt = 5
+while True:
+    password = input("Enter a password: ")
+    if maximum_attempt == 0:
+        print("You exceeded the maximum number of attempts.")
+        break
+    else:
+        if password == "Anchitafnu826$":
+            print("Congrats! You guessed the password correctly!")
+            break
+        else:
+            print("Invalid input. Try again.")
+    if maximum_attempt == 2:
+        print('You only have 2 attempts left.')
+    maximum_attempt -= 1
+
+
+
 
