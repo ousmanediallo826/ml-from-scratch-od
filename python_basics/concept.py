@@ -327,48 +327,112 @@
 # =================================================20. For Loops ===============================
 
 # Syntax of the For Loop
-performance_level = ('beginner', 'novice', 'intermediate', 'advanced', 'expert')
-for level in performance_level:
-    print(level)
-
-edibles = ["bacon", "spam", "eggs", "nuts"]
-
-for food in edibles:
-    if food == "spam":
-        print("No more spam please.")
-        break
-    print("Great Delicious " + food)
-else:
-    print("I am so glad: No spam!")
-print("Finally, I finished stuffing myself")
-
+# performance_level = ('beginner', 'novice', 'intermediate', 'advanced', 'expert')
+# for level in performance_level:
+#     print(level)
+#
+# edibles = ["bacon", "spam", "eggs", "nuts"]
+#
+# for food in edibles:
+#     if food == "spam":
+#         print("No more spam please.")
+#         break
+#     print("Great Delicious " + food)
+# else:
+#     print("I am so glad: No spam!")
+# print("Finally, I finished stuffing myself")
+#
 
 
 # Calculation of the Pythagorean Numbers
-
-from math import sqrt
-n = int(input("Maximal Number? "))
-for a in range(1, n+1):
-    for b in range(a, n):
-        c_square = a**2 + b**2
-        c = int(sqrt(c_square))
-        if ((c_square - c**2) == 0):
-            print(a, b, c)
-
-
-
+#
+# from math import sqrt
+# n = int(input("Maximal Number? "))
+# for a in range(1, n+1):
+#     for b in range(a, n):
+#         c_square = a**2 + b**2
+#         c = int(sqrt(c_square))
+#         if ((c_square - c**2) == 0):
+#             print(a, b, c)
+#
+#
+#
 
 
 # ==============================23. Working with Dictionaries and while Loops=======================
-coffee_list = {"Peter": 0,
-               "Eva": 0,
-               "Franka": 0}
+# coffee_list = {"Peter": 0,
+#                "Eva": 0,
+#                "Franka": 0}
+#
+# while True:
+#     name = input("What is your name? ")
+#     if name == "":
+#         break
+#     coffee_list[name] += 1
+#     print(coffee_list[name])
+# print("coffee list: ", coffee_list)
+#
 
-while True:
-    name = input("What is your name? ")
-    if name == "":
-        break
-    coffee_list[name] += 1
-    print(coffee_list[name])
-print("coffee list: ", coffee_list)
 
+
+#===================================== 24. Functions ========================================
+
+def greet(name):
+    print("Hi " + name)
+    print("Nice to see you again!")
+    print("Enjoy our video!")
+
+print("Program starts")
+
+greet("Peter")
+
+the_answer = 42
+
+greet("Sarah")
+
+width, length = 3, 4
+area = width * length
+
+
+greet("Dominque")
+
+
+# Default arguments in Python
+
+def hello(name="everybody"):
+    print("Hello " + name)
+hello("Peter")
+hello()
+
+# Local and Global Variables in Functions
+def f():
+    print(s)  # free occurrence of s in f
+
+
+s = "Python"
+f()
+
+
+# def f():
+#     s = "Perl"  # now s is local in f
+#     print(s)
+#
+#
+# s = "Python"
+# f()
+# print(s)
+
+
+
+#============================================29. File Management=========================
+
+text = open("./files/file_definition.txt").read()
+print(text)
+
+with open("./files/second_file.txt") as infile:
+    with open("./files/write_second_file.txt", 'w') as outfile:
+        for line in infile:
+            line = line.replace("Pythonista", "Python newbie")
+            line = line.replace("Python snake", "Python guru")
+            print(line.strip())
+            outfile.write(line)

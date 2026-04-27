@@ -1080,3 +1080,179 @@ print(fraud_order_analyzer(orders))
 # HR payroll systems
 # Attendance dashboards
 # Corporate analytics
+
+
+
+
+
+#======================================++While and For Loops =============================
+
+# 1. Store Inventory Manager 🛒
+# Problem:
+#
+# You own a small electronics store.
+#
+# Create a program where:
+inventory = {
+    "Laptop": 5,
+    "Phone": 10,
+    "Tablet": 3
+}
+
+# Using a while loop, ask the user what item they want to buy.
+#
+# If item exists → reduce stock by 1
+# If stock is 0 → say out of stock
+# If item doesn't exist → say not found
+# Type "quit" to stop
+
+
+def store_inventory_system(inventory):
+    while True:
+        user_input = input("what item would you like to purchase? (Laptop, Phone, Tablet): ")
+        if user_input in inventory and inventory[user_input] > 1:
+            inventory[user_input] -= 1
+            return f"You purchased {user_input} item."
+        elif user_input in inventory and inventory[user_input] == 0:
+            return "This item is out of stock."
+        else:
+            print("This item is not in the inventory.")
+            break
+
+
+print(store_inventory_system(inventory))
+
+
+
+
+# 2. Student Grade Tracker 🎓
+# Problem:
+#
+# You have:
+
+grades = {
+    "John": [80, 90, 85],
+    "Sarah": [100, 95, 92],
+    "Mike": [70, 75, 72]
+}
+
+# Use a for loop to calculate:
+#
+# average grade of each student
+# highest average student
+# lowest average student
+
+
+def student_grade(grades):
+    student_average_score = {}
+
+    for student in grades:
+        total = 0
+        for grade in grades[student]:
+            total += grade
+        average = total / len(grades[student])
+        student_average_score[student] = average
+    return student_average_score
+
+
+print(student_grade(grades))
+
+
+
+
+
+
+# 3. ATM Banking System 💳
+# Problem:
+# accounts = {
+#     "ousmane": 1200,
+#     "john": 500,
+#     "mike": 2000
+# }
+
+# Using a while loop:
+#
+# Ask user:
+# Enter username:
+# Withdraw amount:
+#
+# Rules:
+#
+# If user doesn't exist → invalid account
+# If money too high → insufficient funds
+# If valid → subtract amount
+#
+# Repeat until "quit"
+
+
+# 4. Word Frequency Counter (Like Search Engine) 🔍
+# Problem:
+#
+# Given:
+#
+# sentence = "python is great and python is powerful"
+#
+# Use a for loop + dictionary to count words.
+#
+# Output:
+# {
+#  'python': 2,
+#  'is': 2,
+#  'great': 1,
+#  'and': 1,
+#  'powerful': 1
+# }
+
+
+
+
+
+
+
+
+
+
+# 5. Delivery Driver Earnings Tracker 🚗
+#
+# (Real world for Uber Eats / DoorDash)
+#
+# Problem:
+# deliveries = [
+#     {"day": "Mon", "earnings": 120},
+#     {"day": "Tue", "earnings": 95},
+#     {"day": "Wed", "earnings": 140},
+#     {"day": "Thu", "earnings": 110}
+# ]
+#
+# Use a for loop to calculate:
+#
+# Total weekly earnings
+# Highest earning day
+# Average earnings
+# Output:
+# Total: 465
+# Best Day: Wed
+# Average: 116.25
+
+
+
+
+
+
+
+# 6. Fraud Order Detector 🧠
+#
+# Orders:
+#
+# orders = [
+#  {"email": "a@gmail.com", "amount": 200},
+#  {"email": "b@gmail.com", "amount": 800},
+#  {"email": "a@gmail.com", "amount": 300}
+# ]
+#
+# Detect:
+#
+# duplicate emails
+# any order above $500 suspicious
+#
+# Use loops + dictionary.

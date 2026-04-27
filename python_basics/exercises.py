@@ -231,23 +231,23 @@ def calculate_grade(grade):
 # We had a program to convert a dog age to a human age in our chapter Conditional Statements.
 #
 # This was the program:
-
-while True:
-    dog_age = int(input("Age of the dog: "))
-    print()
-    if dog_age <= 0:
-        human_age = -1
-
-    elif dog_age == 1:
-        human_age = 14
-    else:
-        # this means: dog_age >= 2:
-        human_age = 22 + (dog_age - 2) * 5
-    if human_age > 0:
-        print("Corresponds to  " + str(human_age) + " human years!")
-    else:
-        print("Negative values or zero makes no sense for a dog age!")
-        break
+#
+# while True:
+#     dog_age = int(input("Age of the dog: "))
+#     print()
+#     if dog_age <= 0:
+#         human_age = -1
+#
+#     elif dog_age == 1:
+#         human_age = 14
+#     else:
+#         # this means: dog_age >= 2:
+#         human_age = 22 + (dog_age - 2) * 5
+#     if human_age > 0:
+#         print("Corresponds to  " + str(human_age) + " human years!")
+#     else:
+#         print("Negative values or zero makes no sense for a dog age!")
+#         break
 
 # Write a version with a while loop so that people can keep on converting dog ages.
 # 0 or a negative value means that they want to finish.
@@ -259,18 +259,18 @@ while True:
 # is the product of all positive integers from 1 to n.
 # For example, 5! (read as "5 factorial") is equal to 5 * 4 * 3 * 2 * 1, which is 120.
 
-
-n = int(input("Enter a number: "))
-factorial = 1
-counter = 1
-while counter <= n:
-
-
-
-
-        factorial *= counter
-        counter += 1
-print(f"{n}! = {factorial}")
+#
+# n = int(input("Enter a number: "))
+# factorial = 1
+# counter = 1
+# while counter <= n:
+#
+#
+#
+#
+#         factorial *= counter
+#         counter += 1
+# print(f"{n}! = {factorial}")
 
 
 
@@ -280,23 +280,41 @@ print(f"{n}! = {factorial}")
 # to prompt them until they enter the correct password.
 # Once the correct password is entered, the program should print a success message.
 
+#
+# maximum_attempt = 5
+# while True:
+#     password = input("Enter a password: ")
+#     if maximum_attempt == 0:
+#         print("You exceeded the maximum number of attempts.")
+#         break
+#     else:
+#         if password == "Anchitafnu826$":
+#             print("Congrats! You guessed the password correctly!")
+#             break
+#         else:
+#             print("Invalid input. Try again.")
+#     if maximum_attempt == 2:
+#         print('You only have 2 attempts left.')
+#     maximum_attempt -= 1
+#
 
-maximum_attempt = 5
-while True:
-    password = input("Enter a password: ")
-    if maximum_attempt == 0:
-        print("You exceeded the maximum number of attempts.")
-        break
-    else:
-        if password == "Anchitafnu826$":
-            print("Congrats! You guessed the password correctly!")
-            break
-        else:
-            print("Invalid input. Try again.")
-    if maximum_attempt == 2:
-        print('You only have 2 attempts left.')
-    maximum_attempt -= 1
 
 
+#===================================29. File Management ========================
+
+# Exercise 1
+# Write a function which reads in a text from file and returns a list of the paragraphs.
+# You may use one of the following books:
+
+def read_books():
+    paragraphs = []
+
+    with open("./files/Virginia_wolf.txt", "r") as file:
+        text= file.read()
+    raw_paragraphs = text.split("\n\n")
+    for paragraph in raw_paragraphs:
+        paragraphs.append(paragraph)
+    return paragraphs
 
 
+print(read_books())
