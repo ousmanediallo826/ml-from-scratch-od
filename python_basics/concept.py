@@ -291,35 +291,84 @@
 
 # ============================================================19. While Loops==============================
 
-n = 100
+# n = 100
+#
+# total_sum = 0
+# counter = 1
+# while counter <= n:
+#     total_sum += counter
+#     counter += 1
+# print("Sum of 1 until " + str(n) +  " results in " + str(total_sum))
+#
+#
+#
+#
+# import random
+#
+# upper_bound = 20
+# lower_bound = 1
+#
+# to_be_guessed = random.randint(lower_bound, upper_bound)
+# guess = 0
+#
+# while guess != to_be_guessed:
+#     guess = int(input("Guess the number: "))
+#     if guess > 0:
+#         if guess > to_be_guessed:
+#             print("Too high")
+#         elif guess < to_be_guessed:
+#             print("Too low")
+#     else:
+#         print("Sorry that you're giving up!")
+#         break
+# else:
+#     print("Congrats! You guessed the number!")
 
-total_sum = 0
-counter = 1
-while counter <= n:
-    total_sum += counter
-    counter += 1
-print("Sum of 1 until " + str(n) +  " results in " + str(total_sum))
+# =================================================20. For Loops ===============================
 
+# Syntax of the For Loop
+performance_level = ('beginner', 'novice', 'intermediate', 'advanced', 'expert')
+for level in performance_level:
+    print(level)
 
+edibles = ["bacon", "spam", "eggs", "nuts"]
 
-
-import random
-
-upper_bound = 20
-lower_bound = 1
-
-to_be_guessed = random.randint(lower_bound, upper_bound)
-guess = 0
-
-while guess != to_be_guessed:
-    guess = int(input("Guess the number: "))
-    if guess > 0:
-        if guess > to_be_guessed:
-            print("Too high")
-        elif guess < to_be_guessed:
-            print("Too low")
-    else:
-        print("Sorry that you're giving up!")
+for food in edibles:
+    if food == "spam":
+        print("No more spam please.")
         break
+    print("Great Delicious " + food)
 else:
-    print("Congrats! You guessed the number!")
+    print("I am so glad: No spam!")
+print("Finally, I finished stuffing myself")
+
+
+
+# Calculation of the Pythagorean Numbers
+
+from math import sqrt
+n = int(input("Maximal Number? "))
+for a in range(1, n+1):
+    for b in range(a, n):
+        c_square = a**2 + b**2
+        c = int(sqrt(c_square))
+        if ((c_square - c**2) == 0):
+            print(a, b, c)
+
+
+
+
+
+# ==============================23. Working with Dictionaries and while Loops=======================
+coffee_list = {"Peter": 0,
+               "Eva": 0,
+               "Franka": 0}
+
+while True:
+    name = input("What is your name? ")
+    if name == "":
+        break
+    coffee_list[name] += 1
+    print(coffee_list[name])
+print("coffee list: ", coffee_list)
+
