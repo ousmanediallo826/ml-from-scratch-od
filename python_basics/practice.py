@@ -1,5 +1,7 @@
 #LIST EXERCISES (5)
 from ipaddress import ip_address
+from os import name
+
 
 
 # 1. Filter + Transform
@@ -1256,3 +1258,279 @@ print(student_grade(grades))
 # any order above $500 suspicious
 #
 # Use loops + dictionary.
+
+
+
+
+
+
+#================================ Functions and File Management ========================
+# 1. Daily Journal App
+#
+# Create a program that uses a file called journal.txt.
+#
+# Tasks:
+# Write a function to add a new journal entry.
+# Write a function to display all past entries.
+# Write a function to search for a word inside the journal.
+# Write a function to count how many entries exist.
+
+
+
+
+
+
+
+
+
+
+
+
+
+# 2. Student Grade Book
+#
+# Create a file called grades.txt.
+#
+# Each line should store:
+#
+# Name,Grade
+# Tasks:
+# Write a function to add a student grade.
+# Write a function to display all students.
+# Write a function to calculate the average grade.
+# Write a function to find the highest grade.
+# Write a function to search for one student.
+
+def add_student_grade():
+    student_name = input("What would you like to add?: ")
+
+    grades = []
+    for _ in range(3):
+        grade = int(input("Enter grade: "))
+        grades.append(grade)
+
+    student_score = {
+        "name": student_name,
+        "grades": [grades]
+    }
+    with open("./files/student.txt", "a") as file:
+        grades_text = ",".join(str(g) for g in student_score["grades"])
+        file.write(student_score["name"] + "," + grades_text + "\n")
+
+
+
+print(add_student_grade())
+
+
+def show_all_students():
+    with open("./files/student.txt", "r") as file:
+        for student in file.readlines():
+            print(student)
+
+print(show_all_students())
+
+
+def calculate_average():
+    with open("./files/student.txt", "r") as file:
+        for student in file.readlines():
+
+            parts = student.strip().split(",", 1)
+
+            name = parts[0]
+            grades = eval(parts[1])
+
+            average = sum(grades) / len(grades)
+
+            print(name, round(average, 2))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# 3. To-Do List Manager
+#
+# Create a file called tasks.txt.
+#
+# Tasks:
+# Write a function to add a task.
+# Write a function to show all tasks.
+# Write a function to remove a task by name.
+# Write a function to count total tasks.
+# Write a function to clear all tasks.
+
+
+def add_task():
+    tasks = []
+
+    task_name  = input("What would you like to add?: ")
+    task_description = input("What would you like to add?: ")
+    tasked = {
+        "name": task_name,
+        "description": task_description
+    }
+    tasks.append(tasked)
+
+    with open("./files/contact.txt", "a") as file:
+        file.write(tasked["name"] + "," + tasked["description"] + "\n")
+
+
+
+
+    return tasks
+
+# print(add_task())
+
+def show_tasks():
+    with open("./files/tasks.txt", "r") as file:
+        tasks = file.readlines()
+        return tasks
+
+
+
+
+def remove_task():
+    task_to_remove = input("Enter task name to remove: ")
+    with open("./files/tasks.txt", "r") as file:
+        tasks = file.readlines()
+    with open("./files/tasks.txt", "w") as file:
+        for task in tasks:
+            if not task.startswith(task_to_remove + "|"):
+                file.write(task)
+    print("Task removed if found.")
+
+
+
+
+def count_tasks():
+    count_tasks = 0
+    with open("./files/tasks.txt", "r") as file:
+        for task in file.readlines():
+            count_tasks += 1
+
+    return count_tasks
+
+
+
+
+
+def clear_all_tasks():
+    with open("./files/tasks.txt", "w") as file:
+        file.write("")
+
+
+
+
+
+
+
+# 4. Expense Tracker
+#
+# Create a file called expenses.txt
+#
+# Each line:
+#
+# Category,Amount
+# Tasks:
+# Write a function to add a new expense.
+# Write a function to show all expenses.
+# Write a function to calculate total money spent.
+# Write a function to find the biggest expense.
+# Write a function to search by category.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# 5. Contact Book
+#
+# Create a file called contacts.txt
+#
+# Each line:
+#
+# Name,PhoneNumber
+# Tasks:
+# Write a function to add a contact.
+# Write a function to display all contacts.
+# Write a function to search for a contact name.
+# Write a function to update a phone number.
+# Write a function to count contacts.
+
+def add_contacts():
+
+    name = input("What is your name?: ")
+    email = input("What is your email?: ")
+    phone = input("What is your phone number?: ")
+    contact = {
+        "name": name,
+        "email": email,
+        "phone": phone
+    }
+    with open("./files/contacts.txt", "a") as file:
+        file.write(contact["name"] + "," + contact["email"] + "," + contact["phone"] + "\n")
+
+
+
+
+# print(add_contacts())
+
+
+def show_contacts():
+    with open("./files/contacts.txt", "r") as file:
+        contacts = file.readlines()
+        return contacts
+
+
+
+
+def search_contacts():
+    search_contact = input("What would you like to search?: ")
+    with open("./files/contacts.txt", "r") as file:
+        if search_contact in file.read():
+            return f"here the contact you searched for {search_contact}."
+        else:
+            return "contact not found."
+
+
+
+
+
+
+def count_contacts():
+    count_contacts = 0
+    with open("./files/contacts.txt", "r") as file:
+        for contact in file.readlines():
+            count_contacts += 1
+    return count_contacts
+
+
