@@ -1,0 +1,95 @@
+Project: Mainframe Batch Job Log Analyzer
+This project is directly aligned with your career path. Mainframe systems produce massive job logs every night — real companies need tools to parse and summarize them. You'll build a CLI program that ingests a simulated job log, processes it, and produces a summary report.
+
+🗂️ What You're Building
+A program that reads a list of job log entries, parses them, and lets a user query the results through a menu — all from the terminal.
+
+The Data
+At the top of your file, define this hardcoded list. This simulates a raw mainframe job log:
+"JOBNAME=PAYROLL01 DEPT=FINANCE RC=0000 TIME=3.2s"
+"JOBNAME=INVUPDT02 DEPT=SUPPLY RC=0008 TIME=1.1s"
+"JOBNAME=RPTGEN03 DEPT=FINANCE RC=0000 TIME=5.7s"
+"JOBNAME=BACKUP04 DEPT=IT RC=0004 TIME=2.3s"
+"JOBNAME=PAYROLL05 DEPT=FINANCE RC=0000 TIME=3.0s"
+"JOBNAME=DBMAINT06 DEPT=IT RC=0016 TIME=8.4s"
+"JOBNAME=INVUPDT07 DEPT=SUPPLY RC=0000 TIME=1.4s"
+"JOBNAME=AUDIT08 DEPT=COMPLIANCE RC=0000 TIME=4.1s"
+"JOBNAME=RPTGEN09 DEPT=HR RC=0008 TIME=2.9s"
+"JOBNAME=BACKUP10 DEPT=IT RC=0000 TIME=3.3s"
+
+Phase 1 — Parse the Log
+Write a function called parse_log(raw_logs) that:
+
+Takes the raw list of strings as input
+Loops through each string using a for loop
+Splits each string to extract: job_name, dept, return_code, and runtime
+Stores each job as a dictionary with those four keys
+Appends each dictionary to a new list
+Returns the final list of job dictionaries
+
+
+💡 Hint: .split() and string slicing will help you isolate each value from a string like "JOBNAME=PAYROLL01".
+
+
+Phase 2 — Analyze the Data
+Write these three separate functions, each taking the parsed list as input:
+get_departments(jobs)
+
+Loop through all jobs and collect every unique department
+Use a set to ensure no duplicates
+Return the set
+
+filter_by_status(jobs, status)
+
+status should accept either "success" or "failed"
+In mainframe convention: RC=0000 is success, anything else is a failure
+Loop through jobs and return a list of only the matching ones
+
+get_summary(jobs)
+
+Return a dictionary with these keys:
+
+"total" → total number of jobs
+"successful" → count of RC=0000 jobs
+"failed" → count of non-zero RC jobs
+"departments" → the set of unique departments
+"avg_runtime" → average runtime across all jobs (strip the "s" from the time string to do math)
+
+
+
+
+Phase 3 — Build the Menu
+Write a main() function that:
+
+Calls parse_log() once at the start to get your jobs list
+Uses a while loop to keep the menu running until the user exits
+Displays this menu each loop iteration:
+
+=============================
+  MAINFRAME JOB LOG ANALYZER
+=============================
+1. View Summary Report
+2. View Successful Jobs
+3. View Failed Jobs
+4. List All Departments
+5. Exit
+
+Reads the user's input with input()
+Calls the appropriate function and prints formatted results
+If the user types 5, break the loop and print "Session closed."
+If the user enters anything invalid, print a warning and loop again
+
+
+Phase 4 — Format Your Output
+When printing results, don't just dump raw data. For each job displayed, print a clean line like:
+[FINANCE] PAYROLL01 | RC: 0000 | Runtime: 3.2s | Status: SUCCESS
+Write a helper function called format_job(job) that takes a single job dictionary and returns this formatted string. Call it whenever you're printing job lists.
+
+Concepts Checklist
+ConceptWhere You Use ItListsRaw log data, filtered job resultsDictionariesEach parsed job record, summary reportSetsUnique departmentsFor loopsParsing, filtering, printing jobsWhile loopThe interactive menuFunctionsEvery logical unit of work
+
+Stretch Goals (when you're done)
+
+Add a "Search by Department" menu option that asks the user to type a dept name and shows only those jobs
+Add a "Most Problematic Job" option that finds the job name (prefix, e.g. RPTGEN) that failed the most
+Sort the failed jobs by return code severity before displaying them
