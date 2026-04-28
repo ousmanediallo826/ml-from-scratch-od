@@ -14,18 +14,18 @@ from os import name
 # 👉 Example:
 # [1, 2, 3, 4] → [4, 8]
 
-# def new_lists(d):
-#     sqrt_even_list = []
-#     even_list = []
-#     for k in d:
-#         if k % 2 == 0:
-#             sqrt_even_list.append(k * 2)
-#             even_list.append(k)
-#     return sqrt_even_list, even_list
-#
-#
-# d = new_lists([1,2,3,4,5,6,7,8,9])
-# print(d)
+def new_lists(d):
+    sqrt_even_list = []
+    even_list = []
+    for k in d:
+        if k % 2 == 0:
+            sqrt_even_list.append(k * 2)
+            even_list.append(k)
+    return sqrt_even_list, even_list
+
+
+d = new_lists([1,2,3,4,5,6,7,8,9])
+print(d)
 #
 
 
@@ -41,16 +41,16 @@ from os import name
 # 👉 Example:
 # [1, 2, 2, 3, 1] → [1, 2, 3]
 #
-# def remove_duplicates(d):
-#     lst = []
-#     for i in d:
-#         if i not in lst:
-#             lst.append(i)
-#     return lst
-#
-# d = remove_duplicates([1,1,2,3,3,4,5,6,6])
-# print(d)
-#
+def remove_duplicates(d):
+    lst = []
+    for i in d:
+        if i not in lst:
+            lst.append(i)
+    return lst
+
+d = remove_duplicates([1,1,2,3,3,4,5,6,6])
+print(d)
+
 
 
 # 3. Find Second Largest
@@ -63,20 +63,20 @@ from os import name
 # 👉 Example:
 # [10, 5, 8, 20] → 10
 
-# def second_largests(d):
-#     largest = float('-inf')
-#     second_largest = float('-inf')
-#     for k in d:
-#         if k > largest:
-#             second_largest = largest
-#             largest = k
-#         elif k > second_largest and k != largest:
-#             second_largest = k
-#     return second_largest
-#
-# d = second_largests([10, 5, 8, 20])
-# print(d)
-#
+def second_largests(d):
+    largest = float('-inf')
+    second_largest = float('-inf')
+    for k in d:
+        if k > largest:
+            second_largest = largest
+            largest = k
+        elif k > second_largest and k != largest:
+            second_largest = k
+    return second_largest
+
+d = second_largests([10, 5, 8, 20])
+print(d)
+
 
 # 4. Flatten a Nested List
 #
@@ -88,18 +88,18 @@ from os import name
 # 👉 Output:
 # [1, 2, 3, 4, 5]
 
-# def flatten_lst(lst):
-#     flat_list = []
-#     for item in lst:
-#         if isinstance(item, list):
-#             flat_list.extend(flatten_lst(item))
-#         else:
-#             flat_list.append(item)
-#     return flat_list
-#
-# lst = flatten_lst( [1, [2, 3], [4, [5]]])
-# print(lst)
-#
+def flatten_lst(lst):
+    flat_list = []
+    for item in lst:
+        if isinstance(item, list):
+            flat_list.extend(flatten_lst(item))
+        else:
+            flat_list.append(item)
+    return flat_list
+
+lst = flatten_lst( [1, [2, 3], [4, [5]]])
+print(lst)
+
 
 
 
@@ -132,16 +132,16 @@ from os import name
 
 # ['a', 'b', 'a'] → {'a': 2, 'b': 1}
 
-# def frequency_element(lst):
-#     frequency = {}
-#     for item in lst:
-#         if item not in frequency:
-#             frequency[item] = 1
-#         else:
-#             frequency[item] += 1
-#     return frequency
-# lst = frequency_element(['a', 'b', 'a', 'c', 'c', 'c'])
-# print(lst)
+def frequency_element(lst):
+    frequency = {}
+    for item in lst:
+        if item not in frequency:
+            frequency[item] = 1
+        else:
+            frequency[item] += 1
+    return frequency
+lst = frequency_element(['a', 'b', 'a', 'c', 'c', 'c'])
+print(lst)
 
 # 2. Invert Dictionary
 #
@@ -153,17 +153,17 @@ from os import name
 # 👉 Example:
 # {'a': 1, 'b': 1} → {1: ['a', 'b']}
 #
-# def swap_duplicate_value(lst):
-#     new_dict = {}
-#     for item, value in lst.items():
-#         if value not in new_dict:
-#             new_dict[value] = [item]
-#         else:
-#             new_dict[value].append(item)
-#     return new_dict
-#
-# lst=  swap_duplicate_value({'a': 1, 'b': 1, 'c': 2, 'd': 3})
-# print(lst)
+def swap_duplicate_value(lst):
+    new_dict = {}
+    for item, value in lst.items():
+        if value not in new_dict:
+            new_dict[value] = [item]
+        else:
+            new_dict[value].append(item)
+    return new_dict
+
+lst=  swap_duplicate_value({'a': 1, 'b': 1, 'c': 2, 'd': 3})
+print(lst)
 
 
 # 3. Group by First Letter
@@ -177,19 +177,19 @@ from os import name
 # ['apple', 'banana', 'apricot']
 # → {'a': ['apple', 'apricot'], 'b': ['banana']}
 
-# def groupping_by_letter(lst):
-#     new_dict= {}
-#
-#     for item in lst:
-#         word = item[0]
-#         if word not in new_dict:
-#             new_dict[word] = [item]
-#         else:
-#             new_dict[word].append(item)
-#     return new_dict
-#
-# lst = groupping_by_letter(['apple', 'banana', 'apricot', 'coconut', 'car'])
-# print(lst)
+def groupping_by_letter(lst):
+    new_dict= {}
+
+    for item in lst:
+        word = item[0]
+        if word not in new_dict:
+            new_dict[word] = [item]
+        else:
+            new_dict[word].append(item)
+    return new_dict
+
+lst = groupping_by_letter(['apple', 'banana', 'apricot', 'coconut', 'car'])
+print(lst)
 
 
 # 4. Nested Sum
@@ -202,19 +202,19 @@ from os import name
 # 👉 Example:
 # {'a': 10, 'b': {'c': 5, 'd': 15}} → 30
 
-# def sum_of_numbers(lst):
-#     total = 0
-#     for value in lst.values():
-#         if isinstance(value, dict):
-#             total += sum_of_numbers(value)
-#         else:
-#             total += value
-#     return total
-#
-# lst =  sum_of_numbers({'a': 10, 'b': {'c': 5, 'd': 15}})
-# print(lst)
-#
-#
+def sum_of_numbers(lst):
+    total = 0
+    for value in lst.values():
+        if isinstance(value, dict):
+            total += sum_of_numbers(value)
+        else:
+            total += value
+    return total
+
+lst =  sum_of_numbers({'a': 10, 'b': {'c': 5, 'd': 15}})
+print(lst)
+
+
 
 
 #===============================================PART TWO=================================
@@ -239,23 +239,23 @@ from os import name
 #     "u2": {"view": 1, "click": 1}
 # }
 #
-# def aggregate_user_log(user_log):
-#     aggregate_log = {}
-#     for item in user_log:
-#         for key, value in item.items():
-#             if key not in aggregate_log:
-#                 if key == 'user':
-#                     aggregate_log[key] = value
-#
-#     return aggregate_log
-#
-# user_log = aggregate_user_log([
-#     {"user": "u1", "action": "click"},
-#     {"user": "u2", "action": "view"},
-#     {"user": "u1", "action": "purchase"},
-#     {"user": "u2", "action": "click"},
-# ])
-# print(user_log)
+def aggregate_user_log(user_log):
+    aggregate_log = {}
+    for item in user_log:
+        for key, value in item.items():
+            if key not in aggregate_log:
+                if key == 'user':
+                    aggregate_log[key] = value
+
+    return aggregate_log
+
+user_log = aggregate_user_log([
+    {"user": "u1", "action": "click"},
+    {"user": "u2", "action": "view"},
+    {"user": "u1", "action": "purchase"},
+    {"user": "u2", "action": "click"},
+])
+print(user_log)
 
 
 
@@ -297,24 +297,24 @@ from os import name
 #
 # Data pipelines
 # ML preprocessing
-# def flatten_dict(api, parent_key='', result=None):
-#     if result is None:
-#         result = {}
-#
-#     for key, value in api.items():
-#         new_key = f"{parent_key}.{key}" if parent_key else key
-#
-#         if isinstance(value, dict):
-#             flatten_dict(value, new_key, result)
-#         elif isinstance(value, list):
-#             for i, item in enumerate(value):
-#                 result[f"{parent_key}.{i}"] = item
-#         else:
-#             result[new_key] = value
-#     return result
-#
-#
-#
+def flatten_dict(api, parent_key='', result=None):
+    if result is None:
+        result = {}
+
+    for key, value in api.items():
+        new_key = f"{parent_key}.{key}" if parent_key else key
+
+        if isinstance(value, dict):
+            flatten_dict(value, new_key, result)
+        elif isinstance(value, list):
+            for i, item in enumerate(value):
+                result[f"{parent_key}.{i}"] = item
+        else:
+            result[new_key] = value
+    return result
+
+
+
 # # Output
 # api = {
 #     "user": {
@@ -362,82 +362,82 @@ from os import name
 # Fraud detection
 # ML features
 
-# def transactions(api ):
-#     total = {}
-#
-#     for item in api:
-#         user = item["user"]
-#         amount = item["amount"]
-#
-#         if user in total:
-#             total[user] += amount
-#         else:
-#             total[user] = amount
-#
-#     return total
-#
-#
-#
-#
-# api = [
-#     {"user": "u1", "amount": 100},
-#     {"user": "u2", "amount": 200},
-#     {"user": "u1", "amount": 50},
-# ]
-# print(transactions(api))
+def transactions(api ):
+    total = {}
+
+    for item in api:
+        user = item["user"]
+        amount = item["amount"]
+
+        if user in total:
+            total[user] += amount
+        else:
+            total[user] = amount
+
+    return total
+
+
+
+
+api = [
+    {"user": "u1", "amount": 100},
+    {"user": "u2", "amount": 200},
+    {"user": "u1", "amount": 50},
+]
+print(transactions(api))
 
 
 
 
 # 🟥 1. Order Revenue Analyzer (E-commerce Style)
 
-# def Revenue_analysis(orders):
-#     revenue = {}
-#
-#     for order in orders:
-#        store = order["store"]
-#        price = order["price"]
-#
-#        if store in revenue:
-#            revenue[store] += price
-#        else:
-#            revenue[store] = price
-#     return revenue
-#
-# orders = [
-#     {"store": "Nike", "price": 120},
-#     {"store": "Adidas", "price": 80},
-#     {"store": "Nike", "price": 200},
-# ]
-#
-# print(Revenue_analysis(orders))
+def Revenue_analysis(orders):
+    revenue = {}
+
+    for order in orders:
+       store = order["store"]
+       price = order["price"]
+
+       if store in revenue:
+           revenue[store] += price
+       else:
+           revenue[store] = price
+    return revenue
+
+orders = [
+    {"store": "Nike", "price": 120},
+    {"store": "Adidas", "price": 80},
+    {"store": "Nike", "price": 200},
+]
+
+print(Revenue_analysis(orders))
 
 
 
 # 🟥 2. Employee Work Hours Tracker (HR Style)
 
-# def hr_tracker(employees):
-#     hr_tracker = {}
-#
-#     for employer in employees:
-#         worker = employer["employee"]
-#         hour = employer["hours"]
-#
-#         if worker in hr_tracker:
-#             hr_tracker[worker] += hour
-#         else:
-#             hr_tracker[worker] = hour
-#
-#     return hr_tracker
-#
-#
-#
-# employees = [
-#     {"employee": "John", "hours": 8},
-#     {"employee": "Sarah", "hours": 6},
-#     {"employee": "John", "hours": 5},
-# ]
-# print(hr_tracker(employees))
+def hr_tracker(employees):
+    hr_tracker = {}
+
+    for employer in employees:
+        worker = employer["employee"]
+        hour = employer["hours"]
+
+        if worker in hr_tracker:
+            hr_tracker[worker] += hour
+        else:
+            hr_tracker[worker] = hour
+
+    return hr_tracker
+
+
+
+employees = [
+    {"employee": "John", "hours": 8},
+    {"employee": "Sarah", "hours": 6},
+    {"employee": "John", "hours": 5},
+]
+print(hr_tracker(employees))
 
 
 
@@ -634,15 +634,15 @@ from os import name
 #
 # 👉 Real world: Website analytics
 #
-# def visitor_counter(people):
-#     unique_visitor = set()
-#     for person in people:
-#         unique_visitor.add(person)
-#     return unique_visitor
-#
-# people = ["john", "mary", "john", "alex", "mary", "kevin"]
-# print(visitor_counter(people))
-#
+def visitor_counter(people):
+    unique_visitor = set()
+    for person in people:
+        unique_visitor.add(person)
+    return unique_visitor
+
+people = ["john", "mary", "john", "alex", "mary", "kevin"]
+print(visitor_counter(people))
+
 
 
 
@@ -663,16 +663,16 @@ from os import name
 #
 # 👉 Real world: Login systems
 
-# def access_checkr(username):
-#
-#
-#         if username == "admin123":
-#             return "Access granted"
-#
-#         else:
-#             return "Access denied"
-# username = input("Please enter your username: ")
-# print(access_checkr(username))
+def access_checkr(username):
+
+
+        if username == "admin123":
+            return "Access granted"
+
+        else:
+            return "Access denied"
+username = input("Please enter your username: ")
+print(access_checkr(username))
 
 # 3. Age Restriction App
 #
@@ -686,16 +686,16 @@ from os import name
 #
 # 👉 Real world: Insurance / Ticket pricing
 
-# def restriction_app(age):
-#     if age >= 65:
-#         return "You're Senior"
-#     elif age >= 18 and age <= 64:
-#         return "You're an Adult"
-#     else:
-#         return "You're a Minor"
-#
-# age = int(input("Please enter your age: "))
-# print(restriction_app(age))
+def restriction_app(age):
+    if age >= 65:
+        return "You're Senior"
+    elif age >= 18 and age <= 64:
+        return "You're an Adult"
+    else:
+        return "You're a Minor"
+
+age = int(input("Please enter your age: "))
+print(restriction_app(age))
 
 
 
@@ -712,16 +712,16 @@ from os import name
 #
 # 👉 Real world: Inventory system
 
-# def duplicate_product(lst):
-#     new_product_list = set()
-#     for item in lst:
-#         new_product_list.add(item)
-#     return list(new_product_list)
-#
-# lst =  ["TV", "Phone", "TV", "Laptop", "Phone", "Tablet"]
-# print(duplicate_product(lst))
-#
-#
+def duplicate_product(lst):
+    new_product_list = set()
+    for item in lst:
+        new_product_list.add(item)
+    return list(new_product_list)
+
+lst =  ["TV", "Phone", "TV", "Laptop", "Phone", "Tablet"]
+print(duplicate_product(lst))
+
+
 
 
 
@@ -744,18 +744,18 @@ from os import name
 #
 # 👉 Real world: E-commerce checkout
 
-# def shipping_checkr(country):
-#
-#     if country == "UK" or country == "USA" or country == "Canada":
-#         return "Shipping Available"
-#     else:
-#         return "Shipping Not Available"
-#
-#
-# country = input("Please enter your country: ")
-# print(shipping_checkr(country))
-#
-#
+def shipping_checkr(country):
+
+    if country == "UK" or country == "USA" or country == "Canada":
+        return "Shipping Available"
+    else:
+        return "Shipping Not Available"
+
+
+country = input("Please enter your country: ")
+print(shipping_checkr(country))
+
+
 #
 
 
@@ -777,21 +777,21 @@ from os import name
 #
 # 👉 Real world: Airline memberships
 
-#
-# def airline_membership(info):
-#     vip_permission = set()
-#     for item in info:
-#         vip_permission.add(item)
-#     vip_permission = frozenset(vip_permission)
-#     if "free meal" in vip_permission:
-#         print("Free Meal")
-#     return vip_permission
-#
-#
-#
-# info = {"lounge", "priority boarding", "free meal"}
-# print(airline_membership(info))
-#
+
+def airline_membership(info):
+    vip_permission = set()
+    for item in info:
+        vip_permission.add(item)
+    vip_permission = frozenset(vip_permission)
+    if "free meal" in vip_permission:
+        print("Free Meal")
+    return vip_permission
+
+
+
+info = {"lounge", "priority boarding", "free meal"}
+print(airline_membership(info))
+
 #
 
 
@@ -807,21 +807,21 @@ from os import name
 #
 # 👉 Real world: Cybersecurity fraud detection
 
-#
-# def fraud_detection(ip_address):
-#     not_duplicated_ip_address = []
-#     duplicated_ip_address = []
-#     for item in ip_address:
-#         if item not in not_duplicated_ip_address:
-#             not_duplicated_ip_address.append(item)
-#         else:
-#             duplicated_ip_address.append(item)
-#     return f"Not Duplicated IP Address: {not_duplicated_ip_address}, Duplicated IP Address: {duplicated_ip_address}"
-#
-# ip_address = ["192.1.1.1", "192.1.1.2", "192.1.1.1", "10.0.0.1"]
-# print(fraud_detection(ip_address))
-#
-#
+
+def fraud_detection(ip_address):
+    not_duplicated_ip_address = []
+    duplicated_ip_address = []
+    for item in ip_address:
+        if item not in not_duplicated_ip_address:
+            not_duplicated_ip_address.append(item)
+        else:
+            duplicated_ip_address.append(item)
+    return f"Not Duplicated IP Address: {not_duplicated_ip_address}, Duplicated IP Address: {duplicated_ip_address}"
+
+ip_address = ["192.1.1.1", "192.1.1.2", "192.1.1.1", "10.0.0.1"]
+print(fraud_detection(ip_address))
+
+
 
 
 
@@ -845,26 +845,26 @@ from os import name
 #
 # 👉 Real world: University systems
 #
-# def student_enrollment_match(math_student, science_student):
-#     only_math_student = set()
-#     only_science_student = set()
-#     both_classes = set()
-#     for student in math_student:
-#         if student not in science_student:
-#             only_math_student.add(student)
-#     for student in science_student:
-#         if student not in math_student:
-#             only_science_student.add(student)
-#     for student in math_student:
-#         if student in science_student:
-#             both_classes.add(student)
-#
-#     return f"Only science class: {only_science_student}, math student: {only_math_student}, both_classes: {both_classes}"
-#
-#
-# science_student = {"Mary", "Alex", "Sarah"}
-# math_student = {"John", "Mary", "Alex", "David"}
-# print(student_enrollment_match(math_student, science_student))
+def student_enrollment_match(math_student, science_student):
+    only_math_student = set()
+    only_science_student = set()
+    both_classes = set()
+    for student in math_student:
+        if student not in science_student:
+            only_math_student.add(student)
+    for student in science_student:
+        if student not in math_student:
+            only_science_student.add(student)
+    for student in math_student:
+        if student in science_student:
+            both_classes.add(student)
+
+    return f"Only science class: {only_science_student}, math student: {only_math_student}, both_classes: {both_classes}"
+
+
+science_student = {"Mary", "Alex", "Sarah"}
+math_student = {"John", "Mary", "Alex", "David"}
+print(student_enrollment_match(math_student, science_student))
 
 
 
@@ -887,31 +887,31 @@ from os import name
 #
 # 👉 Real world: Banking systems
 
-#
-# def smart_atm_machine(user):
-#     balance = 0
-#     if user == "deposit":
-#         deposit = int(input("Please enter your deposit: "))
-#         if deposit <= 0:
-#             return "You can not deposit 0 or negative amount"
-#         else:
-#             balance = balance + deposit
-#             return f"Your balance is {balance}"
-#
-#     elif user == "withdraw":
-#         withdraw = int(input("Please enter your withdraw: "))
-#         if withdraw > balance:
-#             return f"Your balance is {balance}, you cannot withdraw {withdraw}"
-#         elif withdraw <= 0:
-#             return "You can not withdraw 0 or negative amount"
-#         else:
-#             balance = balance - withdraw
-#             return f"You withdraw this amount {withdraw}, and your current balance is {balance}"
-#
-#
-# user = str(input("Hello there what would you like to do here to do, (deposit, withdraw): "))
-# print(smart_atm_machine(user))
-#
+
+def smart_atm_machine(user):
+    balance = 0
+    if user == "deposit":
+        deposit = int(input("Please enter your deposit: "))
+        if deposit <= 0:
+            return "You can not deposit 0 or negative amount"
+        else:
+            balance = balance + deposit
+            return f"Your balance is {balance}"
+
+    elif user == "withdraw":
+        withdraw = int(input("Please enter your withdraw: "))
+        if withdraw > balance:
+            return f"Your balance is {balance}, you cannot withdraw {withdraw}"
+        elif withdraw <= 0:
+            return "You can not withdraw 0 or negative amount"
+        else:
+            balance = balance - withdraw
+            return f"You withdraw this amount {withdraw}, and your current balance is {balance}"
+
+
+user = str(input("Hello there what would you like to do here to do, (deposit, withdraw): "))
+print(smart_atm_machine(user))
+
 
 # 🔴 Expert Level
 # 10. Dynamic Access Control System
@@ -931,29 +931,29 @@ from os import name
 #
 # 👉 Real world: Company internal systems
 
-#
-# def access_control_systems(employee_input_role, employee_input_department):
-#     employee_catalog = {}
-#     employee_catalog["role"] = employee_input_role
-#     employee_catalog["department"] = employee_input_department
-#     print(employee_catalog)
-#
-#     if employee_catalog['role'] == "admin":
-#         return "Admin can access all"
-#     elif employee_catalog['role'] == "manager":
-#         return f"Manger only access {employee_catalog['department']}"
-#     elif employee_catalog['role'] == "staff":
-#         return f"Staff only access {employee_catalog['department']}"
-#     else:
-#         return "Access denied"
-#
-#
-#
-# employee_input_role = input("Please enter your employee role: ")
-# employee_input_department = input("Please enter your employee department: ")
-# print(access_control_systems(employee_input_role, employee_input_department))
-#
-#
+
+def access_control_systems(employee_input_role, employee_input_department):
+    employee_catalog = {}
+    employee_catalog["role"] = employee_input_role
+    employee_catalog["department"] = employee_input_department
+    print(employee_catalog)
+
+    if employee_catalog['role'] == "admin":
+        return "Admin can access all"
+    elif employee_catalog['role'] == "manager":
+        return f"Manger only access {employee_catalog['department']}"
+    elif employee_catalog['role'] == "staff":
+        return f"Staff only access {employee_catalog['department']}"
+    else:
+        return "Access denied"
+
+
+
+employee_input_role = input("Please enter your employee role: ")
+employee_input_department = input("Please enter your employee department: ")
+print(access_control_systems(employee_input_role, employee_input_department))
+
+
 
 
 

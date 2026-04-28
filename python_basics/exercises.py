@@ -185,20 +185,20 @@ def calculate_grade(grade):
 #     Seniors: 65 years old and older
 
 
-# def age_classification(age):
-#     if age >= 65:
-#         return "You're a seniors"
-#     elif age >= 20 and age <= 64:
-#         return "You're an adult"
-#     elif age >= 13 and age < 19:
-#         return "You're a teenagers"
-#     elif age >= 3 and age <= 12:
-#         return "You're a child"
-#     elif age >= 0 and age <= 2:
-#         return "You're an infant"
-#     else:
-#         return "invalid input"
-#
+def age_classification(age):
+    if age >= 65:
+        return "You're a seniors"
+    elif age >= 20 and age <= 64:
+        return "You're an adult"
+    elif age >= 13 and age < 19:
+        return "You're a teenagers"
+    elif age >= 3 and age <= 12:
+        return "You're a child"
+    elif age >= 0 and age <= 2:
+        return "You're an infant"
+    else:
+        return "invalid input"
+
 #
 # age = int(input("Enter a age: "))
 # print(age_classification(age))
@@ -214,16 +214,16 @@ def calculate_grade(grade):
 # Write a Python program, which asks for a year and calculates, if this year is a leap year or not.
 
 
-# def leap_year(year):
-#     if year % 4:
-#         return f"{year} is not a leap year"
-#     elif year % 100 == 0 and year % 400 != 0:
-#         return f"{year} is not a leap year"
-#     else:
-#         return f"{year} is a leap year"
-#
-# year = int(input("Enter a year: "))
-# print(leap_year(year))
+def leap_year(year):
+    if year % 4:
+        return f"{year} is not a leap year"
+    elif year % 100 == 0 and year % 400 != 0:
+        return f"{year} is not a leap year"
+    else:
+        return f"{year} is a leap year"
+
+year = int(input("Enter a year: "))
+print(leap_year(year))
 
 # ======================================While Loops Exercise ======================
 
@@ -232,22 +232,22 @@ def calculate_grade(grade):
 #
 # This was the program:
 #
-# while True:
-#     dog_age = int(input("Age of the dog: "))
-#     print()
-#     if dog_age <= 0:
-#         human_age = -1
-#
-#     elif dog_age == 1:
-#         human_age = 14
-#     else:
-#         # this means: dog_age >= 2:
-#         human_age = 22 + (dog_age - 2) * 5
-#     if human_age > 0:
-#         print("Corresponds to  " + str(human_age) + " human years!")
-#     else:
-#         print("Negative values or zero makes no sense for a dog age!")
-#         break
+while True:
+    dog_age = int(input("Age of the dog: "))
+    print()
+    if dog_age <= 0:
+        human_age = -1
+
+    elif dog_age == 1:
+        human_age = 14
+    else:
+        # this means: dog_age >= 2:
+        human_age = 22 + (dog_age - 2) * 5
+    if human_age > 0:
+        print("Corresponds to  " + str(human_age) + " human years!")
+    else:
+        print("Negative values or zero makes no sense for a dog age!")
+        break
 
 # Write a version with a while loop so that people can keep on converting dog ages.
 # 0 or a negative value means that they want to finish.
@@ -260,17 +260,17 @@ def calculate_grade(grade):
 # For example, 5! (read as "5 factorial") is equal to 5 * 4 * 3 * 2 * 1, which is 120.
 
 #
-# n = int(input("Enter a number: "))
-# factorial = 1
-# counter = 1
-# while counter <= n:
-#
-#
-#
-#
-#         factorial *= counter
-#         counter += 1
-# print(f"{n}! = {factorial}")
+n = int(input("Enter a number: "))
+factorial = 1
+counter = 1
+while counter <= n:
+
+
+
+
+        factorial *= counter
+        counter += 1
+print(f"{n}! = {factorial}")
 
 
 
@@ -281,22 +281,22 @@ def calculate_grade(grade):
 # Once the correct password is entered, the program should print a success message.
 
 #
-# maximum_attempt = 5
-# while True:
-#     password = input("Enter a password: ")
-#     if maximum_attempt == 0:
-#         print("You exceeded the maximum number of attempts.")
-#         break
-#     else:
-#         if password == "Anchitafnu826$":
-#             print("Congrats! You guessed the password correctly!")
-#             break
-#         else:
-#             print("Invalid input. Try again.")
-#     if maximum_attempt == 2:
-#         print('You only have 2 attempts left.')
-#     maximum_attempt -= 1
-#
+maximum_attempt = 5
+while True:
+    password = input("Enter a password: ")
+    if maximum_attempt == 0:
+        print("You exceeded the maximum number of attempts.")
+        break
+    else:
+        if password == "Anchitafnu826$":
+            print("Congrats! You guessed the password correctly!")
+            break
+        else:
+            print("Invalid input. Try again.")
+    if maximum_attempt == 2:
+        print('You only have 2 attempts left.')
+    maximum_attempt -= 1
+
 
 
 
