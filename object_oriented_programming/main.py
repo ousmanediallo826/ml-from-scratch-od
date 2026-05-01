@@ -232,11 +232,178 @@
 
 
 # Generic Getters and Setters
-class Robot:
-    def __init__(self, name, build_year, city):
-        self.name = name
-        self.build_year = build_year
-        self.city = city
+# class Robot:
+#     def __init__(self, name, build_year, city):
+#         self.name = name
+#         self.build_year = build_year
+#         self.city = city
+#
+#     @property
+#     def name(self):
+#         return self.__name
+#
+#     @property
+#     def build_year(self):
+#         return self.__build_year
+#     @property
+#     def city(self):
+#         return self.__city
+#     @name.setter
+#     def name(self, value):
+#         self.__name = value
+#     @build_year.setter
+#     def build_year(self, value):
+#         self.__build_year = value
+#     @city.setter
+#     def city(self, value):
+#         self.__city = value
+#
+# robot = Robot("RoboBot", 2022, "Tech Place")
+# print(robot.name)
+# print(robot.build_year)
+# print(robot.city)
+
+
+# class Robots:
+#     def __init__(self, name, build_year, city):
+#         self.name = name
+#         self.build_year = build_year
+#         self.city = city
+#
+#     def __getattr__(self, name):
+#         return self.__dict__[f"__{name}"]
+#
+#     def __setattr__(self, name, value):
+#         if name == 'name':
+#             if value in ['Henry', 'Oscar']:
+#                 raise ValueError("Not a decent Robot name")
+#         elif value == 'build_year':
+#             if int(value) < 2020:
+#                 raise ValueError("Build has to be after 2019")
+#         self.__dict__[f"__{name}"] = value
+#
+#
+#     robot1 = Robot("Robot1", 2018, "Tech Place")
+#     print(robot1.name)
+#     print(robot1.build_year)
+#     print(robot1.city)
+#
+#
+
+
+
+#==================================4. Creating Immutable Classes In Python===================================
+# Ways to Create Immutable Classes
+
+#
+# class ImmutableRObot:
+#     def __init__(self, name, brandname):
+#         self.__name = name
+#         self.__brandname = brandname
+#     @property
+#     def get_name(self):
+#         return self.__name
+#     @property
+#     def get_brandname(self):
+#         return self.__brandname
+#
+# robot = ImmutableRObot("RoboX", brandname="TechBot")
+# print(robot.get_name)
+# print(robot.get_brandname)
+#
+#
+# try:
+#     robot.name = "RoboY"
+# except AttributeError as e:
+#     print(e)
+#
+#
+# try:
+#     robot.brandname = "TechBot"
+# except AttributeError as e:
+#     print(e)
+
+
+
+#==========================================5. Dataclasses In Python=======================
+
+# class Robot_traditional:
+#     def __init__(self, model, serial_number, manufacturer):
+#         self.model = model
+#         self.serial_number = serial_number
+#         self.manufacturer = manufacturer
+#
+#
+# from dataclasses import dataclass
+# @dataclass
+# class Robot:
+#     model: str
+#     serial_number: str
+#     manufacturer: str
+#
+# x = Robot_traditional("NanoGuardian XR-2000", "234-76", "Cyber Robotics Co.")
+# y = Robot("MachinaMaster MM-42", "986-42", "Quantum Automations Inc.")
+# print( repr(x) )
+# print( repr(y) )
+
+
+# Immutable Classes
+from dataclasses import dataclass
+
+@dataclass(frozen=True)
+class ImmutableRobot:
+    name: str
+    brand_name: str
+
+x1 = ImmutableRobot("Marvin", "NanoGuardian XR-2000")
+x2 = ImmutableRobot("Marvin", "NanoGuardian XR-2000")
+print(x1.__hash__(), x2.__hash__())
+
+
+class ImmutableRobot_traditional:
+    def __init__(self, name: str, brand_name:str):
+        self._name = name
+        self._brand_name = brand_name
 
     @property
+    def name(self) -> str:
+        return self._name
+    @property
+    def brand_name(self) -> str:
+        return self._brand_name
+    def __eq__(self, other):
+        if not isinstance(other, ImmutableRobot_traditional):
+            return False
+        return self.name == other.name and self.brand_name == other.brand_name
+
+    def __hash__(self):
+        return hash((self.name, self.brand_name))
+
+x1 = ImmutableRobot_traditional("Marvin", "NanoGuardian XR-2000")
+x2 = ImmutableRobot_traditional("Marvin", "NanoGuardian XR-2000")
+
+print(x1 == x2)
+
+
+
+@dataclass(frozen=True)
+class ImmutableRobot1:
+    name: str
+    brand_name: str
+
+
+robot1 = ImmutableRobot("Marvin", "NanoGuardian XR-2000")
+robot2 = ImmutableRobot("R2D2", "QuantumTech Sentinel-7")
+robot3 = ImmutableRobot("Marva", "MachinaMaster MM-42")
+
+robots = {robot1,robot2, robot3}
+print("The robots in the set robots:")
+for robot in robots:
+    print(robot)
+
+activity = {robot1: 'activated', robot2: 'activated', robot3: 'deactivated'}
+print("\nAll the activated robots in the set robots:")
+for robo, mode in activity.items():
+    if mode == 'activated':
+        print(f"{robo}: is {mode}")
 
