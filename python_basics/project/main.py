@@ -14,6 +14,7 @@ def format_jobs(jobs):
 def main():
     jobs = parse_log(raw_log)
 
+
     print("=============================\n"
           "MAINFRAME JOB LOG ANALYZER\n"
           "=============================\n"
@@ -21,10 +22,11 @@ def main():
           "2. View Successful Jobs\n"
           "3. View Failed Jobs\n"
           "4. List All Departments\n"
-          "5. Exit\n")
+          "5. Do you want to search with Departments\n"
+          "6. Exit\n")
 
     while True:
-        choice = input("Please enter your choice: (1,2,3,4,5) ")
+        choice = input("Please enter your choice: (1,2,3,4,5 for department type 'yes' or 'no') ")
 
         if choice == "1":
             s = get_summary(jobs)
@@ -36,20 +38,37 @@ def main():
             print(f"Departments:     {', '.join(s['departments'])}")
 
         elif choice == "2":
-            success_list = [j for j in jobs if j['RC'] == '0000']
-            print("\n--- SUCCESSFUL JOBS ---")
-            print(format_jobs(success_list))
+            with open("./files/successful_jobs.csv", "a") as file:
+                success_list = [j for j in jobs if j['RC'] == '0000']
+                file.write(format_jobs(success_list))
+
+                print("\n--- SUCCESSFUL JOBS ---")
+                print(format_jobs(success_list))
 
         elif choice == "3":
-            fail_list = [j for j in jobs if j['RC'] != '0000']
-            print("\n--- FAILED JOBS ---")
-            print(format_jobs(fail_list))
+            with open("./files/failed_jobs.csv", "a") as file:
+                fail_list = [j for j in jobs if j['RC'] != '0000']
+                file.write(format_jobs(fail_list))
+                print("\n--- FAILED JOBS ---")
+                print(format_jobs(fail_list))
 
         elif choice == "4":
             depts = sorted(set(j['DEPT'] for j in jobs))
             print("\n--- DEPARTMENTS ---")
-            for d in depts:
-                print(f"- {d}")
+            with open("./files/departments.csv", "a") as file:
+                for d in depts:
+                    file.write(f"{d}\n")
+                    print(f"- {d}")
+        elif choice == 'yes':
+            while True:
+                user_dept_choose = input("Enter Department name as [FINANCE]: or type 'exit' to exit: ")
+                for j in jobs:
+                    if j['DEPT'] == user_dept_choose:
+                        print(format_job(j))
+                if user_dept_choose == "exit":
+                    break
+
+
 
         elif choice == "5":
             print("Goodbye!")
