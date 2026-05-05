@@ -157,66 +157,144 @@ while True:
 #
 # Challenge: appointment status can only change through methods like cancel() or complete().
 from uuid import UUID
+from dataclasses import dataclass, field
 from datetime import datetime
+import uuid
+
+
 @dataclass
 class Patient:
     full_name: str
     dob: str
-    phone_number: int
-    appointment_history: list
+    phone_number: str
+    appointment_history: list = field(default_factory=list)
 
     def store_patient_info(self):
-        patient_info = {
+        return {
             "full_name": self.full_name,
             "dob": self.dob,
             "phone_number": self.phone_number,
             "appointment_history": self.appointment_history
         }
-        return patient_info
-    def schedule_appointment(self, date: datetime):
-        appointment = Appointment.create_appointment({
-            "date": date,
-            "id": uuid.uuid4(),
-            "name": self.full_name,
-            "phone_number": self.phone_number,
-            "dob": self.dob,
-
-        })
-        self.appointment_history.append(appointment)
-
 
 
 @dataclass
 class Doctor:
     full_name: str
     specialization: str
-    available = bool
-    appointment_list: list
+    available: bool = True
+    appointment_list: list = field(default_factory=list)
 
-
-    def accept_appointment(self):
+    def accept_appointment(self, appointment):
         if not self.available:
-            return "Doctor is not available at this time"
-        Appointment.booked(self)
-        self.available = False
-        return f"{self.full_name} accepted the appointment"
+            return "Doctor is not available at this time."
 
-    def view_appointment(self):
-        for appointment in self.appointment_list:
-            print(f"Appointment: {appointment}")
-    def marked_appointment(self):
-        result = Appointment.complete()
+        appointment.book()
+        self.appointment_list.append(appointment)
+        self.available = False
+        return f"Dr. {self.full_name} accepted the appointment."
+
+    def complete_appointment(self, appointment):
+        result = appointment.complete()
         self.available = True
         return result
+
+
 @dataclass
 class Appointment:
     patient: Patient
     doctor: Doctor
-    patient_id: str = uuid.uuid4()
+    reason_for_visit: str
+    appointment_date: datetime = field(default_factory=datetime.now)
+    appointment_id: str = field(default_factory=lambda: str(uuid.uuid4()))
+    _status: str = "scheduled"
+
+    hospital_name = "City Hospital"
+
+    @property
+    def status(self):
+        return self._status
+
+    @staticmethod
+    def validate_phone_number(phone_number):
+        return phone_number.isdigit() and len(phone_number) == 10
 
     @classmethod
-    def schedule_appointment(cls):
-        if not Doctor.available:
-            return "Doctor is not available at this time"
+    def create_appointment_from_form(cls, form_data):
+        phone = form_data["phone_number"]
 
+        if not cls.validate_phone_number(phone):
+            return "Invalid phone number."
+
+        patient = Patient(
+            form_data["patient_name"],
+            form_data["dob"],
+            phone
+        )
+
+        doctor = Doctor(
+            form_data["doctor_name"],
+            form_data["specialization"]
+        )
+
+        appointment = cls(
+            patient=patient,
+            doctor=doctor,
+            reason_for_visit=form_data["reason_for_visit"]
+        )
+
+        patient.appointment_history.append(appointment)
+        return appointment
+
+    def book(self):
+        if self._status != "scheduled":
+            return "Only scheduled appointments can be booked."
+        return "Appointment booked successfully."
+
+    def cancel(self):
+        if self._status == "completed":
+            return "Cannot cancel a completed appointment."
+        if self._status == "cancelled":
+            return "Appointment is already cancelled."
+
+        self._status = "cancelled"
+        return "Appointment cancelled."
+
+    def complete(self):
+        if self._status == "cancelled":
+            return "Cannot complete a cancelled appointment."
+        if self._status == "completed":
+            return "Appointment is already completed."
+
+        self._status = "completed"
+        return "Appointment completed."
+
+    def appointment_details(self):
+        return {
+            "appointment_id": self.appointment_id,
+            "hospital": self.hospital_name,
+            "patient": self.patient.full_name,
+            "doctor": self.doctor.full_name,
+            "specialization": self.doctor.specialization,
+            "reason": self.reason_for_visit,
+            "date": self.appointment_date,
+            "status": self.status
+        }
+
+
+form = {
+    "patient_name": "Ousmane Diallo",
+    "dob": "08/26/2000",
+    "phone_number": "6467038461",
+    "doctor_name": "Anchita",
+    "specialization": "Brain Surgery",
+    "reason_for_visit": "Headache"
+}
+
+appointment = Appointment.create_appointment_from_form(form)
+
+print(appointment.appointment_details())
+print(appointment.doctor.accept_appointment(appointment))
+print(appointment.doctor.complete_appointment(appointment))
+print(appointment.appointment_details())
 
