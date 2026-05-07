@@ -157,144 +157,249 @@ while True:
 #
 # Challenge: appointment status can only change through methods like cancel() or complete().
 from uuid import UUID
+# from dataclasses import dataclass, field
+# from datetime import datetime
+# import uuid
+#
+#
+# @dataclass
+# class Patient:
+#     full_name: str
+#     dob: str
+#     phone_number: str
+#     appointment_history: list = field(default_factory=list)
+#
+#     def store_patient_info(self):
+#         return {
+#             "full_name": self.full_name,
+#             "dob": self.dob,
+#             "phone_number": self.phone_number,
+#             "appointment_history": self.appointment_history
+#         }
+#
+#
+# @dataclass
+# class Doctor:
+#     full_name: str
+#     specialization: str
+#     available: bool = True
+#     appointment_list: list = field(default_factory=list)
+#
+#     def accept_appointment(self, appointment):
+#         if not self.available:
+#             return "Doctor is not available at this time."
+#
+#         appointment.book()
+#         self.appointment_list.append(appointment)
+#         self.available = False
+#         return f"Dr. {self.full_name} accepted the appointment."
+#
+#     def complete_appointment(self, appointment):
+#         result = appointment.complete()
+#         self.available = True
+#         return result
+#
+#
+# @dataclass
+# class Appointment:
+#     patient: Patient
+#     doctor: Doctor
+#     reason_for_visit: str
+#     appointment_date: datetime = field(default_factory=datetime.now)
+#     appointment_id: str = field(default_factory=lambda: str(uuid.uuid4()))
+#     _status: str = "scheduled"
+#
+#     hospital_name = "City Hospital"
+#
+#     @property
+#     def status(self):
+#         return self._status
+#
+#     @staticmethod
+#     def validate_phone_number(phone_number):
+#         return phone_number.isdigit() and len(phone_number) == 10
+#
+#     @classmethod
+#     def create_appointment_from_form(cls, form_data):
+#         phone = form_data["phone_number"]
+#
+#         if not cls.validate_phone_number(phone):
+#             return "Invalid phone number."
+#
+#         patient = Patient(
+#             form_data["patient_name"],
+#             form_data["dob"],
+#             phone
+#         )
+#
+#         doctor = Doctor(
+#             form_data["doctor_name"],
+#             form_data["specialization"]
+#         )
+#
+#         appointment = cls(
+#             patient=patient,
+#             doctor=doctor,
+#             reason_for_visit=form_data["reason_for_visit"]
+#         )
+#
+#         patient.appointment_history.append(appointment)
+#         return appointment
+#
+#     def book(self):
+#         if self._status != "scheduled":
+#             return "Only scheduled appointments can be booked."
+#         return "Appointment booked successfully."
+#
+#     def cancel(self):
+#         if self._status == "completed":
+#             return "Cannot cancel a completed appointment."
+#         if self._status == "cancelled":
+#             return "Appointment is already cancelled."
+#
+#         self._status = "cancelled"
+#         return "Appointment cancelled."
+#
+#     def complete(self):
+#         if self._status == "cancelled":
+#             return "Cannot complete a cancelled appointment."
+#         if self._status == "completed":
+#             return "Appointment is already completed."
+#
+#         self._status = "completed"
+#         return "Appointment completed."
+#
+#     def appointment_details(self):
+#         return {
+#             "appointment_id": self.appointment_id,
+#             "hospital": self.hospital_name,
+#             "patient": self.patient.full_name,
+#             "doctor": self.doctor.full_name,
+#             "specialization": self.doctor.specialization,
+#             "reason": self.reason_for_visit,
+#             "date": self.appointment_date,
+#             "status": self.status
+#         }
+#
+#
+# form = {
+#     "patient_name": "Ousmane Diallo",
+#     "dob": "08/26/2000",
+#     "phone_number": "6467038461",
+#     "doctor_name": "Anchita",
+#     "specialization": "Brain Surgery",
+#     "reason_for_visit": "Headache"
+# }
+#
+# appointment = Appointment.create_appointment_from_form(form)
+#
+# print(appointment.appointment_details())
+# print(appointment.doctor.accept_appointment(appointment))
+# print(appointment.doctor.complete_appointment(appointment))
+# print(appointment.appointment_details())
+#
+
+
+
+# 🏦 1. Loan Approval System (Banking)
+
 from dataclasses import dataclass, field
-from datetime import datetime
 import uuid
 
+class Customer:
+    def __init__(self, customer_name, customer_credit_score):
+        self.customer_name = customer_name
+        self.customer_credit_score = customer_credit_score
 
-@dataclass
-class Patient:
-    full_name: str
-    dob: str
-    phone_number: str
-    appointment_history: list = field(default_factory=list)
-
-    def store_patient_info(self):
-        return {
-            "full_name": self.full_name,
-            "dob": self.dob,
-            "phone_number": self.phone_number,
-            "appointment_history": self.appointment_history
-        }
+class BankOfficer:
+    def __init__(self, name):
+        self.name = name
+        self.accept_loan = []
+        self.reject_loan = []
 
 
-@dataclass
-class Doctor:
-    full_name: str
-    specialization: str
-    available: bool = True
-    appointment_list: list = field(default_factory=list)
+    def approve(self, loan):
+        if loan.status != "pending":
+            return "Loan is already processed"
 
-    def accept_appointment(self, appointment):
-        if not self.available:
-            return "Doctor is not available at this time."
+        if loan.validate_credit_score(loan.customer.customer_credit_score) and loan.amount > 0:
+            loan.approve()
+            self.accept_loan.append(loan)
+            return f"{self.name} approve the loan."
+        return "Loan cannot be approved"
 
-        appointment.book()
-        self.appointment_list.append(appointment)
-        self.available = False
-        return f"Dr. {self.full_name} accepted the appointment."
+    def reject(self, loan):
+        if loan.status != "pending":
+            return "Loan is already processed"
 
-    def complete_appointment(self, appointment):
-        result = appointment.complete()
-        self.available = True
-        return result
+        loan.reject()
+        self.reject_loan.append(loan)
+        return f"{self.name} reject the loan."
 
 
 @dataclass
-class Appointment:
-    patient: Patient
-    doctor: Doctor
-    reason_for_visit: str
-    appointment_date: datetime = field(default_factory=datetime.now)
-    appointment_id: str = field(default_factory=lambda: str(uuid.uuid4()))
-    _status: str = "scheduled"
+class Loan:
+    customer: Customer
+    amount: int
+    interest_rate: float
+    loan_id: str = field(default_factory=lambda: str(uuid.uuid4()))
+    _status: str = "pending"
 
-    hospital_name = "City Hospital"
+    bank_name: str = " Anchita Diallo Bank"
 
     @property
     def status(self):
         return self._status
 
     @staticmethod
-    def validate_phone_number(phone_number):
-        return phone_number.isdigit() and len(phone_number) == 10
+    def validate_credit_score(credit_score):
+        return credit_score > 700
 
     @classmethod
-    def create_appointment_from_form(cls, form_data):
-        phone = form_data["phone_number"]
-
-        if not cls.validate_phone_number(phone):
-            return "Invalid phone number."
-
-        patient = Patient(
-            form_data["patient_name"],
-            form_data["dob"],
-            phone
+    def create_loan_form(cls, form_data):
+        customer = Customer(form_data["customer_name"], form_data["credit_score"])
+        return cls(
+            customer=customer,
+            amount=form_data["amount"],
+            interest_rate=form_data["interest_rate"],
         )
+    def approve(self):
+        if self.status == "pending":
+            return "Loan is already processed"
+        self._status = "approved"
+        return "Loan approved"
 
-        doctor = Doctor(
-            form_data["doctor_name"],
-            form_data["specialization"]
-        )
+    def reject(self):
+        if self.status == "pending":
+            return "Loan is already processed"
+        self._status = "rejected"
+        return "Loan rejected"
 
-        appointment = cls(
-            patient=patient,
-            doctor=doctor,
-            reason_for_visit=form_data["reason_for_visit"]
-        )
+    def calculate_interest(self):
+        return self.amount * self.interest_rate / 100
 
-        patient.appointment_history.append(appointment)
-        return appointment
 
-    def book(self):
-        if self._status != "scheduled":
-            return "Only scheduled appointments can be booked."
-        return "Appointment booked successfully."
-
-    def cancel(self):
-        if self._status == "completed":
-            return "Cannot cancel a completed appointment."
-        if self._status == "cancelled":
-            return "Appointment is already cancelled."
-
-        self._status = "cancelled"
-        return "Appointment cancelled."
-
-    def complete(self):
-        if self._status == "cancelled":
-            return "Cannot complete a cancelled appointment."
-        if self._status == "completed":
-            return "Appointment is already completed."
-
-        self._status = "completed"
-        return "Appointment completed."
-
-    def appointment_details(self):
-        return {
-            "appointment_id": self.appointment_id,
-            "hospital": self.hospital_name,
-            "patient": self.patient.full_name,
-            "doctor": self.doctor.full_name,
-            "specialization": self.doctor.specialization,
-            "reason": self.reason_for_visit,
-            "date": self.appointment_date,
+    def loan_details(self):
+        return  {
+             "loan_id": self.loan_id,
+            "bank": self.bank_name,
+            "customer": self.customer.customer_name,
+            "amount": self.amount,
+            "interest_rate": self.interest_rate,
+            "interest_amount": self.calculate_interest(),
             "status": self.status
         }
 
-
 form = {
-    "patient_name": "Ousmane Diallo",
-    "dob": "08/26/2000",
-    "phone_number": "6467038461",
-    "doctor_name": "Anchita",
-    "specialization": "Brain Surgery",
-    "reason_for_visit": "Headache"
+    "customer_name": "Ousmane Diallo",
+    "credit_score": 750,
+    "amount": 10000,
+    "interest_rate": 5.5
 }
 
-appointment = Appointment.create_appointment_from_form(form)
+loan = Loan.create_loan_form(form)
+officer = BankOfficer("Mr. Smith")
 
-print(appointment.appointment_details())
-print(appointment.doctor.accept_appointment(appointment))
-print(appointment.doctor.complete_appointment(appointment))
-print(appointment.appointment_details())
-
+print(loan.loan_details())
+print(officer.approve(loan))
+print(loan.loan_details())
