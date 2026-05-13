@@ -410,30 +410,138 @@
 
 
 #===============================6. Implementing a Custom Property Class=================
-class Our_property:
-    """ emulation of the property class
-           for educational purposes """
+# class Our_property:
+#     """ emulation of the property class
+#            for educational purposes """
+#
+#     def __init__(self, fget=None, fset=None, fdel=None, doc=None):
+#         """Attributes of 'our_decorator'
+#                 fget
+#                     function to be used for getting
+#                     an attribute value
+#                 fset
+#                     function to be used for setting
+#                     an attribute value
+#                 fdel
+#                     function to be used for deleting
+#                     an attribute
+#                 doc
+#                     the docstring
+#                 """
+#         self.fget = fget
+#         self.fset = fset
+#         self.fdel = fdel
+#         print("\n__init__ called with:)")
+#         print(f"fget={fget}, fset={fset}, fdel={fdel}, doc={doc}")
+#         if doc is None and fget is not None:
+#             print(f"doc set to docstring of {fget.__name__} method")
+#             doc = fget.__doc__
+#         self.__doc__ = doc
+#
+#     def __get__(self, obj, objType=None):
+#         if obj is None:
+#             return self
+#         if self.fget is None:
+#             raise AttributeError("unreadable attribute")
+#         return self.fget(obj)
+#
+#
+#     def __set__(self, obj, value):
+#         if self.fset is None:
+#             raise AttributeError("can't set attribute")
+#         return self.fset(obj, value)
+#
+#     def __delete__(self, obj):
+#         if self.fdel is None:
+#             raise AttributeError("can't delete attribute")
+#         return self.fdel(obj)
+#
+#     def getter(self, fget):
+#         return type(self)(fget, self.fset, self.fdel, self.__doc__)
+#
+#     def setter(self, fset):
+#         return type(self)(self.fget, fset, self.fdel, self.__doc__)
+#
+#     def deleter(self, fdel):
+#         return type(self)(self.fget, self.fset, fdel, self.__doc__)
+#
+#
+#
+#
+# class Robot:
+#     def __init__(self, city):
+#         self.city = city
+#
+#     @property
+#     def city(self):
+#         print("The Property 'city' will be returned now:")
+#         return self.__city
+#
+#     @city.setter
+#     def city(self, city):
+#         print("City will be set now:")
+#         self.__city = city
+#
+#
+# print(type(Robot.city))
+# print("Instantiating a Root and setting 'city' to 'Berlin'")
+# robo = Robot("Berlin")
+# print("The value is: ", robo.city)
+# print("Our robot moves now to Frankfurt:")
+# robo.city = "Frankfurt"
+# print("The value is: ", robo.city)
+#
 
-    def __init__(self, fget=None, fset=None, fdel=None, doc=None):
-        """Attributes of 'our_decorator'
-                fget
-                    function to be used for getting
-                    an attribute value
-                fset
-                    function to be used for setting
-                    an attribute value
-                fdel
-                    function to be used for deleting
-                    an attribute
-                doc
-                    the docstring
-                """
-        self.fget = fget
-        self.fset = fset
-        self.fdel = fdel
-        if doc is None and fget is not None:
-            doc = fget.__doc__
-        self.__doc__ = doc
 
-    def __get__(self, obj, objType=None):
+#================================7. Magic Methods==============================
+# class Length:
+#     __metric = {
+#         "mm": 0.001,
+#         "cm": 0.01,
+#         "m": 1,
+#         "km": 1000,
+#         "in": 0.0254,
+#         "ft": 0.3048,
+#         "yd": 0.0193,
+#         "mi": 1609.344
+#     }
+#     def __init__(self, value, unit="m"):
+#         self.value = value
+#         self.unit = unit
+#
+#     def Converse2Meters(self):
+#         return self.value * Length.__metric[self.unit]
+#
+#     def __add__(self, other):
+#         l = self.Converse2Meters() + other.Converse2Meters()
+#         return Length(l / Length.__metric[self.unit], self.unit)
+#     def __str__(self):
+#         return str(self.Converse2Meters())
+#     def __repr__(self):
+#         return "Length(" + str(self.value) + ", '" + self.unit + "')"
+#
+#
+#
+# if __name__ == "__main__":
+#     x = Length(4)
+#     print(x)
+#     y = eval(repr(x))
+#     z = Length(4.5, "yd") + Length(1)
+#     print(repr(z))
+#     print(z)
 
+
+
+#Standard Classes as Base Classes
+
+class Plist(list):
+    def __init__(self, l):
+        list.__init__(self, l)
+    def push(self, item):
+        self.append(item)
+
+
+if __name__ == "__main__":
+    x = Plist([3, 4])
+    x.push(47)
+    print(x)
