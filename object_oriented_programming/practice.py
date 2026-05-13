@@ -403,3 +403,25 @@ officer = BankOfficer("Mr. Smith")
 print(loan.loan_details())
 print(officer.approve(loan))
 print(loan.loan_details())
+
+
+# 🎬 2. Movie Ticket Booking System
+
+class User:
+    def __init__(self, name, email):
+        self.name = name
+        self.email = email
+        self.list_of_tickets = []
+
+        def select_movie(self, movie: Movie):
+            if movie
+
+
+class Movie:
+    def __init__(self, movie_title, showtime, total_seats):
+        self.movie_title = movie_title
+        self,
+
+
+
+#📦 3. Delivery Tracking System (Amazon-style)

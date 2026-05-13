@@ -348,62 +348,92 @@
 
 
 # Immutable Classes
-from dataclasses import dataclass
+# from dataclasses import dataclass
+#
+# @dataclass(frozen=True)
+# class ImmutableRobot:
+#     name: str
+#     brand_name: str
+#
+# x1 = ImmutableRobot("Marvin", "NanoGuardian XR-2000")
+# x2 = ImmutableRobot("Marvin", "NanoGuardian XR-2000")
+# print(x1.__hash__(), x2.__hash__())
+#
+#
+# class ImmutableRobot_traditional:
+#     def __init__(self, name: str, brand_name:str):
+#         self._name = name
+#         self._brand_name = brand_name
+#
+#     @property
+#     def name(self) -> str:
+#         return self._name
+#     @property
+#     def brand_name(self) -> str:
+#         return self._brand_name
+#     def __eq__(self, other):
+#         if not isinstance(other, ImmutableRobot_traditional):
+#             return False
+#         return self.name == other.name and self.brand_name == other.brand_name
+#
+#     def __hash__(self):
+#         return hash((self.name, self.brand_name))
+#
+# x1 = ImmutableRobot_traditional("Marvin", "NanoGuardian XR-2000")
+# x2 = ImmutableRobot_traditional("Marvin", "NanoGuardian XR-2000")
+#
+# print(x1 == x2)
+#
+#
+#
+# @dataclass(frozen=True)
+# class ImmutableRobot1:
+#     name: str
+#     brand_name: str
+#
+#
+# robot1 = ImmutableRobot("Marvin", "NanoGuardian XR-2000")
+# robot2 = ImmutableRobot("R2D2", "QuantumTech Sentinel-7")
+# robot3 = ImmutableRobot("Marva", "MachinaMaster MM-42")
+#
+# robots = {robot1,robot2, robot3}
+# print("The robots in the set robots:")
+# for robot in robots:
+#     print(robot)
+#
+# activity = {robot1: 'activated', robot2: 'activated', robot3: 'deactivated'}
+# print("\nAll the activated robots in the set robots:")
+# for robo, mode in activity.items():
+#     if mode == 'activated':
+#         print(f"{robo}: is {mode}")
 
-@dataclass(frozen=True)
-class ImmutableRobot:
-    name: str
-    brand_name: str
-
-x1 = ImmutableRobot("Marvin", "NanoGuardian XR-2000")
-x2 = ImmutableRobot("Marvin", "NanoGuardian XR-2000")
-print(x1.__hash__(), x2.__hash__())
 
 
-class ImmutableRobot_traditional:
-    def __init__(self, name: str, brand_name:str):
-        self._name = name
-        self._brand_name = brand_name
+#===============================6. Implementing a Custom Property Class=================
+class Our_property:
+    """ emulation of the property class
+           for educational purposes """
 
-    @property
-    def name(self) -> str:
-        return self._name
-    @property
-    def brand_name(self) -> str:
-        return self._brand_name
-    def __eq__(self, other):
-        if not isinstance(other, ImmutableRobot_traditional):
-            return False
-        return self.name == other.name and self.brand_name == other.brand_name
+    def __init__(self, fget=None, fset=None, fdel=None, doc=None):
+        """Attributes of 'our_decorator'
+                fget
+                    function to be used for getting
+                    an attribute value
+                fset
+                    function to be used for setting
+                    an attribute value
+                fdel
+                    function to be used for deleting
+                    an attribute
+                doc
+                    the docstring
+                """
+        self.fget = fget
+        self.fset = fset
+        self.fdel = fdel
+        if doc is None and fget is not None:
+            doc = fget.__doc__
+        self.__doc__ = doc
 
-    def __hash__(self):
-        return hash((self.name, self.brand_name))
-
-x1 = ImmutableRobot_traditional("Marvin", "NanoGuardian XR-2000")
-x2 = ImmutableRobot_traditional("Marvin", "NanoGuardian XR-2000")
-
-print(x1 == x2)
-
-
-
-@dataclass(frozen=True)
-class ImmutableRobot1:
-    name: str
-    brand_name: str
-
-
-robot1 = ImmutableRobot("Marvin", "NanoGuardian XR-2000")
-robot2 = ImmutableRobot("R2D2", "QuantumTech Sentinel-7")
-robot3 = ImmutableRobot("Marva", "MachinaMaster MM-42")
-
-robots = {robot1,robot2, robot3}
-print("The robots in the set robots:")
-for robot in robots:
-    print(robot)
-
-activity = {robot1: 'activated', robot2: 'activated', robot3: 'deactivated'}
-print("\nAll the activated robots in the set robots:")
-for robo, mode in activity.items():
-    if mode == 'activated':
-        print(f"{robo}: is {mode}")
+    def __get__(self, obj, objType=None):
 
