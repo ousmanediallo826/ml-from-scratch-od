@@ -6,8 +6,7 @@
 # x = Robot()
 # x.name = "Marvin"
 # hi(x)
-
-
+import weakref
 # The __init__ Method
 # class Robot:
 #     def __init__(self, name=None, build_year=None):
@@ -534,14 +533,182 @@
 
 #Standard Classes as Base Classes
 
-class Plist(list):
-    def __init__(self, l):
-        list.__init__(self, l)
-    def push(self, item):
-        self.append(item)
+# class Plist(list):
+#     def __init__(self, l):
+#         list.__init__(self, l)
+#     def push(self, item):
+#         self.append(item)
+#
+#
+# if __name__ == "__main__":
+#     x = Plist([3, 4])
+#     x.push(47)
+#     print(x)
 
 
-if __name__ == "__main__":
-    x = Plist([3, 4])
-    x.push(47)
-    print(x)
+#=====================================8. Dynamic Data Transformation==========================
+# Product Class Example
+# class Product:
+#     conversion_rates = {'USD': 1, 'EUR': 0.91, 'CHF': 0.90, 'GBP': 0.79}
+#
+#     def __init__(self, name, price, shipping_cost, currency='USD'):
+#         self.name = name
+#         self._price = price
+#         self._shipping_cost = shipping_cost
+#         self.currency = currency
+#         self._used_currency = currency
+#
+#
+#     def set_currency(self, new_currency, adapt_data=False):
+#         if self.currency != new_currency:
+#             self.currency = new_currency
+#         if adapt_data:
+#             self._price = self.price
+#             self._shipping_cost = self.shipping_cost
+#             self._used_currency = new_currency
+#
+#     @property
+#     def price(self):
+#         return self._convert_currency(self._price)
+#
+#     @property
+#     def shipping_cost(self):
+#         return self._convert_currency(self._shipping_cost)
+#
+#     def _convert_currency(self, amount):
+#         factor =  Product.conversion_rates[self.currency] / Product.conversion_rates[self._used_currency]
+#         return round(amount * factor, 2)
+#
+#     def __str__(self):
+#         return f"Product: {self.name}, Price: {self.price} {self.currency}, Shipping Cost: {self.shipping_cost} {self.currency}"
+#
+#
+#     def show_saved_data(self):
+#         outstr = f"Saved Data: {self.name=}, {self.currency=}, {self._used_currency=} {self._price=}, {self._shipping_cost=}"
+#         print(outstr)
+#
+#
+# class Products:
+#     def __init__(self):
+#         self.products_list = []
+#
+#
+#     def add_product(self, product):
+#         self.products_list.append(product)
+#
+#     def view_products(self, currency="USD", ):
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+# # product = Product(name='Phone', price=500, shipping_cost=10, currency='USD')
+# # print(product)
+# # product.show_saved_data()
+# # product1 = Product(name='Tablet', price=600, shipping_cost=20, currency='EUR')
+# # print(product1)
+# # product1.show_saved_data()
+# # product.set_currency('GBP')
+# # print(product)
+# # product.show_saved_data()
+# # product.set_currency('EUR', adapt_data=True)
+# # print(product)
+# # product.show_saved_data()
+
+
+
+
+
+#=================9. Introduction to Descriptors====================
+# class A:
+#     ca_A = "class attribute of A"
+#     def __init__(self):
+#         self.ia_A = "instance attribute of A instance"
+#
+#
+# class B(A):
+#     ca_B = "class attribute of B"
+#     def __init__(self):
+#         super().__init__()
+#         self.ia_B = "instance attribute of B"
+#
+#
+# x = B()
+# print(x.ia_B)
+# print(x.ca_B)
+# print(x.ia_A)
+# print(x.ca_A)
+#
+#
+# class SimpleDescriptor(object):
+#     def __init__(self, initval=None):
+#         print("__init__ of SimpleDecorator called with initval: ", initval)
+#         self.__set__(self, initval)
+#
+#     def __get__(self, instance, owner):
+#         print(instance, owner)
+#         print('Getting (Retrieving) self.val: ', self.val)
+#         return self.val
+#
+#     def __set__(self, instance, value):
+#         print('Setting self.val to ', value)
+#         self.val = value
+#
+#     def __getattribute__(self, key):
+#         v = type.__getattribute__(self, key)
+#         if hasattr(v, '__get__'):
+#             return v.__get__(None, self)
+#         return v
+#
+#
+# class MyClass(object):
+#     x = SimpleDescriptor("Green")
+#
+# m = MyClass()
+# print(m.x)
+# m.x = "Yellow"
+# print(m.x)
+#
+# print(m.__dict__)
+# print(MyClass.__dict__)
+# print(SimpleDescriptor.__dict__)
+# m.__getattribute__("x")
+
+
+
+from weakref import WeakKeyDictionary
+class Voter:
+    required_age = 18 # in Germany
+    def __init__(self):
+        self.age = WeakKeyDictionary()
+    def __get__(self, instance_obj, objtype):
+        return self.age.get(instance_obj)
+    def __set__(self, instance, new_age):
+        if new_age < Voter.required_age:
+            msg = '{name} is not old enough to vote in Germany'
+            raise Exception(msg.format(name=instance.name))
+        self.age[instance] = new_age
+        print('{name} can vote in Germany'.format(
+            name=instance.name))
+    def __delete__(self, instance):
+        del self.age[instance]
+class Person:
+    voter_age = Voter()
+    def __init__(self, name, age):
+        self.name = name
+        self.voter_age = age
+p1 = Person('Ben', 23)
+p2 = Person('Emilia', 22)
+p2.voter_age
