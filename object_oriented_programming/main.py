@@ -686,29 +686,116 @@ import weakref
 # print(SimpleDescriptor.__dict__)
 # m.__getattribute__("x")
 
+#
+#
+# from weakref import WeakKeyDictionary
+# class Voter:
+#     required_age = 18 # in Germany
+#     def __init__(self):
+#         self.age = WeakKeyDictionary()
+#     def __get__(self, instance_obj, objtype):
+#         return self.age.get(instance_obj)
+#     def __set__(self, instance, new_age):
+#         if new_age < Voter.required_age:
+#             msg = '{name} is not old enough to vote in Germany'
+#             raise Exception(msg.format(name=instance.name))
+#         self.age[instance] = new_age
+#         print('{name} can vote in Germany'.format(
+#             name=instance.name))
+#     def __delete__(self, instance):
+#         del self.age[instance]
+# class Person:
+#     voter_age = Voter()
+#     def __init__(self, name, age):
+#         self.name = name
+#         self.voter_age = age
+# p1 = Person('Ben', 23)
+# p2 = Person('Emilia', 22)
+# p2.voter_age
 
 
-from weakref import WeakKeyDictionary
-class Voter:
-    required_age = 18 # in Germany
-    def __init__(self):
-        self.age = WeakKeyDictionary()
-    def __get__(self, instance_obj, objtype):
-        return self.age.get(instance_obj)
-    def __set__(self, instance, new_age):
-        if new_age < Voter.required_age:
-            msg = '{name} is not old enough to vote in Germany'
-            raise Exception(msg.format(name=instance.name))
-        self.age[instance] = new_age
-        print('{name} can vote in Germany'.format(
-            name=instance.name))
-    def __delete__(self, instance):
-        del self.age[instance]
-class Person:
-    voter_age = Voter()
-    def __init__(self, name, age):
-        self.name = name
-        self.voter_age = age
-p1 = Person('Ben', 23)
-p2 = Person('Emilia', 22)
-p2.voter_age
+
+
+#=============================10. Inheritance=====================
+# class Robot:
+#     def __init__(self, name):
+#         self.name = name
+#
+#     def say_hi(self):
+#         print("Hi, I am " + self.name)
+#
+#
+# class PhysicianRobot(Robot):
+#     pass
+#
+# x = Robot("Marvin")
+# y = PhysicianRobot("James")
+#
+# y.say_hi()
+#
+#
+#
+# print(isinstance(x, Robot), isinstance(y, Robot))
+# print(isinstance(x, PhysicianRobot))
+# print(isinstance(y, PhysicianRobot))
+#
+# print(type(y) == Robot, type(y) == PhysicianRobot)
+
+
+# Overriding
+# class Robot:
+#     def __init__(self, name):
+#         self.name = name
+#     def say_hi(self):
+#         print("Hi, I am " + self.name)
+# class PhysicianRobot(Robot):
+#
+#     def say_hi(self):
+#         print("Everything will be okay! ")
+#         print(self.name + " takes care of you!")
+#
+# y = PhysicianRobot("James")
+# y.say_hi()
+
+
+# import random
+#
+# class Robot:
+#     def __init__(self, name):
+#         self.name = name
+#         self.health_level = random.random()
+#
+#     def say_hi(self):
+#         print("Hi, I am " + self.name)
+#
+#     def need_a_doctor(self):
+#         if self.health_level < 0.5:
+#             return True
+#         else:
+#             return False
+#
+# class PhysicianRobot(Robot):
+#     def say_hi(self):
+#         print("Everything will be okay! ")
+#         print(self.name + " takes care of you!")
+#
+#     def heal(self, robo):
+#         robo.health_level = random.uniform(robo.health_level, 1)
+#         print(robo.name + " has been healed by " + self.name)
+#
+# doc = PhysicianRobot("Dr. Frankenstein")
+#
+# rob_list = []
+#
+# for i in range(10):
+#     x = Robot("Marvin " + str(i))
+#     if x.need_a_doctor():
+#         print("health_level of " + x.name + " before healing: ", x.health_level)
+#         doc.heal(x)
+#         print("health_level of " + x.name + " after healing: ", x.health_level)
+#     rob_list.append((x.name, x.health_level))
+# print(rob_list)
+
+
+
+# Distinction between Overwriting, Overloading and Overriding
