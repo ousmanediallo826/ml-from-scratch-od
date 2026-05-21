@@ -1141,4 +1141,48 @@ print(g())
 
 
 #============================14. Slots: Avoiding Dynamically Created Attributes===================
+class S(object):
+    __slots__ = ['val']
+    def __init__(self,v):
+        self.val = v
 
+x = S(42)
+print(x.val)
+
+
+#==========================15. Polynomial Class===========================================
+class Polynomial:
+    def __init__(self, *coefficients):
+        self.coefficients = coefficients
+
+    def __repr__(self):
+        return "Polynomial" + str(tuple(self.coefficients))
+
+    def __str__(self):
+        def x_expr(degree):
+            if degree == 0:
+                res = ""
+            elif degree == 1:
+                res = "x"
+            else:
+                res = "x^" + str(degree)
+            return res
+        degree = len(self.coefficients) - 1
+        res = ""
+
+        for i in range(0, degree+1):
+            coeff = self.coefficients[i]
+            if abs(coeff) == 1 and i < degree:
+                res += f"{'+' if coeff > 0 else '-'}{x_expr(degree - i)}"
+            elif coeff != 0:
+                res += f"{coeff:+g}{x_expr(degree - i)}"
+        return res.lstrip('+')
+
+
+polys = [Polynomial(1, 0, -4, 3, 0),
+         Polynomial(2, 0),
+         Polynomial(4, 1, -1),
+         Polynomial(3, 0, -5, 2, 7),
+         Polynomial(-42)]
+for count, poly in enumerate(polys):
+    print(f"$p_{count} = {str(poly)}$")
