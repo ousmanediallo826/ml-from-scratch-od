@@ -1020,104 +1020,125 @@ import weakref
 
 
 #====================12. Multiple Inheritance: Example===========================
-import random
+# import random
+#
+# class Robot():
+#     __illegal_name = {"Henry", "Oscar"}
+#     __crucial_health_level = 0.6
+#     def __init__(self, name):
+#         self.name = name
+#         self.health_level = random.random()
+#
+#     @property
+#     def name(self):
+#         return self.__name
+#
+#
+#     @name.setter
+#     def name(self, name):
+#         if name in self.__illegal_name:
+#             self.__name = "Marvin"
+#         else:
+#             self.__name = name
+#
+#     def __str__(self):
+#         return self.name + " , Robot"
+#
+#     def __add__(self, other):
+#         first = self.name.split("-")[0]
+#         second = other.name.split("-")[0]
+#         return type(self)(first + "-" + second)
+#
+#     def need_a_nurse(self):
+#         if self.health_level < Robot.__crucial_health_level:
+#             return True
+#         else:
+#             return False
+#
+#     def say_hi(self):
+#         print("Hi, I am " + self.name)
+#         print("My health level is: " + str(self.health_level))
+#
+#
+#
+# first_generation = (Robot("Marvin"),
+#                     Robot("Anchita"),
+#                     Robot("Twaambo"))
+# gen1 = first_generation
+# babies = [gen1[0] + gen1[1], gen1[1] + gen1[2]]
+# babies.append(babies[0] + babies[1])
+# for baby in babies:
+#     baby.say_hi()
+#
+#
+#
+# class NursingRObot(Robot):
+#     def __init__(self, name="Hubert", healing_power=None):
+#         super().__init__(name)
+#         if healing_power is None:
+#             self.healing_power = random.uniform(0.8, 1)
+#         else:
+#             self.healing_power = healing_power
+#     def say_hi(self):
+#         print("Well, well, everything will be fine ... " + self.name + " takes care of you!")
+#
+#     def say_hi_doc(self):
+#         Robot.say_hi(self)
+#
+#     def heal(self, robo):
+#         if robo.health_level > self.healing_power:
+#             print(self.name + " not strong enough to heal " + robo.name)
+#         else:
+#             robo.health_level = random.uniform(robo.health_level, self.healing_power)
+#             print(robo.name + " has been healed by " + self.name + "!")
+#
+#
+#
+# from itertools import chain
+#
+# nurses = [NursingRObot("Hubert"),
+#           NursingRObot("Anchita", healing_power=1)]
+#
+# for nurse in nurses:
+#     print("Healing power of " + nurse.name,
+#           nurse.healing_power)
+#
+# print("\nLet's start the healing")
+# for robo in chain(first_generation, babies):
+#     robo.say_hi()
+#     if robo.need_a_nurse():
+#         nurse = random.choice(nurses)
+#         nurse.heal(robo)
+#         print("New health level: ", robo.health_level)
+#     else:
+#         print(robo.name + " is healthy enough!")
+#         print()
+#
+#
+#
+# x = nurses[0] + nurses[1]
+# x.say_hi()
+# print(type(x))
+#
 
-class Robot():
-    __illegal_name = {"Henry", "Oscar"}
-    __crucial_health_level = 0.6
-    def __init__(self, name):
-        self.name = name
-        self.health_level = random.random()
+#=============================13. Callable Instances of Classes================================
+class FoodSupply:
 
-    @property
-    def name(self):
-        return self.__name
+    def __init__(self, *ingredients):
+        self.incredients = ingredients
 
 
-    @name.setter
-    def name(self, name):
-        if name in self.__illegal_name:
-            self.__name = "Marvin"
-        else:
-            self.__name = name
+    def __call__(self):
+        result = " ".join(self.incredients) + " plus delicious spam!"
+        return result
 
-    def __str__(self):
-        return self.name + " , Robot"
 
-    def __add__(self, other):
-        first = self.name.split("-")[0]
-        second = other.name.split("-")[0]
-        return type(self)(first + "-" + second)
-
-    def need_a_nurse(self):
-        if self.health_level < Robot.__crucial_health_level:
-            return True
-        else:
-            return False
-
-    def say_hi(self):
-        print("Hi, I am " + self.name)
-        print("My health level is: " + str(self.health_level))
+f = FoodSupply("fish", "rice")
+print(f())
+g = FoodSupply("vegetables")
+print(g())
 
 
 
-first_generation = (Robot("Marvin"),
-                    Robot("Anchita"),
-                    Robot("Twaambo"))
-gen1 = first_generation
-babies = [gen1[0] + gen1[1], gen1[1] + gen1[2]]
-babies.append(babies[0] + babies[1])
-for baby in babies:
-    baby.say_hi()
-
-
-
-class NursingRObot(Robot):
-    def __init__(self, name="Hubert", healing_power=None):
-        super().__init__(name)
-        if healing_power is None:
-            self.healing_power = random.uniform(0.8, 1)
-        else:
-            self.healing_power = healing_power
-    def say_hi(self):
-        print("Well, well, everything will be fine ... " + self.name + " takes care of you!")
-
-    def say_hi_doc(self):
-        Robot.say_hi(self)
-
-    def heal(self, robo):
-        if robo.health_level > self.healing_power:
-            print(self.name + " not strong enough to heal " + robo.name)
-        else:
-            robo.health_level = random.uniform(robo.health_level, self.healing_power)
-            print(robo.name + " has been healed by " + self.name + "!")
-
-
-
-from itertools import chain
-
-nurses = [NursingRObot("Hubert"),
-          NursingRObot("Anchita", healing_power=1)]
-
-for nurse in nurses:
-    print("Healing power of " + nurse.name,
-          nurse.healing_power)
-
-print("\nLet's start the healing")
-for robo in chain(first_generation, babies):
-    robo.say_hi()
-    if robo.need_a_nurse():
-        nurse = random.choice(nurses)
-        nurse.heal(robo)
-        print("New health level: ", robo.health_level)
-    else:
-        print(robo.name + " is healthy enough!")
-        print()
-
-
-
-x = nurses[0] + nurses[1]
-x.say_hi()
-print(type(x))
-
+#============================14. Slots: Avoiding Dynamically Created Attributes===================
 
