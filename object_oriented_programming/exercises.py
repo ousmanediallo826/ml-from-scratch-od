@@ -154,39 +154,81 @@
 
 #==============================Inheritance==============================
 
+#
+# class Animal:
+#     def __init__(self, name, age, sound, type_of_animal):
+#         self.name = name
+#         self.age = age
+#         self.sound = sound
+#         self.type_of_animal = type_of_animal
+#
+#     def speak(self):
+#         print("I am " + self.name + " and I am " + str(self.age) + " years old")
+#
+#     def type_of_animal(self):
+#         print(self.type_of_animal)
+#
+#
+#
+# class Mammal(Animal):
+#     def hi(self):
+#         print("I am " + self.name + " and I am " + str(self.age) + " years old")
+#
+#     def animal(self):
+#         print("I am this type of animal: " + self.type_of_animal)
+#
+#
+# class Dog(Mammal):
+#     def bark(self):
+#         print("I am " + self.name + " and I am a " + self.type_of_animal + " and I am barking")
+#
+#
+# y = Mammal("Julia", 20, "barking", type_of_animal="Mammal")
+# x = Dog("Julia", 20, "barking", type_of_animal="Dog")
+# x.bark()
+# bird  = Dog("Anchita", 18, "pookie", type_of_animal="Bird")
+# bird.bark()
+#
+#
 
-class Animal:
-    def __init__(self, name, age, sound, type_of_animal):
-        self.name = name
-        self.age = age
-        self.sound = sound
-        self.type_of_animal = type_of_animal
 
-    def speak(self):
-        print("I am " + self.name + " and I am " + str(self.age) + " years old")
+class ElectricVehicle:
+    def __init__(self, battery_capacity, charging_time):
+        self.battery_capacity = battery_capacity
+        self.charging_time = charging_time
 
-    def type_of_animal(self):
-        print(self.type_of_animal)
+    def fuel_tank_capacitys(self):
+        print("fuel tank capacity is", self.battery_capacity)
 
+    def charging_times(self):
+        print("charging time is", self.charging_time)
 
 
-class Mammal(Animal):
-    def hi(self):
-        print("I am " + self.name + " and I am " + str(self.age) + " years old")
-
-    def animal(self):
-        print("I am this type of animal: " + self.type_of_animal)
 
 
-class Dog(Mammal):
-    def bark(self):
-        print("I am " + self.name + " and I am a " + self.type_of_animal + " and I am barking")
+class GasolineVehicle:
+    def __init__(self, fuel_tank_capacity, fuel_efficiency):
+        self.fuel_tank_capacity = fuel_tank_capacity
+        self.fuel_efficiency = fuel_efficiency
+
+    def fuel_tank_capacitys(self):
+        print("Fuel tank capacity is", self.fuel_tank_capacity)
+        return self.fuel_tank_capacity - self.fuel_efficiency
+
+class HybridCar(ElectricVehicle, GasolineVehicle):
+    def __init__(self, battery_capacity, charging_time, fuel_tank_capacity, fuel_efficiency):
+        ElectricVehicle.__init__(self, battery_capacity, charging_time)
+        GasolineVehicle.__init__(self, fuel_tank_capacity, fuel_efficiency)
+
+    def drive(self):
+        print("Driving using both electric and gasoline power sources.")
 
 
-y = Mammal("Julia", 20, "barking", type_of_animal="Mammal")
-x = Dog("Julia", 20, "barking", type_of_animal="Dog")
-x.bark()
-bird  = Dog("Anchita", 18, "pookie", type_of_animal="Bird")
-bird.bark()
+
+hybrid_car = HybridCar(battery_capacity=60, charging_time=4, fuel_tank_capacity=40, fuel_efficiency=30)
+hybrid_car.fuel_tank_capacitys()
+hybrid_car.charging_times()
+hybrid_car.drive()
+
 
 
