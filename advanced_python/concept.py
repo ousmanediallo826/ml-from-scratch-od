@@ -179,27 +179,136 @@ from typing import Iterator
 
 
 #============================4. Lambda Operator, filter, reduce and map=========================
-square  = lambda x: x * x
-print(square(5))
+# square  = lambda x: x * x
+# print(square(5))
+#
+#
+# prices = [10, 20, 30, 40, 50]
+# taxed_prices = map(lambda p: p * 1.10, prices)
+# print(list(taxed_prices))
+#
+#
+# scores = [55, 82, 67, 90, 74, 43]
+# passing_scores = filter(lambda s: s >= 70, scores)
+# print(list(passing_scores))
+#
+# from functools import reduce
+#
+# numbers = [2, 3, 5, 6, 7]
+# total_product = reduce(lambda x, y: x * y, numbers)
+# print(total_product)
+#
+#
+# salaries = [40000, 65000, 32000, 80000, 50000]
+#
+# high_salary = filter(lambda s: s > 45000, salaries)
+# print(list(high_salary))
+#
 
 
-prices = [10, 20, 30, 40, 50]
-taxed_prices = map(lambda p: p * 1.10, prices)
-print(list(taxed_prices))
+
+#=====================5. zip introduction and examples====================
+#
+# heroes = ["Batman", "Superman", "Spider-Man"]
+# identities = ["Bruce Wayne", "Clark Kent", "Peter Parker"]
+#
+# zipped_heros = zip(heroes, identities)
+# for name, identity in zipped_heros:
+#     print(f"{name} is secretly {identity}")
+#
+# pairs = [("Apples", 2.50), ("Bananas", 1.20), ("Cherries", 4.00)]
+# items, prices = zip(*pairs)
+# print(items)
+# print(prices)
+#
+#
+# keys = ["username", "email", "role"]
+# values = ["dev_pro", "pro@email.com", "Admin"]
+#
+# user_profile = dict(zip(keys, values))
+# print(user_profile)
+#
+#
+#
+# students = ["Alex", "Blair", "Charlie", "Drew"]
+# scores = [85, 92, 78, 95]
+#
+# result = zip(students, scores)
+# for name, score in result:
+#     print(f"{name} scores {score}/100")
 
 
-scores = [55, 82, 67, 90, 74, 43]
-passing_scores = filter(lambda s: s >= 70, scores)
-print(list(passing_scores))
+#===================6. Decorators and Decoration==================================
+def shout(text):
+    return text.upper()
 
-from functools import reduce
+def print_msg(func_to_run):
+    print("Starting process...")
+    print(func_to_run("hello"))
 
-numbers = [2, 3, 5, 6, 7]
-total_product = reduce(lambda x, y: x * y, numbers)
-print(total_product)
+print(print_msg(shout))
 
 
-salaries = [40000, 65000, 32000, 80000, 50000]
+def polite_decorator(original_func):
 
-high_salary = filter(lambda s: s > 45000, salaries)
-print(list(high_salary))
+    def wrapper():
+        print("Bonjour! Nice to meet you.")  # Code before
+        original_func()  # The original function runs!
+        print("Au revoir! Have a nice day.")
+
+    return wrapper
+@polite_decorator
+def say_name():
+    print("My name is Gemini.")
+
+
+print(say_name())
+
+
+
+import time
+def time_decorator(original_func):
+    def wrapper():
+        start_time = time.time()
+        original_func()
+        end_time = time.time()
+
+        print(f"⏱️ Execution time: {end_time - start_time:.4f} seconds")
+    return wrapper
+
+@time_decorator
+def heavy_calculator():
+    print("Running a massive loop...")
+    time.sleep(1.2)
+
+print(heavy_calculator())
+
+
+def security_bypassed_check(func):
+    def wrapper(*args, **kwargs):
+        print("--- Doing something before ---")
+        print("⚠️ WARNING: Accessing sensitive data account...")
+        result = func(*args, **kwargs)
+        return result
+
+    return wrapper
+
+@security_bypassed_check
+def view_bank_vault():
+    print("🔓 Vault Opened! Accessing $1,000,000.")
+
+view_bank_vault()
+
+
+def universal_decorator(func):
+    def wrapper(*args, **kwargs):
+        print("--- Doing something before ---")
+        result = func(*args, **kwargs)
+        return result
+    return wrapper
+
+@universal_decorator
+def greet_name(name, age):
+    print(f"Hello, {name}! I am {age} years old.")
+
+greet_name("Ousmane", 18)

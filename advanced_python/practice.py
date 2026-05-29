@@ -359,3 +359,72 @@ low_stocks = map(lambda item: item["restock_cost"], stocks)
 total_amount = reduce(lambda x, y: x + y, low_stocks)
 
 print(f"💰 Total replacement stocks: ${total_amount:.2f}")
+
+
+# Problem 2: Tri-Zipping Inventory
+products = ["Wireless Mouse", "Mechanical Keyboard", "Gaming Monitor"]
+stock = [15, 0, 4]
+prices = [25.00, 75.00, 250.00]
+
+inventory = zip(products, stock, prices)
+for name, stock, price in inventory:
+    time.sleep(0.5)
+    print(f"{name} costs ${price:.2f} ({stock:.2f} left in stock) ")
+
+
+# Problem 3: Coordinate Addition (Using List Comprehension)
+x_coords = [10, 20, 30, 40]
+y_coords = [5, 15, 25, 35]
+
+result = list(zip(x_coords, y_coords))
+print(result)
+
+
+#Problem 4: Setting Up User Accounts (zip + dict)
+employee_ids = [101, 102, 103, 104]
+employee_names = ["Rachel", "Monica", "Chandler", "Joey"]
+
+employee_profiles = dict(zip(employee_ids, employee_names))
+print(employee_profiles)
+
+
+# Problem 5: The Ultimate Combo (zip + map)
+fruits = ["Apples", "Bananas", "Cherries"]
+base_prices = [2.00, 1.00, 4.00]
+
+combo = dict(zip(fruits, base_prices))
+print(combo)
+result = map(lambda item: f"{item[0]}: ${item[1] * 1.10:.2f}", combo.items())
+print(list(result))
+
+
+
+#====Problem 1: User Logins and Timestamps======
+users = ["charlie_dev", "emma_secure", "admin_sam"]
+timestamps = ["14:22:05", "14:23:11", "14:25:40"]
+
+users_logs = zip(users, timestamps)
+
+for user, timestamp in users_logs:
+    time.sleep(0.5)
+    print(f"{user} has logged in at {timestamp}")
+
+
+#=========Problem 2: Tracking Score Differences====================
+week1_scores = [14, 21, 7, 28]
+week2_scores = [24, 21, 14, 35]
+
+scores = zip(week1_scores, week2_scores)
+results = map(lambda score: score[1] - score[0], scores )
+print(list(results))
+
+
+
+# Problem 3: Merging Config Settings (zip + dict)
+
+elements = ["background", "text", "buttons", "borders"]
+dark_colors = ["#121212", "#FFFFFF", "#1F1F1F", "#333333"]
+
+config_setting = dict(zip(elements, dark_colors))
+print(config_setting)
+
