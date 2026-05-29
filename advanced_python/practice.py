@@ -156,3 +156,54 @@ print("-" * 30)
 print("Monitoring finished.")
 
 
+
+
+#Problem 2: The E-Commerce Price Converter (Transforming Data)
+
+def usd_price_stream():
+    prices = [10.0, 25.5, 99.9, 5.0]
+    for price in prices:
+        time.sleep(0.5)
+        yield price
+
+def euro_convertor(prices):
+    for price in prices:
+        yield f"Euro: ${price * 0.92:.2f}"
+
+usd_stream= usd_price_stream()
+euro = euro_convertor(usd_stream)
+print("Starting money convertor...")
+print("-" * 30)
+for price in euro:
+    print(price)
+
+print("End money convertor...")
+print("-" * 30)
+
+
+
+# Problem 3: The Username Cleaner (Data Cleaning)
+
+def usernames():
+    messy_signups = ["  alice   ", "BOB  ", "   ", "charlie_99", "  DEBBY "]
+    for signup in messy_signups:
+        time.sleep(0.5)
+        yield signup
+
+def cleanup_messy_data(messy_data):
+    for user in messy_data:
+        if user == " ":
+            messy_data.remove(user)
+        else:
+            user = user.strip().lower()
+            yield f"Here the cleanup username: {user}"
+
+users = usernames()
+clean_users = cleanup_messy_data(users)
+print("Cleaning up...")
+print("-" * 30)
+
+for user in clean_users:
+    print(user)
+print("Finished Cleaning up...")
+print("-" * 30)
