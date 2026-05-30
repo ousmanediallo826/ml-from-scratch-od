@@ -438,3 +438,102 @@ from typing import Iterator
 #
 #
 #======================8. Functional Programming OOP==============================
+class ImmutableEmployee:
+    def __init__(self, name, salary):
+        self.name = name
+        self.salary = salary
+
+    def apply_raise(self, amount):
+        return ImmutableEmployee(self.name, self.salary + amount)
+
+
+emp1 = ImmutableEmployee("Bob", 50000)
+emp2 = emp1.apply_raise(5000)
+
+print(emp1.salary)
+print(emp2.salary)
+
+
+
+class Product:
+    def __init__(self, name, price, category):
+        self.name = name
+        self.price = price
+        self.category = category
+
+
+catalog = [
+    Product("Laptop", 1200, "Electronics"),
+    Product("Shirt", 40, "Clothing"),
+    Product("Headphones", 150, "Electronics"),
+    Product("Book", 20, "Media")
+]
+
+electronics = filter(lambda x: x.category == "Electronics", catalog)
+price = map(lambda x: x.price, electronics)
+total_cost = sum(price)
+print(total_cost)
+
+
+
+
+class BankAccount:
+    def __init__(self, owner, balance):
+        self.owner = owner
+        self.balance = balance
+
+
+    def deposit(self, amount):
+        return BankAccount(self.owner, self.balance + amount)
+    def withdraw(self, amount):
+        return BankAccount(self.owner, self.balance - amount)
+
+acc1 = BankAccount("Charlie", 1000)
+acc2 = acc1.deposit(500)
+acc3 = acc2.withdraw(700)
+
+print(acc1.balance)
+print(acc2.balance)
+print(acc3.balance)
+
+
+#=====Problem 2: The Fleet Tracker Pipeline========
+class Vehicle:
+    def __init__(self, vin, status, mileage):
+        self.vin = vin
+        self.status = status
+        self.mileage = mileage
+
+fleet = [
+    Vehicle("V101", "Active", 50000),
+    Vehicle("V102", "Maintenance", 120000),
+    Vehicle("V103", "Active", 35000),
+    Vehicle("V104", "Active", 80000),
+    Vehicle("V105", "Maintenance", 15000)
+]
+
+active = filter(lambda x: x.status == "Active", fleet)
+active_mileages = map(lambda x: x.mileage, active)
+mileage_list = list(active_mileages)
+
+average_mileage = sum(mileage_list) / len(mileage_list)
+print(f"Active Vehicle Mileages: {mileage_list}")
+print(f"Average Fleet Mileage: {average_mileage} miles")
+
+
+#Problem 3: The RPG Character Inventory Reducer
+from functools import reduce
+class Item:
+    def __init__(self, name, weight):
+        self.name = name
+        self.weight = weight
+
+inventory = [
+    Item("Iron Sword", 12.5),
+    Item("Health Potion", 0.5),
+    Item("Steel Shield", 22.0),
+    Item("Magic Scroll", 0.2)
+]
+
+total_weight = reduce(lambda x, y: x + y.weight, inventory, 0)
+print(total_weight)
