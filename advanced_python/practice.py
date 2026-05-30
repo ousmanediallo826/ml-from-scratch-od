@@ -428,3 +428,95 @@ dark_colors = ["#121212", "#FFFFFF", "#1F1F1F", "#333333"]
 config_setting = dict(zip(elements, dark_colors))
 print(config_setting)
 
+
+#========Problem 1: The Input Logger (*args practice)=============
+
+def log_arguments(func):
+
+    def wrapper(*args, **kwargs):
+        print("📝 System Log - Arguments given:")
+        func(*args, **kwargs)
+
+    return wrapper
+
+@log_arguments
+def greet_user(name, age):
+
+    print(f"Hello {name}, you are {age} years old.")
+
+greet_user("Bob", 25)
+
+
+# Problem 2: The Double Trouble Decorator (Return Value practice)
+def double_result(func):
+    def wrapper(*args, **kwargs):
+        result = func(*args, **kwargs) * 2
+        return result
+    return wrapper
+
+@double_result
+def add_scores(base_score, bonus_score):
+    return base_score + bonus_score
+
+final_score = add_scores(5, 10)
+print(final_score)
+
+
+# Problem 3: The HTML Text Stylist (String Transformation practice)
+def make_bold(func):
+    def wrapper(*args, **kwargs):
+        html= f"<b>{func(*args, **kwargs)}</b>"
+        return html
+    return wrapper
+
+@make_bold
+def get_announcement(topic):
+    return f"System Update: {topic} is now live!"
+
+print(get_announcement("Python 3.12"))
+
+
+# Problem 4: The Performance Stopwatch (Real-World practice)
+def calculate_time(func):
+
+    def wrapper(*args, **kwargs):
+        start_time = time.time()
+        func()
+        end_time = time.time()
+        print(f"{func.__name__} took {end_time - start_time:.4f} seconds")
+    return wrapper
+
+@calculate_time
+def process_heavy_data():
+    print("Parsing files...")
+    time.sleep(0.8)
+    return "Data Processed Successfully"
+
+status = process_heavy_data()
+print(status)
+
+
+# Problem 5: The Execution Counter (State Management practice)
+def count_calls(func):
+
+
+    def wrapper(count=None,*args, **kwargs):
+
+        func(*args, **kwargs)
+
+
+        wrapper.count = wrapper.count + 1
+        return count
+
+    return wrapper
+
+@count_calls
+def send_notification():
+    print("Notification sent!")
+
+
+send_notification()
+send_notification()
+send_notification()
+
+
