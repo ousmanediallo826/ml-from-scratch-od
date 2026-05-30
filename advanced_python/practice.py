@@ -497,26 +497,171 @@ print(status)
 
 
 # Problem 5: The Execution Counter (State Management practice)
-def count_calls(func):
+# def count_calls(func):
+#
+#
+#     def wrapper(count=None,*args, **kwargs):
+#
+#         func(*args, **kwargs)
+#
+#
+#         wrapper.count = wrapper.count + 1
+#         return count
+#
+#     return wrapper
+#
+# @count_calls
+# def send_notification():
+#     print("Notification sent!")
+#
+#
+# send_notification()
+# send_notification()
+# send_notification()
 
 
-    def wrapper(count=None,*args, **kwargs):
-
-        func(*args, **kwargs)
+#===============Data for Problem 1: Global Shipping Logistics Router===================
 
 
-        wrapper.count = wrapper.count + 1
-        return count
 
+def shippment_decorator(func):
+    def wrapper(*args, **kwargs):
+        start_time = time.time()
+        result = func(*args, **kwargs)
+        end_time = time.time()
+        print(f"⏱️ {func.__name__} took {end_time - start_time:.4f} seconds")
+        return result
     return wrapper
 
-@count_calls
-def send_notification():
-    print("Notification sent!")
+def shipping_generator():
+    shipments = [
+        {"vessel": "Pacific Titan", "weight_kg": 500_000, "is_international": True},
+        {"vessel": "Atlantic Breeze", "weight_kg": 80_000, "is_international": False},
+        {"vessel": "Northern Explorer", "weight_kg": 1_200_000, "is_international": True},
+        {"vessel": "Coastal Express", "weight_kg": 30_000, "is_international": False},
+        {"vessel": "Orient Star", "weight_kg": 750_000, "is_international": True}
+    ]
+    for shipment in shipments:
+        time.sleep(0.5)
+        yield shipment
 
 
-send_notification()
-send_notification()
-send_notification()
+
+@shippment_decorator
+def run_logistic_pipeline():
+    docking_codes = ["DOCK-ALPHA", "DOCK-BETA", "DOCK-GAMMA"]
+    shipping_stream = shipping_generator()
+
+    filtering_shipment = filter(lambda s: s["is_international"], shipping_stream)
+    mapping_shipment = map(lambda s: s["weight_kg"] / 1000, filtering_shipment)
+    zip_shipment = zip(mapping_shipment, docking_codes)
+    total_tonnage = reduce(lambda x, y: x + y[0], zip_shipment, 0)
+
+    return total_tonnage
+
+final_weight = run_logistic_pipeline()
+print(f"Total Fleet Weight: {final_weight} Tons")
+
+
+
+
+#===================Instructions for Problem 2: Crypto Whales Transaction Flagging=======================
+def track_fraud_scans(func):
+    def wrapper(*args, **kwargs):
+        wrapper.count += 1
+        print(f"🔒 Security Sweep #{wrapper.count} Active...")
+        return func(*args, **kwargs)
+    wrapper.count = 0
+    return wrapper
+
+
+def block_chain_stream():
+    ledger = [
+        {"tx_id": "0xABC123", "amount_usd": 15_000, "asset": "BTC"},
+        {"tx_id": "0xXYZ789", "amount_usd": 750_000, "asset": "ETH"},
+        {"tx_id": "0xDEF456", "amount_usd": 2_500, "asset": "SOL"},
+        {"tx_id": "0xMNO987", "amount_usd": 1_100_000, "asset": "BTC"},
+        {"tx_id": "0xGHI321", "amount_usd": 450_000, "asset": "ETH"}
+    ]
+    for entry in ledger:
+        time.sleep(0.5)
+        yield entry
+
+@track_fraud_scans
+def block_chain_pipeline():
+    risk_tags = ["TIER_3_HIGH_RISK", "TIER_4_CRITICAL", "TIER_2_MODERATE"]
+    live_blockchain_feed = block_chain_stream()
+
+    filter_scans = filter(lambda s: s["amount_usd"] > 100_000, live_blockchain_feed)
+    map_scans = map(lambda s: s["amount_usd"] * 0.005, filter_scans)
+    zip_scans = zip(map_scans, risk_tags)
+    sum_scans = reduce(lambda x, y: x + y[0], zip_scans, 0)
+    return sum_scans
+
+final_fraud_scans = block_chain_pipeline()
+print(f"Higher scans fraud detected: {final_fraud_scans}")
+
+
+
+
+
+
+
+#====================Problem 1: The Multi-Currency Converter=======================
+def cache_rates(func):
+
+    notepad  = {}
+    def wrapper(*args):
+        if args in notepad:
+            print("⚡ [CACHE HIT] Answer found in notepad!")
+            return notepad[args]
+        result = func(*args)
+        notepad[args] = result
+        return result
+    return wrapper
+
+@cache_rates
+def get_exchange_rate(from_currency, to_currency):
+    print(f"💰 Fetching live rates from the web for {from_currency} -> {to_currency}...")
+    # Simulated live exchange rate multiplier
+    return 1.12
+
+
+
+# Problem 2: The Video Game Math Engine
+
+def engine_cache(func):
+    notepad = {}
+    def wrapper(*args):
+        if args in notepad:
+            print("⚡ [CACHE HIT] Answer found in notepad!")
+            return notepad[args]
+        result = func(*args)
+        notepad[args] = result
+        return result
+    return wrapper
+
+@engine_cache
+def calculate_distance(x, y):
+    print(f"🧮 Running heavy coordinate physics math for position ({x}, {y})...")
+    # Simulated distance calculation result
+    return (x**2 + y**2)**0.5
+
+
+print(calculate_distance(10, 20))
+print(calculate_distance(10, 20)) # Should hit the cache!
+print(calculate_distance(5, 5))
+print(calculate_distance(5, 5))
+print(calculate_distance(5, 5))
+
+
+
+
+print(get_exchange_rate("USD", "EUR"))
+print(get_exchange_rate("GBP", "USD"))
+print(get_exchange_rate("USD", "EUR"))
+
+
+# Problem 3: The Multi-Argument DB Query Cache
 
 

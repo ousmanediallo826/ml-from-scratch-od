@@ -239,76 +239,202 @@ from typing import Iterator
 
 
 #===================6. Decorators and Decoration==================================
-def shout(text):
-    return text.upper()
+# def shout(text):
+#     return text.upper()
+#
+# def print_msg(func_to_run):
+#     print("Starting process...")
+#     print(func_to_run("hello"))
+#
+# print(print_msg(shout))
+#
+#
+# def polite_decorator(original_func):
+#
+#     def wrapper():
+#         print("Bonjour! Nice to meet you.")  # Code before
+#         original_func()  # The original function runs!
+#         print("Au revoir! Have a nice day.")
+#
+#     return wrapper
+# @polite_decorator
+# def say_name():
+#     print("My name is Gemini.")
+#
+#
+# print(say_name())
+#
+#
+#
+# import time
+# def time_decorator(original_func):
+#     def wrapper():
+#         start_time = time.time()
+#         original_func()
+#         end_time = time.time()
+#
+#         print(f"⏱️ Execution time: {end_time - start_time:.4f} seconds")
+#     return wrapper
+#
+# @time_decorator
+# def heavy_calculator():
+#     print("Running a massive loop...")
+#     time.sleep(1.2)
+#
+# print(heavy_calculator())
+#
+#
+# def security_bypassed_check(func):
+#     def wrapper(*args, **kwargs):
+#         print("--- Doing something before ---")
+#         print("⚠️ WARNING: Accessing sensitive data account...")
+#         result = func(*args, **kwargs)
+#         return result
+#
+#     return wrapper
+#
+# @security_bypassed_check
+# def view_bank_vault():
+#     print("🔓 Vault Opened! Accessing $1,000,000.")
+#
+# view_bank_vault()
+#
+#
+# def universal_decorator(func):
+#     def wrapper(*args, **kwargs):
+#         print("--- Doing something before ---")
+#         result = func(*args, **kwargs)
+#         return result
+#     return wrapper
+#
+# @universal_decorator
+# def greet_name(name, age):
+#     print(f"Hello, {name}! I am {age} years old.")
+#
+# greet_name("Ousmane", 18)
 
-def print_msg(func_to_run):
-    print("Starting process...")
-    print(func_to_run("hello"))
-
-print(print_msg(shout))
-
-
-def polite_decorator(original_func):
-
-    def wrapper():
-        print("Bonjour! Nice to meet you.")  # Code before
-        original_func()  # The original function runs!
-        print("Au revoir! Have a nice day.")
-
-    return wrapper
-@polite_decorator
-def say_name():
-    print("My name is Gemini.")
-
-
-print(say_name())
 
 
 
-import time
-def time_decorator(original_func):
-    def wrapper():
-        start_time = time.time()
-        original_func()
-        end_time = time.time()
-
-        print(f"⏱️ Execution time: {end_time - start_time:.4f} seconds")
-    return wrapper
-
-@time_decorator
-def heavy_calculator():
-    print("Running a massive loop...")
-    time.sleep(1.2)
-
-print(heavy_calculator())
 
 
-def security_bypassed_check(func):
-    def wrapper(*args, **kwargs):
-        print("--- Doing something before ---")
-        print("⚠️ WARNING: Accessing sensitive data account...")
-        result = func(*args, **kwargs)
-        return result
-
-    return wrapper
-
-@security_bypassed_check
-def view_bank_vault():
-    print("🔓 Vault Opened! Accessing $1,000,000.")
-
-view_bank_vault()
-
-
-def universal_decorator(func):
-    def wrapper(*args, **kwargs):
-        print("--- Doing something before ---")
-        result = func(*args, **kwargs)
-        return result
-    return wrapper
-
-@universal_decorator
-def greet_name(name, age):
-    print(f"Hello, {name}! I am {age} years old.")
-
-greet_name("Ousmane", 18)
+#===============================7. Memoization and Decorators=========================
+# def fetch_user_data(user_id):
+#     print(f"📡 Fetching user {user_id} from slow database...")
+#     return {"id": user_id, "status": "Active"}
+#
+#
+# fetch_user_data(101)
+# fetch_user_data(102)
+# fetch_user_data(101)
+#
+#
+#
+# notepad = {}
+#
+# def calculate_expensive_bonus(worker_name):
+#     if worker_name in notepad:
+#         print(f"⚡ [CACHE HIT] Found {worker_name} in the notepad. Skipping math!")
+#         return notepad[worker_name]
+#
+#     print(f"📡 [MATH DETECTED] Calculating bonus for {worker_name}...")
+#
+#     calculate_bonus = 5000 * 1.15
+#
+#     notepad[worker_name] = calculate_bonus
+#     return calculate_bonus
+#
+#
+# print(calculate_expensive_bonus("Alice"))
+# print(calculate_expensive_bonus("Bob"))
+# print(calculate_expensive_bonus("Alice")) # Calling Alice again!
+#
+#
+#
+#
+# # Our secret notepad to store downloaded images
+#
+# image_cache = {}
+#
+# def download_profile_pic(username):
+#     if username in image_cache:
+#         print(f"⚡ [CACHE HIT] Already have {username}'s photo in memory. Displaying instantly!")
+#         return image_cache[username]
+#
+#     print(f"🌐 [NETWORK DOWNLOAD] Connecting to server to get {username}'s photo...")
+#     raw_image_data = f"📸 Raw_Data_Of_{username}_Photo.png"
+#
+#     image_cache[username] = raw_image_data
+#     return raw_image_data
+#
+#
+# download_profile_pic("alex_travels")
+# download_profile_pic("coding_pro")
+# download_profile_pic("alex_travels") # Clicking Alex again!
+#
+#
+#
+# def memoize_image(original_download_function):
+#     notepad = {}
+#
+#     def wrapper(username):
+#         if username in image_cache:
+#             print(f"⚡ [DECORATOR CACHE] Found {username} in memory!")
+#             return image_cache[username]
+#
+#         result = original_download_function(username)
+#         notepad[username] = result
+#         return result
+#     return wrapper
+#
+# @memoize_image
+# def download_profile_pic(username):
+#     print(f"🌐 Downloading {username}'s photo from the web...")
+#     return f"📸 {username}_image.png"
+#
+# download_profile_pic("sarah_sky") # Runs the download code
+# download_profile_pic("sarah_sky")
+#
+#
+#
+# def universal_memoize(func):
+#     notepad = {}
+#
+#     def wrapper(*args):
+#         if args in notepad:
+#             print("⚡ [CACHE HIT] Answer found in notepad!")
+#             return notepad[args]
+#
+#         result = func(*args)
+#         notepad[args] = result
+#         return result
+#     return wrapper
+#
+#
+# def memoize_flights(func):
+#
+#     notepad = {}
+#     def wrapper(*args):
+#         if args in notepad:
+#             print("⚡ [CACHE HIT] Answer found in notepad!")
+#             return notepad[args]
+#         result = func(*args)
+#         notepad[args] = result
+#         return result
+#     return wrapper
+#
+# @memoize_flights
+# def get_flight_price(destination):
+#     print(f"✈️ Searching airline databases for flights to {destination}...")
+#     return 450.00
+#
+#
+# print(get_flight_price("Tokyo"))
+# print(get_flight_price("Paris"))
+# print(get_flight_price("Tokyo"))
+#
+#
+#
+#
+#
+#======================8. Functional Programming OOP==============================
