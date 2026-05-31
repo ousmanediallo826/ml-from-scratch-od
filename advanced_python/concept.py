@@ -438,102 +438,152 @@ from typing import Iterator
 #
 #
 #======================8. Functional Programming OOP==============================
-class ImmutableEmployee:
-    def __init__(self, name, salary):
-        self.name = name
-        self.salary = salary
+# class ImmutableEmployee:
+#     def __init__(self, name, salary):
+#         self.name = name
+#         self.salary = salary
+#
+#     def apply_raise(self, amount):
+#         return ImmutableEmployee(self.name, self.salary + amount)
+#
+#
+# emp1 = ImmutableEmployee("Bob", 50000)
+# emp2 = emp1.apply_raise(5000)
+#
+# print(emp1.salary)
+# print(emp2.salary)
+#
+#
+#
+# class Product:
+#     def __init__(self, name, price, category):
+#         self.name = name
+#         self.price = price
+#         self.category = category
+#
+#
+# catalog = [
+#     Product("Laptop", 1200, "Electronics"),
+#     Product("Shirt", 40, "Clothing"),
+#     Product("Headphones", 150, "Electronics"),
+#     Product("Book", 20, "Media")
+# ]
+#
+# electronics = filter(lambda x: x.category == "Electronics", catalog)
+# price = map(lambda x: x.price, electronics)
+# total_cost = sum(price)
+# print(total_cost)
+#
+#
+#
+#
+# class BankAccount:
+#     def __init__(self, owner, balance):
+#         self.owner = owner
+#         self.balance = balance
+#
+#
+#     def deposit(self, amount):
+#         return BankAccount(self.owner, self.balance + amount)
+#     def withdraw(self, amount):
+#         return BankAccount(self.owner, self.balance - amount)
+#
+# acc1 = BankAccount("Charlie", 1000)
+# acc2 = acc1.deposit(500)
+# acc3 = acc2.withdraw(700)
+#
+# print(acc1.balance)
+# print(acc2.balance)
+# print(acc3.balance)
+#
+#
+# #=====Problem 2: The Fleet Tracker Pipeline========
+# class Vehicle:
+#     def __init__(self, vin, status, mileage):
+#         self.vin = vin
+#         self.status = status
+#         self.mileage = mileage
+#
+# fleet = [
+#     Vehicle("V101", "Active", 50000),
+#     Vehicle("V102", "Maintenance", 120000),
+#     Vehicle("V103", "Active", 35000),
+#     Vehicle("V104", "Active", 80000),
+#     Vehicle("V105", "Maintenance", 15000)
+# ]
+#
+# active = filter(lambda x: x.status == "Active", fleet)
+# active_mileages = map(lambda x: x.mileage, active)
+# mileage_list = list(active_mileages)
+#
+# average_mileage = sum(mileage_list) / len(mileage_list)
+# print(f"Active Vehicle Mileages: {mileage_list}")
+# print(f"Average Fleet Mileage: {average_mileage} miles")
+#
+#
+# #Problem 3: The RPG Character Inventory Reducer
+# from functools import reduce
+# class Item:
+#     def __init__(self, name, weight):
+#         self.name = name
+#         self.weight = weight
+#
+# inventory = [
+#     Item("Iron Sword", 12.5),
+#     Item("Health Potion", 0.5),
+#     Item("Steel Shield", 22.0),
+#     Item("Magic Scroll", 0.2)
+# ]
+#
+# total_weight = reduce(lambda x, y: x + y.weight, inventory, 0)
+# print(total_weight)
 
-    def apply_raise(self, amount):
-        return ImmutableEmployee(self.name, self.salary + amount)
-
-
-emp1 = ImmutableEmployee("Bob", 50000)
-emp2 = emp1.apply_raise(5000)
-
-print(emp1.salary)
-print(emp2.salary)
 
 
 
-class Product:
-    def __init__(self, name, price, category):
-        self.name = name
-        self.price = price
-        self.category = category
+#===========================9. List Comprehension====================================
+numbers = [1,2,3,4,5]
+squares = []
+for number in numbers:
+    squares.append(number * number)
+print(squares)
 
 
-catalog = [
-    Product("Laptop", 1200, "Electronics"),
-    Product("Shirt", 40, "Clothing"),
-    Product("Headphones", 150, "Electronics"),
-    Product("Book", 20, "Media")
-]
+squares = [number * number for number in numbers]
+print(squares)
 
-electronics = filter(lambda x: x.category == "Electronics", catalog)
-price = map(lambda x: x.price, electronics)
-total_cost = sum(price)
-print(total_cost)
+even_squares = [number for number in numbers if number % 2 == 0]
+print(even_squares)
 
+
+words = ["apple", "banana", "cherry"]
+shouting = [w.upper() for w in words]
+print(shouting)
 
 
 
-class BankAccount:
-    def __init__(self, owner, balance):
-        self.owner = owner
-        self.balance = balance
+# Problem 1: The Email Cleaner
+dirty_emails = [" user1@gmail.com ", "admin@site.com   ", "  hello@yahoo.com "]
+clean_emails = [email.strip() for email in dirty_emails]
+print(clean_emails)
+
+# Problem 2: High-Score Filter
+all_scores = [45, 120, 88, 200, 99, 105, 30]
+
+elite_scores = [score for score in all_scores if score >= 100]
+print(elite_scores)
 
 
-    def deposit(self, amount):
-        return BankAccount(self.owner, self.balance + amount)
-    def withdraw(self, amount):
-        return BankAccount(self.owner, self.balance - amount)
-
-acc1 = BankAccount("Charlie", 1000)
-acc2 = acc1.deposit(500)
-acc3 = acc2.withdraw(700)
-
-print(acc1.balance)
-print(acc2.balance)
-print(acc3.balance)
+# Problem 3: The VIP Guest Initializer
+guests = ["Alex", "Alexander", "Bo", "Cassandra", "Ed"]
+badge_initials = [name[0] for name in guests if len(name) > 4]
+print(badge_initials)
 
 
-#=====Problem 2: The Fleet Tracker Pipeline========
-class Vehicle:
-    def __init__(self, vin, status, mileage):
-        self.vin = vin
-        self.status = status
-        self.mileage = mileage
+scores = [40, 85, 30, 92]
+results = ["pass" if s >= 50 else "fail" for s in scores]
+print(results)
 
-fleet = [
-    Vehicle("V101", "Active", 50000),
-    Vehicle("V102", "Maintenance", 120000),
-    Vehicle("V103", "Active", 35000),
-    Vehicle("V104", "Active", 80000),
-    Vehicle("V105", "Maintenance", 15000)
-]
-
-active = filter(lambda x: x.status == "Active", fleet)
-active_mileages = map(lambda x: x.mileage, active)
-mileage_list = list(active_mileages)
-
-average_mileage = sum(mileage_list) / len(mileage_list)
-print(f"Active Vehicle Mileages: {mileage_list}")
-print(f"Average Fleet Mileage: {average_mileage} miles")
-
-
-#Problem 3: The RPG Character Inventory Reducer
-from functools import reduce
-class Item:
-    def __init__(self, name, weight):
-        self.name = name
-        self.weight = weight
-
-inventory = [
-    Item("Iron Sword", 12.5),
-    Item("Health Potion", 0.5),
-    Item("Steel Shield", 22.0),
-    Item("Magic Scroll", 0.2)
-]
-
-total_weight = reduce(lambda x, y: x + y.weight, inventory, 0)
-print(total_weight)
+order_totals = [25.0, 140.5, 99.0, 300.0, 12.0]
+shipping_cost = [0 if s >= 100 else 15 for s in order_totals]
+print(shipping_cost)

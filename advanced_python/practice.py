@@ -662,6 +662,37 @@ print(get_exchange_rate("GBP", "USD"))
 print(get_exchange_rate("USD", "EUR"))
 
 
-# Problem 3: The Multi-Argument DB Query Cache
+# Problem 1: The Sensor Noise Reducer
+raw_readings = [22.5, -10.0, 31.2, 55.1, 18.9, -2.4, 42.0]
+clean_readings = [temp for temp in raw_readings if temp >= 0.0 and temp <= 50.0]
+print(clean_readings)
 
 
+# Problem 2: Password Length Masker
+passwords = ["secret123", "123", "p@ssword!", "qwerty", "abc"]
+masked_password = [password if len(password) >= 6 else "INVALID" for password in passwords]
+print(masked_password)
+
+
+# Problem 3: The Stock Market Ticker Normalizer
+raw_tickers = ["  aapl ", "tsla", "  goog   ", "amzn  ", "msft"]
+normalized_tickers = [stock.upper().strip() for stock in raw_tickers]
+print(normalized_tickers)
+
+
+# Problem 4: The Inventory Restock Alert
+stock_counts = [50, 8, 12, 3, 10, 100]
+restock_alerts = ["SAFE" if stock > 10 else "RESTOCK" for stock in stock_counts]
+print(restock_alerts)
+
+
+# Problem 5: Filtering Nested Dictionary Values
+users = [
+    {"username": "alice_dev", "role": "admin"},
+    {"username": "bob_design", "role": "user"},
+    {"username": "charlie_manager", "role": "user"},
+    {"username": "dan_sysop", "role": "admin"}
+]
+
+admin_usernames = [user["username"]  for user in users if user["role"] == "admin"]
+print(admin_usernames)
