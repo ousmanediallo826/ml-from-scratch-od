@@ -587,3 +587,38 @@ print(results)
 order_totals = [25.0, 140.5, 99.0, 300.0, 12.0]
 shipping_cost = [0 if s >= 100 else 15 for s in order_totals]
 print(shipping_cost)
+
+
+# 10. Function Composition In Python
+def uppercase(text):
+    return text.upper()
+def exclaim(text):
+    return text + "!"
+
+texts = uppercase(exclaim("Hello"))
+print(texts)
+
+
+# Problem 1: The E-Commerce Price Calculator
+def apply_discount(price):
+    return price * 0.90
+def add_shipping(price):
+    return price + 5.00
+
+final_price = add_shipping(apply_discount(100))
+print(final_price)
+
+
+# Problem 2: The Username Sanitizer Pipeline
+def compose(f, g):
+    return lambda x: f(g(x))
+def strip_space(text):
+    return text.strip()
+def lowercase(text):
+    return text.lower()
+
+sanitize_username = compose(strip_space, lowercase)
+print(sanitize_username("   AliceDev   ")) # Expected: "alicedev"
+print(sanitize_username("  Bob_Design  ")) # Expected: "bob_design"
+
+
