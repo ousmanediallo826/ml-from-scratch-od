@@ -675,6 +675,122 @@ print(wrap_p("This is a paragraph."))
 
 
 
+#=======================13. Tests, DocTests, UnitTests===============================
+# def add(a, b):
+#     """
+#         Returns the sum of x and y.
+#
+#         >>> add(2, 3)
+#         5
+#         >>> add(-1, 1)
+#         0
+#     """
+#     return a + b
+# print(add(2, 3))
+# print(add(-1, 1))
+
+
+# def withdraw(balance, amount):
+#     if amount > balance:
+#         return "Insufficient Funds"
+#     return balance - amount
+#
+#
+# import unittest
+# class TestBankingOperations(unittest.TestCase):
+#     def test_successful_withdraw(self):
+#         result = withdraw(100, 40)
+#         self.assertEqual(result, 60)
+#     def overdraft_protection(self):
+#         result = withdraw(50, 100)
+#         self.assertEqual(result, "Insufficient Funds")
+
+# def triple(x):
+#     """
+#     Return three times x:
+#     >> triple(5)
+#     15
+#     >> triple(10)
+#     30
+#     >> triple(20)
+#     50
+#     :return:
+#     """
+#     return x * 3
+#
+# print(triple(5))
+# print(triple(10))
+# print(triple(20))
+
+
+import unittest
+# def reverse_string(text):
+#     return text[::-1]
+#
+# class TestStringUtilities(unittest.TestCase):
+#     def text_reversal(self):
+#         self.assertEqual(reverse_string("hello"), "olleh")
+#         self.assertEqual(reverse_string("python"), "nohtyp")
+#
+#
+#
+#
+# print(reverse_string("hello"))
+# print(reverse_string("python"))
+
+
+def set_age(age):
+    if age < 0:
+        raise ValueError("Age cannot be negative")
+    return age
+
+class TestValidation(unittest.TestCase):
+    def test_negative_age(self):
+        with self.assertRaises(ValueError):
+            set_age(-5)
+
+
+
+class shopping_cart:
+    def __init__(self):
+        self.items = []
+
+    def add_item(self, item):
+        self.items.append(item)
+
+
+class TestShoppingCart(unittest.TestCase):
+    def setUp(self):
+        self.cart = shopping_cart()
+
+    def test_initial_empty_cart(self):
+        self.assertEqual(len(self.cart.items), 0)
+    def test_add_item(self):
+        self.cart.add_item("apple")
+        self.assertEqual(len(self.cart.items), 1)
+
+    def tearDown(self):
+        self.cart.items.clear()
+
+
+
+def register_user(email):
+    if "@" not in email:
+        raise KeyError("Email address is not valid")
+    return "User registered"
+
+class TestRegister(unittest.TestCase):
+    def test_invalid_email(self):
+        with self.assertRaises(KeyError):
+            register_user("ousmane_without_at_symbol")
+
+
+
+
+
+
+
+#============================14. Testing with Pytest===================================
 
 
 
