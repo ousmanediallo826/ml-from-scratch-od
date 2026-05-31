@@ -790,7 +790,97 @@ class TestRegister(unittest.TestCase):
 
 
 
-#============================14. Testing with Pytest===================================
+#=================15. Regular Expressions==============================================
+import re
+
+text = "Call customer support at 555-867-5309 before 5 PM."
+pattern = r"\d{3}-\d{3}-\d{4}"
+
+match = re.search(pattern, text)
+
+if match:
+    print(f"🎉 Pattern Found: {match.group()}")
+else:
+    print("❌ No match found.")
 
 
+log_data = "Error on line 42, error on line 108, and error on line 255."
+
+all_times = re.findall(r"\d+", log_data)
+print(all_times)
+
+
+
+# Problem 1: Pinpointing the Year
+sentence = "The company was founded on September 24, 1998 in a garage."
+
+pattern_year = r"\d{4}"
+result = re.search(pattern_year, sentence)
+
+if result:
+    print(f"🎉 Pattern Found: {result.group()}")
+else:
+    print("❌ No match found.")
+
+# Problem 2: Gathering All Order IDs
+
+chat_log = "Customer reported issues with ID402 and requested a refund on ID91."
+
+pattern = r"\w{2}\d+"
+match = re.search(pattern, chat_log)
+if match:
+    print(f"🎉 Pattern Found: {match.group()}")
+else:
+    print("❌ No match found.")
+
+
+# Problem 3: Extracting Domain Names (Advanced)
+
+email_info = "Please send the documentation directly to admin@speakhire.org"
+
+domain_pattern = r"@\w+\.\w+"
+result = re.search(domain_pattern, email_info)
+if result:
+    print(f"🎉 Pattern Found: {result.group()}")
+else:
+
+    print("❌ No match found.")
+
+
+log = "2026-05-31: [ERROR] Database Connection Failed"
+
+pattern = r"(\d{4}-\d{2}-\d{2}): \[ERROR\] (.+)"
+
+match = re.search(pattern, log)
+if match:
+    print(f"Full Match: {match.group(0)}")  # The entire matched string
+    print(f"Date Group: {match.group(1)}")  # The first set of parentheses
+    print(f"Msg Group:  {match.group(2)}")
+
+
+# 🔄 2. Search and Replace with Backreferences (re.sub)
+old_name = "Diallo, Ousmane"
+pattern = r"(\w+),\s(\w+)"
+
+new_name = re.sub(pattern, r"\2 \1", old_name)
+print(new_name)
+
+
+# 🔍 3. Lookarounds (The Secret Agents of Regex)
+
+price_tag = "The price of the item is $150 dollars."
+pattern = r"(?<=\$)\d+"
+match = re.search(pattern, price_tag)
+if match:
+    print(match.group())
+
+
+# 🚀 The Advanced Regex Challenge
+raw_phone = "5551234567"
+
+pattern = r"(\d{3})(\d{3})(\d{4})"
+
+replacement = r"\1-\2-\3"
+clearn_cellphone = re.sub(pattern,replacement, raw_phone)
+print(clearn_cellphone)
 
