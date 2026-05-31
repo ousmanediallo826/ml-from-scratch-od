@@ -622,3 +622,59 @@ print(sanitize_username("   AliceDev   ")) # Expected: "alicedev"
 print(sanitize_username("  Bob_Design  ")) # Expected: "bob_design"
 
 
+#====================== 11. Currying in Python===================================
+def curried_multiply(x):
+    def inner(y):
+        return x * y
+    return inner
+
+double_multiply = curried_multiply(2)
+triple_multiply = curried_multiply(3)
+print(double_multiply(10))
+print(triple_multiply(10))
+
+
+def greet(greeting_word):
+    return lambda name: f"{greeting_word}, {name}"
+
+say_hello = greet("Hello")
+print(say_hello)
+
+
+# Problem 1: The Custom Tax Calculator
+def tax_factory(tax_rate):
+    def inner(price):
+        return price + (price * tax_rate)
+
+    return inner
+
+ny_tax = tax_factory(0.08)
+ca_tax = tax_factory(0.10)
+print(ny_tax(100))
+print(ca_tax(100))
+
+
+# Problem 2: The E-Commerce Price Discounter
+def apply_discount(price):
+    return lambda discount: price * discount
+twenty_percent_off = apply_discount(0.20)
+half_off = apply_discount(0.50)
+print(twenty_percent_off(100)) # Expected Output: 80.0
+print(half_off(100))
+
+
+# Problem 3: The HTML Tag Generator
+def make_tag(tag_name):
+    def inner(content):
+        return f"<{tag_name}>{content}</{tag_name}>"
+    return inner
+wrap_h1 = make_tag("h1")
+wrap_p  = make_tag("p")
+print(wrap_h1("Welcome to my Site"))
+print(wrap_p("This is a paragraph."))
+
+
+
+
+
+
