@@ -88,3 +88,53 @@ for line in process.stdout:
 
 process.wait()
 print("Background shell job complete.")
+
+
+
+
+
+
+
+
+
+
+#=====================3. Forks and Forking==============================
+print(f"Initial Process Baseline PID: {os.getpid()}")
+
+pid = os.fork()
+
+if pid == 0:
+    print(f"Greetings from the CHILD! My unique system PID is: {os.getpid()}")
+    sys.exit(0)
+
+else:
+    print(f"Greetings from the PARENT! I just birthed Child Process PID: {pid}")
+
+
+
+
+pid = os.fork()
+if pid == 0:
+    print("Child: Starting short data calculation task...")
+    time.sleep(2)
+    print("Child: Task complete. Exiting clean.")
+    sys.exit(0)
+
+else:
+    print("Parent: I am pausing to wait for my child process to wrap up...")
+    finished_pid, status =os.wait()
+    print(f"Parent: Child {finished_pid} has been safely reaped with status code {status}.")
+
+
+
+shared_inventory = ["Book A", "Book B", "Book C"]
+pid = os.fork()
+if pid == 0:
+    shared_inventory.append("Chilled modify book D")
+    print(f"Child Inventory State: {shared_inventory}")
+    sys.exit(0)
+
+else:
+    os.wait()
+    print(f"Parent Inventory State: {shared_inventory}")
+
