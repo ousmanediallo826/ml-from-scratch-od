@@ -287,61 +287,94 @@ else:
 #         sys.exit(1)
 #
 #     scan_port_range(sys.argv[1], int(sys.argv[2]), int(sys.argv[3]))
+#
+#
+# import socket
+# import threading
+# import sys
+# import time
+#
+# open_ports_discovered = []
+# print_lock = threading.Lock()
+#
+# def check_target_port(target_host: str, port_number: int):
+#     """Worker function handed to an independent concurrent thread."""
+#
+#     try:
+#         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+#         s.settimeout(0.1)
+#
+#         result = s.connect_ex((target_host, port_number))
+#
+#         if result == 0:
+#             open_ports_discovered.append(port_number)
+#             with print_lock:
+#                 sys.stdout.write(f"[ALERT] Found Open Doorway -> Port {port_number} is ACTIVE.\n")
+#         s.close()
+#     except Exception:
+#         pass
+#
+#
+#
+#
+# def run_threaded_scanner(target_host: str, ports_to_scan: list):
+#     start_time = time.time()
+#     thread_pool = []
+#
+#     sys.stdout.write(f"Launching concurrent multi-threaded engine against: {target_host}\n")
+#
+#     for port in ports_to_scan:
+#         t = threading.Thread(target=check_target_port, args=(target_host, port, ports_to_scan))
+#         thread_pool.append(t)
+#
+#         t.start()
+#
+#
+#     for t in thread_pool:
+#         t.join()
+#     duration = time.time() - start_time
+#     sys.stdout.write(f"\n--- SCAN SUMMARY FOR {target_host} ---\n")
+#     sys.stdout.write(f"Execution completed in {duration:.2f} seconds.\n")
+#     sys.stdout.write(f"Active Ports Detected: {sorted(open_ports_discovered)}\n")
+#
+#
+# if __name__ == "__main__":
+#     # Scan a broad structural sequence of standard server doorways (SSH, HTTP, HTTPS, etc.)
+#     COMMON_PORTS = [21, 22, 23, 25, 53, 80, 110, 443, 8080]
+#     TARGET = "127.0.0.1"  # Target localhost
+#
+#     run_threaded_scanner(TARGET, COMMON_PORTS)
+#
 
 
-import socket
-import threading
+
+#====================14. Python and SQL=========================
+import sqlite3
 import sys
-import time
 
-open_ports_discovered = []
-print_lock = threading.Lock()
+conn = sqlite3.connect("campus_library.db")
+cursor = conn.cursor()
+#
+# cursor.execute("""
+# CREATE TABLE IF NOT EXISTS inventory (
+#     book_id INTEGER PRIMARY KEY AUTOINCREMENT,
+#     title TEXT NOT NULL,
+#     category TEXT,
+#     copies_available INTEGER
+# )""")
+#
+# conn.commit()
+#
+# sys.stdout.write(f"Database connection established!\n")
+#
+# conn.close()
 
-def check_target_port(target_host: str, port_number: int):
-    """Worker function handed to an independent concurrent thread."""
+book_data = ("The Pragmatic Programmer", "Computer-Science", 3)
+cursor.execute("INSERT INTO inventory (title, category, copies_available) VALUES (?, ?, ?)", book_data)
+conn.commit()
 
-    try:
-        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        s.settimeout(0.1)
-
-        result = s.connect_ex((target_host, port_number))
-
-        if result == 0:
-            open_ports_discovered.append(port_number)
-            with print_lock:
-                sys.stdout.write(f"[ALERT] Found Open Doorway -> Port {port_number} is ACTIVE.\n")
-        s.close()
-    except Exception:
-        pass
-
-
-
-
-def run_threaded_scanner(target_host: str, ports_to_scan: list):
-    start_time = time.time()
-    thread_pool = []
-
-    sys.stdout.write(f"Launching concurrent multi-threaded engine against: {target_host}\n")
-
-    for port in ports_to_scan:
-        t = threading.Thread(target=check_target_port, args=(target_host, port, ports_to_scan))
-        thread_pool.append(t)
-
-        t.start()
-
-
-    for t in thread_pool:
-        t.join()
-    duration = time.time() - start_time
-    sys.stdout.write(f"\n--- SCAN SUMMARY FOR {target_host} ---\n")
-    sys.stdout.write(f"Execution completed in {duration:.2f} seconds.\n")
-    sys.stdout.write(f"Active Ports Detected: {sorted(open_ports_discovered)}\n")
-
-
-if __name__ == "__main__":
-    # Scan a broad structural sequence of standard server doorways (SSH, HTTP, HTTPS, etc.)
-    COMMON_PORTS = [21, 22, 23, 25, 53, 80, 110, 443, 8080]
-    TARGET = "127.0.0.1"  # Target localhost
-
-    run_threaded_scanner(TARGET, COMMON_PORTS)
-
+cursor.execute("SELECT * FROM inventory WHERE category = ?", ("Computer-Science", ))
+all_cs_books = cursor.fetchall()
+for book in all_cs_books:
+    sys.stdout.write(f"Database Record Found -> ID: {book[0]} | Title: {book[1]} | Stock: {book[3]}\n")
+conn.close()
