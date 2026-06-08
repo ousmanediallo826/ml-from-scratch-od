@@ -30,4 +30,5 @@ def main():
     t.start()
 
 def handle_network_stream(conn, process):
+    pass
 
