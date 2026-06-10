@@ -14,6 +14,7 @@ while True:
     if decoded_message in mock_inventory:
         client_socket.sendall(mock_inventory[decoded_message])
     else:
+        pass
 
 client_socket.close()
 server_socket.close()
